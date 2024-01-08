@@ -1,0 +1,2585 @@
+[
+    {
+        "id": 1,
+        "codigo": "PSFB",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO SURF FCS BLACK",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 10000,
+        "descripcion": "Accesorio ideal para la playa y piscina tanto para riders como para los habituales del mar y los deportes naúticos. Ponte y sácate el neopreno con facilidad aún con personas a tu alrededor si eres un asiduo a las olas."
+    },
+    {
+        "id": 2,
+        "codigo": "PGRB",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO GREY BEACH",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Gris"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 12000,
+        "descripcion": "Diseño elegante para disfrutar de la playa con estilo. Ideal para secarse y cambiar cómodamente después de surfear o nadar."
+    },
+    {
+        "id": 3,
+        "codigo": "PBRW",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO BEACH RIDE WHITE",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Blanco"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 9500,
+        "descripcion": "Estilo y comodidad se unen en este poncho blanco perfecto para los amantes de la playa. Secado rápido y fácil cambio de ropa."
+    },
+    {
+        "id": 4,
+        "codigo": "PBFY",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO BEACH FLY YELLOW",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Amarillo"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 11000,
+        "descripcion": "Poncho amarillo vibrante para destacar en la playa. Secado rápido y cómodo cambio de ropa para disfrutar del sol y las olas."
+    },
+    {
+        "id": 5,
+        "codigo": "PCOB",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO COASTAL BLUE",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 10500,
+        "descripcion": "Disfruta de la costa con este poncho azul. Cambia cómodamente y mantente seco después de tus actividades acuáticas favoritas."
+    },
+    {
+        "id": 6,
+        "codigo": "PMOG",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO MARINE GREEN",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 11500,
+        "descripcion": "Sumérgete en la naturaleza con este poncho verde. Ideal para los amantes del mar y los deportes acuáticos."
+    },
+    {
+        "id": 7,
+        "codigo": "PRPK",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO RIVERSIDE PINK",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Rosa"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 9800,
+        "descripcion": "Poncho rosa perfecto para un día relajado junto al río. Cambia cómodamente y disfruta de la naturaleza con estilo."
+    },
+    {
+        "id": 8,
+        "codigo": "POTB",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO OCEANIC TURQUOISE BLUE",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Turquesa"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 12500,
+        "descripcion": "Sumérgete en el color del océano con este poncho turquesa. Ideal para los días soleados en la playa o junto a la piscina."
+    },
+    {
+        "id": 9,
+        "codigo": "PSSY",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO SUNSET YELLOW",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Amarillo"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 10200,
+        "descripcion": "Disfruta de los atardeceres con este poncho amarillo. Secado rápido y cómodo cambio de ropa para prolongar tus momentos mágicos."
+    },
+    {
+        "id": 10,
+        "codigo": "PFRB",
+        "Tipo": "Poncho",
+        "nombre": "PONCHO FIRE RED BEACH",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "unico"
+            },
+            {
+                "Color": "Rojo"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 10800,
+        "descripcion": "Destaca en la playa con este poncho rojo. Cambia cómodamente y disfruta de la calidez del sol junto al mar."
+    },
+    {
+        "id": 11,
+        "codigo": "CIG",
+        "Tipo": "Tabla",
+        "nombre": "CHANNEL ISLANDS G SKATE CLEAR",
+        "imagen": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "blanco"
+            },
+            {
+                "Medidas": "5.8"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 600,
+        "descripcion": "De la colaboración entre Britt Merrick y los hermanos Gudauskas nace esta nueva tabla de surf fish. Su cóncavo simple a doble entre las quillas, rocker de entrada bajo, volumen adelantado y cantos modernos de shortboard, hacen de la G Skate una tabla con una excelente remada y en la que no echarás de menos el poder surfear a tu máximo nivel. La configuración de quillas 2+1 le aporta la libertad y sensaciones de una tabla de surf twin fin, con un plus de control que le aporta la quilla estabilizadora central."
+    },
+    {
+        "id": 12,
+        "codigo": "CTP",
+        "Tipo": "Tabla",
+        "nombre": "CI TRI PLANE HULL ARMY",
+        "imagen": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "verde"
+            },
+            {
+                "Medidas": "7.1"
+            },
+            {
+                "Stock": "agotado"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 950,
+        "descripcion": "Este Mid Length Al Merrick es una tabla divertida y fácil de surfear, que incorpora una nueva versión del diseño de cóncavos Tri Plane Hull que Al Merrick utilizaba en los años 70 y 80. Las mejoras introducidas en el rocker, cantos y el propio cóncavo, añaden más velocidad y respuesta al flow que te da este Single Fin. Una combinación super adictiva"
+    },
+    {
+        "id": 13,
+        "codigo": "FC",
+        "Tipo": "Tabla",
+        "nombre": "FISH CORE",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "rojo"
+            },
+            {
+                "Medidas": "5.1"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 950,
+        "descripcion": "Este Mid Length Al Merrick es una tabla divertida y fácil de surfear, que incorpora una nueva versión del diseño de cóncavos Tri Plane Hull que Al Merrick utilizaba en los años 70 y 80. Las mejoras introducidas en el rocker, cantos y el propio cóncavo, añaden más velocidad y respuesta al flow que te da este Single Fin. Una combinación super adictiva"
+    },
+    {
+        "id": 14,
+        "codigo": "CMT",
+        "Tipo": "Tabla",
+        "nombre": "CI MID TINT",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "naranja"
+            },
+            {
+                "Medidas": "7.0 x 21 1/8 x 2 3/4 = 44.9 Litros"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 800,
+        "descripcion": "Una tabla de surf diseñada por Devon Howard y Channel Islands que replica las sensaciones de los Egg clásicos añadiendo elementos de tablas modernas como el rocker, cantos y distribución de volumen, consiguiendo añadir un extra de respuesta y maniobrabilidad acorde al surf actual."
+    },
+    {
+        "id": 15,
+        "codigo": "FSP",
+        "Tipo": "Tabla",
+        "nombre": "FIREWIRE SWEET POTATO GRADO B",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "naranja"
+            },
+            {
+                "Medidas": "5'4 x 21 11/16 x 2 7/16  34.6 Litros"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 730,
+        "descripcion": "La nueva Firewire Sweet Potato se renueva con una cola Swallow tail y construcción Helium 2. Vuela en olas pequeñas y gira en una baldosa. Con la nueva laminación Volcanic con tela fibra de basalto, ofrece más velocidad, mejor respuesta y una mayor resistencia."
+    },
+    {
+        "id": 16,
+        "codigo": "BMM",
+        "Tipo": "Tabla",
+        "nombre": "BANSHEE MINI MAL NAVY",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "celeste"
+            },
+            {
+                "Medidas": "6.6 x 21 1/4 x 3 1/16 Volumen 56 Litros"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 430,
+        "descripcion": "La tabla de surf Surfworx BansheeMini Mal soft surfboard es una softboard de alta gama. Incorpora doble stringer, cubierta reforzada, incluye quillas e invento.Es muy ligera, cómoda y con un rocker perfecto para facilitar la puesta en pie."
+    },
+    {
+        "id": 17,
+        "codigo": "CS",
+        "Tipo": "Tabla",
+        "nombre": "CBC SUSHI",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "rosa"
+            },
+            {
+                "Medidas": "6.0 x 21 1/4 x 3 1/16 Volumen 56 Litros"
+            },
+            {
+                "Stock": "agotado"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 560,
+        "descripcion": "Esta tabla de espuma tiene un núcleo 100 hifrófugo, con stringers de madera que le dan flex y solidez. Además incluye un grip para mejorar la sujección del pie trasero. Es una tabla de surf ideal para niños qie están aprendiendo a hacer surf, pero además puede ser utilizada por los surfsitas de nivel más avanzado."
+    },
+    {
+        "id": 18,
+        "codigo": "FGB",
+        "Tipo": "Tabla",
+        "nombre": "FIREWIRE GREEDY BEAVER",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "beige"
+            },
+            {
+                "Medidas": "5.3 x 21 1/5 x 4 1/16 Volumen 60 Litros"
+            },
+            {
+                "Stock": "agotado"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1060,
+        "descripcion": "La greedy beaver tiene un outline similar al de un tablón pero mucho más compacto. Con una excelente remada gracias a su nose redondeado, cogerás un gran número de olas con menos esfuerzo, pero a la vez sus características de tabla performance te permiten realizar un surf de shortboard. Bajo tanto de entrada como de salida, para planear sin dificultad en las secciones más tendidas. Una cola afilada y estrecha, para que cuando pisas con el pie trasero responda inmediatamente y ofrecer agarre en las secciones más verticales. A pesar de tener un grosor generoso en el centro para darte una buena flotabilidad, los cantos se afilan mucho para obtener la respuesta y agarre que necesitas en las maniobras más performance. Cóncavo simple que empieza a pocas pulgadas del nose y se transforma en doble, siendo más profundo en el medio de las quillas, para contrarestar su anchura y ofrecer unas transiciones de canto a canto más rápidas y fluídas."
+    },
+    {
+        "id": 19,
+        "codigo": "LXL",
+        "Tipo": "Tabla",
+        "nombre": "LOST X LIB TECH HYDRA",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "blanca"
+            },
+            {
+                "Medidas": "6.1 22.50 2.9 45.5 Litros"
+            },
+            {
+                "Stock": "agotado"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 869,
+        "descripcion": "Lost HYDRA es un monstruo para olas pequeñas, es el culmen de más de 25 años de desarrollo de tablas de mini olas. Implementa detalles de diseño probados de una gran variedad de modelos como el Puddle Jumper, Bottom Feeder, Pelagic y, más recientemente, el RNF-Retro."
+    },
+    {
+        "id": 20,
+        "codigo": "TMH",
+        "Tipo": "Tabla",
+        "nombre": "THUNDERBOLT MOE HARLEY INGLEBY SAGE",
+        "image": "",
+        "Categoría": "Tablas",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "blanca"
+            },
+            {
+                "Medidas": "7.1 22.5 2.9 45.5 Litros"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1234,
+        "descripcion": "Diseñada por el 2x Campeón mundial de Longboard Harley Ingleby junto a Firewire Surfboards. Este Mid Length Firewire, está pensada para surfear olas pequeñas y con poca fuerza. Para surfistas de cualquier nivel, sirve como tabla de surf evolutiva o como tabla de olas pequeñas para los surfistas más experimentados gracias a las siguientes características: 1- Parte inferior relativamente plana, con doble cóncavo entre los pies. Esta combinación ayuda a la transición de cantos en una tabla ancha como esta.2- Mucho volumen en general, pero los cantos se han rebajado haciéndolos ligeramente boxy. 3- A la altura de las quillas se afina el canto y se hace más afilado para aguantar en giros más radicales y mejorar el control. 4- El rocker de Firewire Moe x Thunderbolt es bastante equilibrado sin ser demasiado plano. Tiene la elevación suficiente en la cola para mantener la tabla suelta y un ligero rocker en el nose para ayudar en olas un poco más huecas."
+    },
+    {
+        "id": 21,
+        "codigo": "BCSB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR SURF BLUE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Medidas": "45x30 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 8500,
+        "descripcion": "Bolso cambiador esencial para surfistas. Cambia cómodamente después de surfear y mantén tus pertenencias secas y organizadas en este bolso azul."
+    },
+    {
+        "id": 22,
+        "codigo": "BCGB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR GREEN BEACH",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Medidas": "40x25 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 9000,
+        "descripcion": "Bolso cambiador verde perfecto para los amantes de la playa. Compacto y funcional para cambiar fácilmente después de surfear."
+    },
+    {
+        "id": 23,
+        "codigo": "BCRB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR RED BEACH",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Rojo"
+            },
+            {
+                "Medidas": "42x28 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 8800,
+        "descripcion": "Destaca en la playa con este bolso cambiador rojo. Cambia cómodamente y guarda tus pertenencias de forma segura durante tus aventuras acuáticas."
+    },
+    {
+        "id": 24,
+        "codigo": "BCOB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR OCEANIC BLUE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Medidas": "38x22 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 9200,
+        "descripcion": "Sumérgete en el estilo con este bolso cambiador azul inspirado en el océano. Compacto y práctico para surfistas en movimiento."
+    },
+    {
+        "id": 25,
+        "codigo": "BCYB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR YELLOW BEACH",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Amarillo"
+            },
+            {
+                "Medidas": "40x30 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 8700,
+        "descripcion": "Brilla bajo el sol con este bolso cambiador amarillo. Ideal para cambiar cómodamente y mantener tus pertenencias protegidas en la playa."
+    },
+    {
+        "id": 26,
+        "codigo": "BCGB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR GREEN BEACH",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Medidas": "45x25 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 9100,
+        "descripcion": "Disfruta de la naturaleza con este bolso cambiador verde. Compacto y funcional para surfistas que buscan comodidad."
+    },
+    {
+        "id": 27,
+        "codigo": "BCTB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR TURQUOISE BEACH",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Turquesa"
+            },
+            {
+                "Medidas": "38x30 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 9400,
+        "descripcion": "Sumérgete en la frescura del turquesa con este bolso cambiador. Perfecto para surfistas que buscan estilo y funcionalidad."
+    },
+    {
+        "id": 28,
+        "codigo": "BCPB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR PINK BEACH",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Rosa"
+            },
+            {
+                "Medidas": "42x28 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 8900,
+        "descripcion": "Añade un toque de color con este bolso cambiador rosa. Compacto y práctico para cambiar cómodamente después de tus sesiones de surf."
+    },
+    {
+        "id": 29,
+        "codigo": "BCGB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR GREY BEACH",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Gris"
+            },
+            {
+                "Medidas": "40x26 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 9200,
+        "descripcion": "Elegancia y funcionalidad se encuentran en este bolso cambiador gris. Cambia con estilo después de tus aventuras en el mar."
+    },
+    {
+        "id": 30,
+        "codigo": "BCOB",
+        "Tipo": "Bolso Cambiador",
+        "nombre": "BOLSO CAMBIADOR OCEAN BLUE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Medidas": "35x20 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 8600,
+        "descripcion": "Sumérgete en la serenidad del azul con este bolso cambiador. Compacto y funcional para los surfistas que buscan comodidad."
+    },
+    {
+        "id": 31,
+        "codigo": "LSBB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF BLACK BASIC",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Medidas": "35x20 cm"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2500,
+        "descripcion": "Leash básico en color negro para surf. Con una longitud de 6 pies, este leash duradero y resistente es ideal para surfistas de todos los niveles."
+    },
+    {
+        "id": 32,
+        "codigo": "LGBB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF GREEN BASIC",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Medidas": "7 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2800,
+        "descripcion": "Leash básico en color verde para surf. Con una longitud de 7 pies, este leash ofrece flexibilidad y resistencia para tus sesiones en el agua."
+    },
+    {
+        "id": 33,
+        "codigo": "LRGB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF RED AND GREEN",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Rojo y Verde"
+            },
+            {
+                "Medidas": "8 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 3200,
+        "descripcion": "Leash con estilo en rojo y verde para surf. Con una longitud de 8 pies, este leash de uretano garantiza un rendimiento óptimo en el agua."
+    },
+    {
+        "id": 34,
+        "codigo": "LWBB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF WHITE BASIC",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Blanco"
+            },
+            {
+                "Medidas": "6.5 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2600,
+        "descripcion": "Leash básico en color blanco para surf. Con una longitud de 6.5 pies, este leash de poliéster proporciona durabilidad y rendimiento confiable."
+    },
+    {
+        "id": 35,
+        "codigo": "LYOB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF YELLOW ORANGE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Amarillo y Naranja"
+            },
+            {
+                "Medidas": "7.5 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 3000,
+        "descripcion": "Leash vibrante en amarillo y naranja para surf. Con una longitud de 7.5 pies, este leash de nylon reforzado garantiza seguridad y rendimiento en el agua."
+    },
+    {
+        "id": 36,
+        "codigo": "LTUB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF TRANSPARENT BLUE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Azul Transparente"
+            },
+            {
+                "Medidas": "9 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 3400,
+        "descripcion": "Leash transparente en azul para surf. Con una longitud de 9 pies, este leash de TPU proporciona resistencia y visibilidad en el agua."
+    },
+    {
+        "id": 37,
+        "codigo": "LPGY",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF PINK AND GREY",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Rosa y Gris"
+            },
+            {
+                "Medidas": "8.5 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 3100,
+        "descripcion": "Leash elegante en rosa y gris para surf. Con una longitud de 8.5 pies, este leash de poliuretano combina estilo y funcionalidad en el agua."
+    },
+    {
+        "id": 38,
+        "codigo": "LBKB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF BLACK AND BLUE KNOT",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Negro y Azul"
+            },
+            {
+                "Medidas": "7 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2900,
+        "descripcion": "Leash con nudo en negro y azul para surf. Con una longitud de 7 pies, este leash de nylon trenzado ofrece resistencia y estilo único."
+    },
+    {
+        "id": 39,
+        "codigo": "LWGB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF WHITE AND GREEN BURST",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Blanco y Verde"
+            },
+            {
+                "Medidas": "6.5 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2700,
+        "descripcion": "Leash con explosión de blanco y verde para surf. Con una longitud de 6.5 pies, este leash de uretano ofrece rendimiento y estilo en el agua."
+    },
+    {
+        "id": 40,
+        "codigo": "LBGB",
+        "Tipo": "Leash",
+        "nombre": "LEASH SURF BLUE AND GREEN BURST",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "talle": ""
+            },
+            {
+                "Color": "Azul y Verde"
+            },
+            {
+                "Medidas": "6.5 pies"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 3000,
+        "descripcion": "Leash con explosión de azul y verde para surf. Con una longitud de 8 pies, este leash de nylon garantiza durabilidad y estilo en cada ola."
+    },
+    {
+        "id": 41,
+        "codigo": "PHBL",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD BLACK",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1800,
+        "descripcion": "Piluso negro clásico para cualquier ocasión. Este piluso de tamaño estándar es perfecto para protegerte del sol y darle un toque de estilo a tu look."
+    },
+    {
+        "id": 42,
+        "codigo": "PHRD",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD RED",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Rojo"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2000,
+        "descripcion": "Añade un toque de energía con este piluso rojo. Ajustable para adaptarse cómodamente, este piluso es ideal para actividades al aire libre."
+    },
+    {
+        "id": 43,
+        "codigo": "PHBL",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD BLUE",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1900,
+        "descripcion": "Piluso azul para un estilo fresco. Este piluso de tamaño estándar es perfecto para protegerte del sol y complementar tu atuendo casual."
+    },
+    {
+        "id": 44,
+        "codigo": "PHGY",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD GREY",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Gris"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "masculino"
+            }
+        ],
+        "Precio": 2100,
+        "descripcion": "Piluso gris moderno y ajustable. Dale un toque urbano a tu estilo con este piluso que se adapta cómodamente a tu cabeza."
+    },
+    {
+        "id": 45,
+        "codigo": "PHGR",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD GREEN",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "femenino"
+            }
+        ],
+        "Precio": 1950,
+        "descripcion": "Piluso verde para un toque de frescura. Tamaño estándar para un ajuste cómodo, perfecto para tus actividades al aire libre."
+    },
+    {
+        "id": 46,
+        "codigo": "PHYW",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD YELLOW WHITE",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Amarillo y Blanco"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "niño"
+            }
+        ],
+        "Precio": 2200,
+        "descripcion": "Piluso en amarillo y blanco para un estilo vibrante. Ajustable para un ajuste personalizado, este piluso te destacará en cualquier ocasión."
+    },
+    {
+        "id": 47,
+        "codigo": "PHBB",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD BLACK AND BLUE",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Negro y Azul"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "masculino"
+            }
+        ],
+        "Precio": 2050,
+        "descripcion": "Combina elegancia con este piluso negro y azul. Tamaño estándar para un ajuste cómodo y versátil en cualquier ocasión."
+    },
+    {
+        "id": 48,
+        "codigo": "PHWB",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD WHITE AND BLACK",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Blanco y Negro"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "femenino"
+            }
+        ],
+        "Precio": 2150,
+        "descripcion": "Estilo contrastante con este piluso blanco y negro. Ajustable para un ajuste perfecto, ideal para tus aventuras al aire libre."
+    },
+    {
+        "id": 49,
+        "codigo": "PHOR",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD ORANGE",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Naranja"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2000,
+        "descripcion": "Añade un toque de vitalidad con este piluso naranja. Tamaño estándar para un ajuste cómodo y versátil en cualquier ocasión."
+    },
+    {
+        "id": 50,
+        "codigo": "PHCB",
+        "Tipo": "Piluso",
+        "nombre": "PILUSO HEAD CAMO BLACK",
+        "imagen": "",
+        "Categoría": "indumentaria",
+        "Características": [
+            {
+                "Talle": "único"
+            },
+            {
+                "Color": "Camuflaje Negro"
+            },
+            {
+               "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 2250,
+        "descripcion": "Estilo camuflaje en negro con este piluso. Ajustable para un ajuste personalizado, perfecto para un look casual y deportivo."
+    },
+    {
+        "id": 51,
+        "codigo": "PWCB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX COOL BLUE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Peso": "90 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1200,
+        "descripcion": "Parafina azul para temperaturas frías. Con un peso de 90 gramos, esta parafina proporciona un agarre óptimo en aguas más frías."
+    },
+    {
+        "id": 52,
+        "codigo": "PHWB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX HOT WHITE BLUE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Blanco y Azul"
+            },
+            {
+                "Peso": "85 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1100,
+        "descripcion": "Parafina blanca y azul para temperaturas cálidas. Peso de 85 gramos para un rendimiento excepcional en condiciones más cálidas del agua."
+    },
+    {
+        "id": 53,
+        "codigo": "PYRB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX YELLOW RED BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Amarillo y Rojo"
+            },
+            {
+                "Peso": "95 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1300,
+        "descripcion": "Parafina amarilla y roja para temperaturas temperadas. Con un peso de 95 gramos, esta parafina ofrece un equilibrio perfecto para condiciones intermedias."
+    },
+    {
+        "id": 54,
+        "codigo": "PGBB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX GREEN BLUE BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Verde y Azul"
+            },
+            {
+                "Peso": "90 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1250,
+        "descripcion": "Parafina verde y azul para temperaturas temperadas. Peso de 90 gramos para un rendimiento óptimo en aguas con temperaturas intermedias."
+    },
+    {
+        "id": 55,
+        "codigo": "PORB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX ORANGE RED BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Naranja y Rojo"
+            },
+            {
+                "Peso": "95 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1280,
+        "descripcion": "Parafina naranja y roja para temperaturas temperadas. Con un peso de 95 gramos, esta parafina ofrece agarre y estabilidad en condiciones intermedias."
+    },
+    {
+        "id": 56,
+        "codigo": "PWPB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX WHITE PINK BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Blanco y Rosa"
+            },
+            {
+                "Peso": "85 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1150,
+        "descripcion": "Parafina blanca y rosa para temperaturas frías. Peso de 85 gramos para un agarre excepcional en aguas más frías."
+    },
+    {
+        "id": 57,
+        "codigo": "PBGB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX BLUE GREEN BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Azul y Verde"
+            },
+            {
+                "Peso": "90 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1220,
+        "descripcion": "Parafina azul y verde para temperaturas temperadas. Con un peso de 90 gramos, esta parafina ofrece un equilibrio perfecto para condiciones intermedias."
+    },
+    {
+        "id": 58,
+        "codigo": "PGRB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX GREEN RED BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Verde y Rojo"
+            },
+            {
+                "Peso": "95 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1300,
+        "descripcion": "Parafina verde y roja para temperaturas temperadas. Peso de 95 gramos para un agarre confiable en aguas con temperaturas intermedias."
+    },
+    {
+        "id": 59,
+        "codigo": "PYPB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX YELLOW PINK BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Amarillo y Rosa"
+            },
+            {
+                "Peso": "85 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1180,
+        "descripcion": "Parafina amarilla y rosa para temperaturas frías. Peso de 85 gramos para un agarre óptimo en aguas más frías."
+    },
+    {
+        "id": 60,
+        "codigo": "PCBB",
+        "Tipo": "Parafina",
+        "nombre": "PARAFINA WAX COOL BLACK BLEND",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Peso": "90 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1200,
+        "descripcion": "Parafina negra para temperaturas frías. Con un peso de 90 gramos, esta parafina proporciona un agarre óptimo en aguas más frías."
+    },
+    {
+        "id": 61,
+        "codigo": "RSTB18",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF ULTIMATE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Peso": "95 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 3800,
+        "descripcion": "Rack Ultimate para transportar dos tablas de surf. Montaje mediante correas y ventosas, fabricado en aluminio resistente para mayor durabilidad. Compatible con todo tipo de autos."
+    },
+    {
+        "id": 62,
+        "codigo": "RSTB19",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF XTREME PRO",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Peso": "110 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 4500,
+        "descripcion": "Rack Xtreme Pro para transportar tres tablas de surf. Montaje mediante imán, fabricado en acero inoxidable para resistencia. Compatible con SUVs y vehículos todo terreno."
+    },
+    {
+        "id": 62,
+        "codigo": "RSTB20",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF NAVIGATOR MAX",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Blanco"
+            },
+            {
+                "Peso": "300 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 3200,
+        "descripcion": "Rack Navigator Max para transportar una tabla de surf. Montaje mediante correas, fabricado en aleación de aluminio para un peso ligero. Compatible con automóviles compactos."
+    },
+    {
+        "id": 63,
+        "codigo": "RSTB21",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF ADVENTURE LITE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "M"
+            },
+            {
+                "Color": ""
+            },
+            {
+                "Peso": "100 gramos"
+            },
+            {
+                "Stock": ""
+            },
+            {
+                "Sexo": "femenino"
+            }
+        ],
+        "Precio": 4200,
+        "descripcion": "Rack Adventure Lite para transportar cuatro tablas de surf. Montaje mediante ventosas, fabricado en fibra de vidrio para un peso ligero. Compatible con vehículos todoterreno."
+    },
+    {
+        "id": 64,
+        "codigo": "RSTB22",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF EXPRESS LITE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "S"
+            },
+            {
+                "Color": "Gris"
+            },
+            {
+                "Peso": "85 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 3900,
+        "descripcion": "Rack Express Lite para transportar dos tablas de surf. Montaje mediante correas e imán, fabricado en aluminio resistente para mayor durabilidad. Compatible con vehículos deportivos."
+    },
+    {
+        "id": 65,
+        "codigo": "RSTB23",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF VENTURE PRO",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "L"
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Peso": "95 gramos"
+            },
+            {
+                "Stock": ""
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 4800,
+        "descripcion": "Rack Venture Pro para transportar tablas de surf. Montaje mediante ventosas. Disponible y compatible con varios tipos de vehículos."
+    },
+    {
+        "id": 66,
+        "codigo": "RSTB24",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF EASY LITE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Rojo"
+            },
+            {
+                "Peso": ""
+            },
+            {
+                "Stock": ""
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": null,
+        "descripcion": "Rack Easy Lite para transportar una tabla de surf. Montaje mediante correas y ventosas. Disponible y compatible con varios tipos de vehículos."
+    },
+    {
+        "id": 67,
+        "codigo": "RSTB25",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF PRODIGY LITE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "M"
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Peso": "90 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 3200,
+        "descripcion": "Rack Prodigy Lite para transportar tablas de surf. Montaje mediante imán, fabricado en acero inoxidable para resistencia."
+    },
+    {
+        "id": 68,
+        "codigo": "RSTB26",
+        "Tipo": "Rack",
+        "nombre": "RACK SURF MASTER",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "XL"
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Peso": "110 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 4500,
+        "descripcion": "Rack Master para transportar tres tablas de surf. Montaje mediante imán, fabricado en acero inoxidable para resistencia. Compatible con SUVs y vehículos todo terreno."
+    },
+    {
+        "id": 69,
+        "codigo": "BBTS01",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF PRO",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Turquesa"
+            },
+            {
+                "Peso": "300 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1500,
+        "descripcion": "Balance Board Surf Pro para entrenamiento de surf. Construido en madera natural para mayor resistencia. Adecuado para surfistas de nivel avanzado."
+    },
+    {
+        "id": 70,
+        "codigo": "BBTS02",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD XTREME WAVE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1800,
+        "descripcion": "Balance Board Xtreme Wave para mejorar el equilibrio. Diseño en negro y azul, peso de 2.5 kg. Adecuado para surfistas de nivel intermedio."
+    },
+    {
+        "id": 71,
+        "codigo": "BBTS03",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD XTREME WAVE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Rojo"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 2000,
+        "descripcion": "Balance Board Xtreme Wave para mejorar el equilibrio. Diseño en blanco y verde, peso de 3 kg. Adecuado para surfistas de todos los niveles."
+    },
+    {
+        "id": 72,
+        "codigo": "BBTS04",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF MASTER",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Madera natural"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1700,
+        "descripcion": "Balance Board Surf Master para mejorar la estabilidad. Construido en madera natural, peso de 2.2 kg. Adecuado para surfistas de todos los niveles."
+    },
+    {
+        "id": 73,
+        "codigo": "BBTS05",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF XTREME",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Negro y rojo"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 2200,
+        "descripcion": "Balance Board Surf Xtreme para entrenamiento avanzado. Diseño en negro y rojo, peso de 2.7 kg. Adecuado para surfistas de nivel intermedio a avanzado."
+    },
+    {
+        "id": 74,
+        "codigo": "BBTS06",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF EASY",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1300,
+        "descripcion": "Balance Board Surf Easy para principiantes. Diseño en azul, peso de 1.8 kg. Adecuado para surfistas de nivel principiante e intermedio."
+    },
+    {
+        "id": 75,
+        "codigo": "BBTS07",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF EXPRESS",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Amarillo"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1600,
+        "descripcion": "Balance Board Surf Express para entrenamiento diario. Construido en material resistente, adecuado para surfistas de todos los niveles."
+    },
+    {
+        "id": 76,
+        "codigo": "BBTS08",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF XTREME PRO",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": ""
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 2500,
+        "descripcion": "Balance Board Surf Xtreme Pro para un entrenamiento intensivo. Diseño en verde, peso de 3 kg. Adecuado para surfistas de nivel avanzado."
+    },
+    {
+        "id": 77,
+        "codigo": "BBTS09",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF NAVIGATOR",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Blanco y azul"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 1900,
+        "descripcion": "Balance Board Surf Navigator para mejorar el equilibrio. Diseño en blanco y azul, peso de 2.3 kg. Adecuado para surfistas de todos los niveles."
+    },
+    {
+        "id": 78,
+        "codigo": "BBTS10",
+        "Tipo": "Balance Board",
+        "nombre": "BALANCE BOARD SURF ADVENTURE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Violeta"
+            },
+            {
+                "Peso": "250 gramos"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 2100,
+        "descripcion": "Balance Board Surf Adventure para entrenamiento versátil. Peso de 2.5 kg, adecuado para surfistas de todos los niveles y géneros."
+    },
+    {
+        "id": 79,
+        "codigo": "FTTS01",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA SURF PRO",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "6'2''"
+            },
+            {
+                "Color": "Gris"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 900,
+        "descripcion": "Funda Tabla Surf Pro para proteger tu tabla de surf. Fabricada en material resistente, adecuada para tablas de hasta 6'2'' de longitud."
+    },
+    {
+        "id": 80,
+        "codigo": "FTTS02",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA XTREME WAVE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "7'0''"
+            },
+            {
+                "Color": "Negro y gris"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1200,
+        "descripcion": "Funda Tabla Xtreme Wave para una protección óptima. Diseño en negro y gris, adecuada para tablas de hasta 7'0'' de longitud."
+    },
+    {
+        "id": 81,
+        "codigo": "FTTS03",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA XTREME WAVE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "6'6''"
+            },
+            {
+                "Color": "Naranja"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1100,
+        "descripcion": "Funda Tabla Xtreme Wave para una protección óptima. Adecuada para tablas de hasta 6'6'' de longitud."
+    },
+    {
+        "id": 82,
+        "codigo": "FTTS04",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA SURF MASTER",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "6'8''"
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 950,
+        "descripcion": "Funda Tabla Surf Master para un transporte seguro. Diseño en azul, adecuada para tablas de hasta 6'8'' de longitud."
+    },
+    {
+        "id": 83,
+        "codigo": "FTTS05",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA SURF XTREME",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "7'2''"
+            },
+            {
+                "Color": "Rojo"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1300,
+        "descripcion": "Funda Tabla Surf Xtreme para un transporte cómodo. Diseño en rojo, adecuada para tablas de hasta 7'2'' de longitud."
+    },
+    {
+        "id": 84,
+        "codigo": "FTTS06",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA SURF EASY",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "6'4''"
+            },
+            {
+                "Color": "Verde"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "niño"
+            }
+        ],
+        "Precio": 850,
+        "descripcion": "Funda Tabla Surf Easy para protección básica. Diseño en verde, adecuada para tablas de hasta 6'4'' de longitud."
+    },
+    {
+        "id": 85,
+        "codigo": "FTTS07",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA SURF EXPRESS",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "6'0''"
+            },
+            {
+                "Color": "Rosa"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": ""
+            }
+        ],
+        "Precio": 900,
+        "descripcion": "Funda Tabla Surf Express para un transporte rápido. Adecuada para tablas de hasta 6'0'' de longitud."
+    },
+    {
+        "id": 86,
+        "codigo": "FTTS08",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA XTREME PRO",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "7'6''"
+            },
+            {
+                "Color": "Blanco"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "unisex"
+            }
+        ],
+        "Precio": 1400,
+        "descripcion": "Funda Tabla Xtreme Pro para una protección premium. Diseño en blanco, adecuada para tablas de hasta 7'6'' de longitud."
+    },
+    {
+        "id": 87,
+        "codigo": "FTTS09",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA SURF NAVIGATOR",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "6'10''"
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "masculino"
+            }
+        ],
+        "Precio": 1100,
+        "descripcion": "Funda Tabla Surf Navigator para un transporte versátil. Diseño en negro, adecuada para tablas de hasta 6'10'' de longitud."
+    },
+    {
+        "id": 88,
+        "codigo": "FTTS10",
+        "Tipo": "Funda",
+        "nombre": "FUNDA TABLA SURF ADVENTURE",
+        "imagen": "",
+        "Categoría": "accesorios",
+        "Características": [
+            {
+                "Talle": "7'4''"
+            },
+            {
+                "Color": "Lila"
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "femenino"
+            }
+        ],
+        "Precio": 1200,
+        "descripcion": "Funda Tabla Surf Adventure para un transporte seguro. Adecuada para tablas de hasta 7'4'' de longitud, diseño versátil para todas las surfistas."
+    },
+    {
+        "id": 89,
+        "Codigo": "HAF",
+        "Tipo": "Neopreno",
+        "Nombre": "HURLEY ADVANT FULLSUIT 4/3 BLACK 2023",
+        "Imagen": "",
+        "Categoria": "indumentaria",
+        "Caracteristicas": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "masculino"
+            },
+            {
+                "Grosor": "4/3 mm"
+            }
+        ],
+        "Precio": 223.96,
+        "Descripcion": "Los nuevos neoprenos Hurley vienen con neopreno mejorado, más suave y elástico"
+    },
+    {
+        "id": 90,
+        "Codigo": "OHC",
+        "Tipo": "Neopreno",
+        "Nombre": "ONEILL HYPERFREAK COMP 5/4 ZIPPERLESS BLK.",
+        "Imagen": "",
+        "Categoria": "indumentaria",
+        "Caracteristicas": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "agotado"
+            },
+            {
+                "Sexo": "masculino"
+            },
+            {
+                "Grosor": "5/4 mm"
+            }
+        ],
+        "Precio": 355,
+        "Descripcion": "La serie O´neill Hyperfreak combina el exclusivo neopreno 100% TechnoButter repelente al agua, gráficos limpios, con  costuras  GBS (glued blindstiched) y sellado interno TAPE además de cremallera frontal. Es un 20% más ligero, más cálido, más aislante, absorve un 30% menos agua que los neoprenos convencionales y tiene secado rápido."
+    },
+    {
+        "id": 91,
+        "Codigo": "HWA",
+        "Tipo": "Neopreno",
+        "Nombre": "HURLEY WOMAN ADVANT FULLSUIT N 4/3 2023",
+        "Imagen": "",
+        "Categoria": "indumentaria",
+        "Caracteristicas": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Negro"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "femenino"
+            },
+            {
+                "Grosor": "4/3 mm"
+            }
+        ],
+        "Precio": 279.95,
+        "Descripcion": "Los nuevos neoprenos Hurley vienen con neopreno mejorado, más suave y elástico"
+    },
+    {
+        "id": 92,
+        "Codigo": "RCW",
+        "Tipo": "Neopreno",
+        "Nombre": "RIP CURL WMS E BOMB 4/3 ZIP FREE E7 LIMITED EDITION 2023 SLATE",
+        "Imagen": "",
+        "Categoria": "indumentaria",
+        "Caracteristicas": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Gris"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "agotado"
+            },
+            {
+                "Sexo": "femenino"
+            },
+            {
+                "Grosor": "4/3 mm"
+            }
+        ],
+        "Precio": 311.99,
+        "Descripcion": "Edición limitada del Rip Curl E Bomb desarrollada en colaboración con los campeones mundiales Mick Fanning, Tyler Wright y Gabriel Medina. Su panel superior fabricado de una sola pieza con neopreno E7, el más elástico de Rip Curl hasta la fecha, proporciona una comodidad y rendimiento excepcionales. "
+    },
+    {
+        "id": 93,
+        "Codigo": "RCE",
+        "Tipo": "Neopreno",
+        "Nombre": "RIP CURL WMS E BOMB 4/3 ZIP FREE E7 2024 BLACK / WHITE",
+        "Imagen": "",
+        "Categoria": "indumentaria",
+        "Caracteristicas": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Blanco"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "femenino"
+            },
+            {
+                "Grosor": "4/3 mm"
+            }
+        ],
+        "Precio": 349.99,
+        "Descripcion": "The EBOMB zip free is inspired by high performance surfing. All new super high stretch E7 Thermoflex performance neoprene that surpasses industry standards topped with the warm fluffy royal blue thermoflex and our best zip free pattern."
+    },
+    {
+        "id": 94,
+        "Codigo": "RCJ",
+        "Tipo": "Neopreno",
+        "Nombre": "RIP CURL JUNIOR FLASHBOMB 4/3 E7 BLUE 2024",
+        "Imagen": "",
+        "Categoria": "indumentaria",
+        "Caracteristicas": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Azul"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "agotado"
+            },
+            {
+                "Sexo": "niño"
+            },
+            {
+                "Grosor": "4/3 mm"
+            }
+        ],
+        "Precio": 289.99,
+        "Descripcion": "La combinación perfecta de calidez y elasticidad. El E6 Flash Lining ofrece una calidez superior y un tiempo de secado inmejorable, mientras que el novedoso y elástico neopreno E7 de Rip Curl con Thermo Lining en los brazos ofrece una libertad de movimiento total a los surfistas."
+    },
+    {
+        "id": 95,
+        "Codigo": "OYH",
+        "Tipo": "Neopreno",
+        "Nombre": "ONEILL YOUTH HYPERFREAK 5/4 + CHEST ZIP RAVEN / RAVEN / FIRE RED",
+        "Imagen": "",
+        "Categoria": "indumentaria",
+        "Caracteristicas": [
+            {
+                "Talle": ""
+            },
+            {
+                "Color": "Rojo"
+            },
+            {
+                "Medidas": ""
+            },
+            {
+                "Stock": "disponible"
+            },
+            {
+                "Sexo": "niño"
+            },
+            {
+                "Grosor": "5/4 mm"
+            }
+        ],
+        "Precio": 212,
+        "Descripcion": "Neopreno Oneill Hyperfreak con cremallera para niños 5/4 + MM . Color HUR, Raven / Raven / Fire Red"
+    }
+]
