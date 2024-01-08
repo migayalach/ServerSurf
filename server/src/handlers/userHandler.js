@@ -8,10 +8,10 @@ const {
 } = require("../controllers/userController");
 
 const postUser = async (request, response) => {
-  const { levelId, nameUser, emailUser, user, password } = request.body;
+  const { idLevel, nameUser, emailUser, user, password } = request.body;
   try {
     const newUser = await createUser(
-      levelId,
+      idLevel,
       nameUser,
       emailUser,
       user,
@@ -38,10 +38,10 @@ const getUserName = (request, response) => {
   }
 };
 
-const getIdUser = (request, response) => {
-  const { id } = request.params;
+const getIdUser = async (request, response) => {
+  const { idUser } = request.params;
   try {
-    const userFind = getUserId(id);
+    const userFind = await getUserId(idUser);
     response.status(200).json(userFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -49,9 +49,9 @@ const getIdUser = (request, response) => {
 };
 
 const deleteUser = (request, response) => {
-  const { id } = request.params;
+  const { idUser } = request.params;
   try {
-    const userFind = userDelete(id);
+    const userFind = userDelete(idUser);
     response.status(200).json(userFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
