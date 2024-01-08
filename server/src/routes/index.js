@@ -14,13 +14,18 @@ const commentRouter = require("./commentRouter");
 
 // entry points
 mainRouter.use("/level", levelRouter); //MATY
-mainRouter.use("/user", userRouter);
-mainRouter.use("/cart", cartRouter);
-mainRouter.use("/sale", saleRouter);
-mainRouter.use("/product", productRouter);
-mainRouter.use("/favorite", favoriteRouter);
-mainRouter.use("/category", categoryRouter);
+mainRouter.use("/user", userRouter); //MATY
+mainRouter.use("/cart", cartRouter); //MATY
+mainRouter.use("/sale", saleRouter); //MARIANA
+mainRouter.use("/product", productRouter); //MARIANA
+mainRouter.use("/favorite", favoriteRouter); //MELANI
+mainRouter.use("/category", categoryRouter); //MELANI
 mainRouter.use("/detail", detailRouter);
 mainRouter.use("/comment", commentRouter);
 
 module.exports = mainRouter;
+
+// busqueda por id, name, todo (name)  - GET
+// agregar (name) - POST
+// eliminar (name) - DELETE
+// editar (name) - UPDATE
