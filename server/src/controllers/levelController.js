@@ -34,12 +34,12 @@ const getAllLevel = async () => {
   return dataLevel;
 };
 
-const levelDelete = (id) => {
-  return "Elimina el level " + id;
+const levelDelete = (idLevel) => {
+  return "Elimina el level " + idLevel;
 };
 
-const levelUpDate = (id) => {
-  return "Actualiza el level " + id;
+const levelUpDate = (idLevel) => {
+  return "Actualiza el level " + idLevel;
 };
 
 module.exports = {
