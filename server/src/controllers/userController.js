@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
 const { Level, User } = require("../dataBase/dataBase");
 
-const createUser = async (levelId, nameUser, emailUser, user, password) => {
+const createUser = async (idLevel, nameUser, emailUser, user, password) => {
   const existUser = await Level.findOne({
     where: {
-      idLevel: levelId,
+      idLevel,
     },
   });
   if (!existUser) {
@@ -16,7 +16,9 @@ const createUser = async (levelId, nameUser, emailUser, user, password) => {
     },
   });
   if (existEmail) {
-    throw Error(`Lo siento no puede haber dos cuentas con la misma dirección email`);
+    throw Error(
+      `Lo siento no puede haber dos cuentas con la misma dirección email`
+    );
   }
 
   const newUser = await User.create({
@@ -24,7 +26,7 @@ const createUser = async (levelId, nameUser, emailUser, user, password) => {
     emailUser,
     user,
     password,
-    levelId,
+    idLevel,
   });
 
   return newUser;
@@ -34,8 +36,24 @@ const getNameUser = (name) => {
   return name;
 };
 
-const getUserId = (id) => {
-  return id;
+const getUserId = async (idUser) => {
+  const dataUser = await User.findOne({
+    where: {
+      idUser,
+    },
+  });
+
+  if (!dataUser) {
+    throw Error(`El usuario que usted busca, no existe`);
+  }
+
+  const dataLevel = await Level.findOne({
+    where: {
+      idLevel: dataUser.idLevel,
+    },
+  });
+
+  return { dataUser, dataLevel };
 };
 
 const getAllUser = () => {
