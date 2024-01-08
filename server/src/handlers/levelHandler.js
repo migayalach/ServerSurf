@@ -1,4 +1,4 @@
-const { createLevel, getNameLevel, getLevelId, getAllLevel } = require("../controllers/levelController");
+const { createLevel, getNameLevel, getLevelId, getAllLevel, levelDelete, levelUpDate } = require("../controllers/levelController");
 
 const postLevel = (request, response) => {
   const { name } = request.body;
@@ -14,11 +14,11 @@ const getLevelName = (request, response) => {
   const { name } = request.query;
   try {
     if (name) {
-      const userName = getNameLevel(name);
-      response.status(200).json(userName);
+      const levelName = getNameLevel(name);
+      response.status(200).json(levelName);
     } else {
-      const allUser = getAllLevel();
-      response.status(200).json(allUser);
+      const allLevels = getAllLevel();
+      response.status(200).json(allLevels);
     } 
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -28,17 +28,37 @@ const getLevelName = (request, response) => {
 const getIdLevel = (request, response) => {
   const { id } = request.params;
   try {
-    const userFind = getLevelId(id);
-    response.status(200).json(userFind);
+    const levelFind = getLevelId(id);
+    response.status(200).json(levelFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const deleteUser = (request, response) => {};
+const deleteLevel = (request, response) => {
+  const { id } = request.params;
+  try {
+    const levelFind = levelDelete(id);
+    response.status(200).json(levelFind);
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
+
+const levelPut = (request, response) => {
+  const { id } = request.body;
+  try {
+    const upDate = levelUpDate(id);
+    response.status(200).json(upDate);
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
   postLevel,
   getLevelName,
-  getIdLevel
+  getIdLevel,
+  deleteLevel,
+  levelPut
 };
