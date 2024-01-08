@@ -1,34 +1,41 @@
-const { createLevel, getNameLevel, getLevelId, getAllLevel, levelDelete, levelUpDate } = require("../controllers/levelController");
+const {
+  createLevel,
+  getNameLevel,
+  getLevelId,
+  getAllLevel,
+  levelDelete,
+  levelUpDate,
+} = require("../controllers/levelController");
 
-const postLevel = (request, response) => {
+const postLevel = async (request, response) => {
   const { name } = request.body;
   try {
-    const newLevel = createLevel(name);
+    const newLevel = await createLevel(name);
     response.status(200).json({ create: true, newLevel });
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const getLevelName = (request, response) => {
+const getLevelName = async(request, response) => {
   const { name } = request.query;
   try {
     if (name) {
-      const levelName = getNameLevel(name);
+      const levelName = await getNameLevel(name);
       response.status(200).json(levelName);
     } else {
-      const allLevels = getAllLevel();
+      const allLevels = await getAllLevel();
       response.status(200).json(allLevels);
-    } 
+    }
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
 const getIdLevel = (request, response) => {
-  const { id } = request.params;
+  const { idLevel } = request.params;
   try {
-    const levelFind = getLevelId(id);
+    const levelFind = getLevelId(idLevel);
     response.status(200).json(levelFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -36,9 +43,9 @@ const getIdLevel = (request, response) => {
 };
 
 const deleteLevel = (request, response) => {
-  const { id } = request.params;
+  const { idLevel } = request.params;
   try {
-    const levelFind = levelDelete(id);
+    const levelFind = levelDelete(idLevel);
     response.status(200).json(levelFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -46,9 +53,9 @@ const deleteLevel = (request, response) => {
 };
 
 const levelPut = (request, response) => {
-  const { id } = request.body;
+  const { idLevel } = request.body;
   try {
-    const upDate = levelUpDate(id);
+    const upDate = levelUpDate(idLevel);
     response.status(200).json(upDate);
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -60,5 +67,5 @@ module.exports = {
   getLevelName,
   getIdLevel,
   deleteLevel,
-  levelPut
+  levelPut,
 };
