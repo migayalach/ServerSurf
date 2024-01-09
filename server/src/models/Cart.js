@@ -1,11 +1,11 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define(
-    "CartProduct",
+    "Cart",
     {
-      check: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+      amount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     { timestamps: false }

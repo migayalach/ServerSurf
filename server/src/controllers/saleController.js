@@ -1,33 +1,34 @@
+const { User, Sale } = require("../dataBase/dataBase");
 
-const createSale = (name) => {
-    return name;
+const createSale = (idUser) => {
+  return idUser;
 };
 
 const getSaleName = (name) => {
-    return name;
+  return name;
 };
 
 const getSaleId = (id) => {
-    return id;
+  return id;
 };
 
 const getAllSales = () => {
-    return 'Todas las ventas';
+  return "Todas las ventas";
 };
 
 const putSales = (id) => {
-    return `Se actualizó el ${id}`
+  return `Se actualizó el ${id}`;
 };
 
 const deleteSales = (id) => {
-    return `Se borró la venta ${id}`
+  return `Se borró la venta ${id}`;
 };
 
 module.exports = {
-    createSale,
-    getSaleName,
-    getSaleId,
-    getAllSales,
-    putSales,
-    deleteSales
-}
+  createSale,
+  getSaleName,
+  getSaleId,
+  getAllSales,
+  putSales,
+  deleteSales,
+};

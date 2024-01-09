@@ -4,8 +4,7 @@ const {postFav, deleteFav} = require("../handlers/favoriteHandler");
 
 const favoriteRouter = Router();
 
-favoriteRouter.post("/", postFav);
-
-favoriteRouter.delete("/:id", deleteFav);
+favoriteRouter.post("/", postFav);  //OK
+favoriteRouter.delete("/:idFavorite", deleteFav);
 
 module.exports = favoriteRouter;

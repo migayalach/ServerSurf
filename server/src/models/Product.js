@@ -17,8 +17,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      //categotia?
-      tipe: {
+      type: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -26,7 +25,6 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      //hay que ver si se necesitara una tabla para atributos
       characteristics: {
         type: DataTypes.JSONB,
         allowNull: false,
