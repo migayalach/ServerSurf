@@ -6,8 +6,8 @@ const userSaleModel = require("../models/UserSale");
 const detailedSaleModel = require("../models/DetailedSale");
 const favoriteModel = require("../models/Favorites");
 const salesCartModel = require("../models/SalesCart");
-const cartProduct = require("../models/CartProduct");
 const commetProduct = require("../models/CommetProduct");
+const cartModel = require("../models/Cart");
 
 // TABLAS
 const levelModel = require("../models/Level");
@@ -35,27 +35,30 @@ detailedSaleModel(sequelize);
 categoryModel(sequelize);
 favoriteModel(sequelize);
 salesCartModel(sequelize);
-cartProduct(sequelize);
+cartModel(sequelize);
 commetProduct(sequelize);
 
 const {
   Level,
   User,
   Sale,
-  UserSale,
   Product,
-  DetailSale,
   Category,
   Favorites,
-  SalesCart,
-  CartProduct,
-  CommetProduct,
+  Cart,
+  // UserSale,
+  // DetailSale,
+  // SalesCart,
+  // CommetProduct,
 } = sequelize.models;
 
 Level.hasMany(User, { foreignKey: "idLevel" });
-
-// User.belongsToMany(Product, { through: Favorites, foreignKey: "userId" });
-// Product.belongsToMany(User, { through: Favorites, foreignKey: "productId" });
+Category.hasMany(Product, { foreignKey: "idCategory" });
+User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });
+Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });
+User.hasMany(Sale, { foreignKey: "idUser" });
+User.belongsToMany(Product, { through: Cart, foreignKey: "idUser" });
+Product.belongsToMany(User, { through: Cart, foreignKey: "idProduct" });
 
 // Category.hasMany(Product, { foreignKey: "categoryId" });
 
