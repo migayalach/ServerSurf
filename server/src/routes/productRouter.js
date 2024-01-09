@@ -9,8 +9,8 @@ const {
 
 const productRouter = Router();
 
-productRouter.post('/', postProduct);
-productRouter.get('/', getNameProduct);
+productRouter.post('/', postProduct);     //OK
+productRouter.get('/', getNameProduct);   //OK
 productRouter.get('/:id', getIdProduct);
 productRouter.delete('/:id', productDeleted);
 productRouter.put('/', productUpdated)
