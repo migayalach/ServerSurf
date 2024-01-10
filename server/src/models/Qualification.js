@@ -1,13 +1,13 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define(
-    "CommetProduct",
+    "Qualification",
     {
       comment: {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      qualification: {
+      points: {
         type: DataTypes.DOUBLE,
         allowNull: true,
       },

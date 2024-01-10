@@ -1,56 +1,56 @@
 const {
-  createComment,
-  editComment,
-  commentDelete,
-  getCommentId,
-  getAllComment,
-  getCommentName,
-} = require("../controllers/commentController");
+  createQualitation,
+  editQualitation,
+  qualitationDelete,
+  getQualitationId,
+  getAllQualitation,
+  getQualitationName,
+} = require("../controllers/qualitationController");
 
-const postComment = (request, response) => {
+const postQualification = (request, response) => {
   const { name } = request.body;
   try {
-    const newComment = createComment(name);
+    const newComment = createQualitation(name);
     response.status(200).json(newComment);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const updateComment = (request, response) => {
+const updateQualification = (request, response) => {
   const { idComment, name } = request.body;
   try {
-    const commentUpdate = editComment(idComment, name);
+    const commentUpdate = editQualitation(idComment, name);
     response.status(200).json(commentUpdate);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const deleteComment = (request, response) => {
+const deleteQualification = (request, response) => {
   const { idComment } = request.params;
   try {
-    const delComment = commentDelete(idComment);
+    const delComment = qualitationDelete(idComment);
     response.status(200).json(delComment);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const getIdComment = (request, response) => {
+const getIdQualification = (request, response) => {
   const { idComment } = request.params;
   try {
-    const commentId = getCommentId(idComment);
+    const commentId = getQualitationId(idComment);
     response.status(200).json(commentId);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const getDetComment = (request, response) => {
+const getQualification = (request, response) => {
   const { name } = request.query;
   try {
-    const allComment = name ? getCommentName(name) : getAllComment();
+    const allComment = name ? getQualitationName(name) : getAllQualitation();
     response.status(200).json(allComment);
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -58,9 +58,9 @@ const getDetComment = (request, response) => {
 };
 
 module.exports = {
-  postComment,
-  updateComment,
-  deleteComment,
-  getIdComment,
-  getDetComment,
+  postQualification,
+  updateQualification,
+  deleteQualification,
+  getIdQualification,
+  getQualification,
 };
