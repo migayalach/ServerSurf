@@ -11,10 +11,10 @@ const {
 const qualificationRouter = Router();
 
 // ENTRY POIN'S
-qualificationRouter.post("/", postQualification);
-qualificationRouter.put("/", updateQualification);
-qualificationRouter.delete("/:idQualification", deleteQualification);
+qualificationRouter.post("/", postQualification); //OK
+qualificationRouter.put("/", updateQualification); //OK
+qualificationRouter.delete("/:idUser/:idProduct", deleteQualification);//OK
 qualificationRouter.get("/:idQualification", getIdQualification);
-qualificationRouter.get("/", getQualification);
+qualificationRouter.get("/", getQualification); //OK busqueda por todo, falta por nombre
 
 module.exports = qualificationRouter;

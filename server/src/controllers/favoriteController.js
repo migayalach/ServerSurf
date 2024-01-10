@@ -3,7 +3,7 @@ const { User, Product, Favorites } = require("../dataBase/dataBase");
 const addFavorite = async (idUser, idProduct) => {
   const existUser = await User.findOne({ where: { idUser } });
   if (!existUser) {
-    throw Error`El usiario no existe`;
+    throw Error`El usario no existe`;
   }
   const existProduct = await Product.findOne({ where: { idProduct } });
   if (!existProduct) {
