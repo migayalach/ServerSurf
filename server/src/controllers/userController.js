@@ -32,8 +32,14 @@ const createUser = async (idLevel, nameUser, emailUser, user, password) => {
   return newUser;
 };
 
-const getNameUser = (name) => {
-  return name;
+const getNameUser = async (name) => {
+  const nameUser = await User.findAll({ where: { nameUser: name } });
+
+  if (nameUser) {
+    return nameUser
+  } else {
+    throw Error('Name not found');
+  }
 };
 
 const getUserId = async (idUser) => {
@@ -56,16 +62,41 @@ const getUserId = async (idUser) => {
   return { dataUser, dataLevel };
 };
 
-const getAllUser = () => {
-  return "Todos los users";
+const getAllUser = async () => {
+  const dataUser = await User.findAll();
+  return dataUser;
 };
 
-const userDelete = (id) => {
-  return "Elimina el user " + id;
+const userDelete = async (idUser) => {
+  const userExisting = await User.findOne({ where: { idUser } });
+
+  if (!userExisting) {
+    throw Error('Non-existent user')
+  }
+
+  const deleted = await User.destroy({ where: { idUser } });
+
+  if (deleted) {
+    return `User ${idUser} deleted`
+  } else {
+    throw Error(`Could not clear the user ${ idUser }`);
+  }
 };
 
-const userUpDate = (id) => {
-  return "Actualiza el user " + id;
+const userUpDate = async (idUser, idLevel, nameUser, emailUser, user, password) => {
+  const userExisting = await User.findOne({ where: { idUser } });
+
+  if (!userExisting) {
+    throw Error('Non-existent user')
+  } else {
+    userExisting.password = password;
+    userExisting.nameUser = nameUser;
+    userExisting.idLevel = idLevel;
+    userExisting.emailUser = emailUser;
+    userExisting.user = user;
+    await userExisting.save();  // Guarda los cambios
+    return { message: 'User updated successfully', userExisting };
+  }
 };
 
 module.exports = {

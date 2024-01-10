@@ -32,30 +32,30 @@ const getLevelName = async(request, response) => {
   }
 };
 
-const getIdLevel = (request, response) => {
+const getIdLevel = async (request, response) => {
   const { idLevel } = request.params;
   try {
-    const levelFind = getLevelId(idLevel);
+    const levelFind = await getLevelId(idLevel);
     response.status(200).json(levelFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const deleteLevel = (request, response) => {
+const deleteLevel = async (request, response) => {
   const { idLevel } = request.params;
   try {
-    const levelFind = levelDelete(idLevel);
+    const levelFind = await levelDelete(idLevel);
     response.status(200).json(levelFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const levelPut = (request, response) => {
-  const { idLevel } = request.body;
+const levelPut = async (request, response) => {
+  const { idLevel, nameLevel } = request.body;
   try {
-    const upDate = levelUpDate(idLevel);
+    const upDate = await levelUpDate(idLevel, nameLevel);
     response.status(200).json(upDate);
   } catch (error) {
     response.status(400).json({ error: error.message });

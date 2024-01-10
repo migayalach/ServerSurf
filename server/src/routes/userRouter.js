@@ -10,9 +10,9 @@ const {
 
 const userRouter = Router();
 
-userRouter.post("/", postUser); //ok
+userRouter.post("/", postUser);
 userRouter.get("/", getUserName);
-userRouter.get("/:idUser", getIdUser); //ok
+userRouter.get("/:idUser", getIdUser);
 userRouter.delete("/:idUser", deleteUser);
 userRouter.put("/", userPut);
 

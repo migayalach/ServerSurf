@@ -18,15 +18,27 @@ const createLevel = async (name) => {
     nameLevel: name,
   });
 
-  return "Nivel creado con éxito", newLevel;
+  return { message: "Nivel creado con éxito", newLevel };
 };
 
-const getNameLevel = (name) => {
-  return name;
+const getNameLevel = async (name) => {
+  const nameLevels = await Level.findOne({ where: { nameLevel: name } });
+
+  if (nameLevels) {
+    return nameLevels
+  } else {
+    throw Error('Name not found');
+  }
 };
 
-const getLevelId = (id) => {
-  return id;
+const getLevelId = async (idLevel) => {
+  const idLevels = await Level.findOne({ where: { idLevel } });
+  
+  if (idLevels) {
+    return idLevels
+  } else {
+    throw Error('Level not found');
+  }
 };
 
 const getAllLevel = async () => {
@@ -34,12 +46,33 @@ const getAllLevel = async () => {
   return dataLevel;
 };
 
-const levelDelete = (idLevel) => {
-  return "Elimina el level " + idLevel;
+const levelDelete = async (idLevel) => {
+  const levelExisting = await Level.findOne({ where: { idLevel } });
+
+  if (!levelExisting) {
+    throw Error('Non-existent level')
+  }
+
+  const deleted = await Level.destroy({ where: { idLevel } });
+
+  if (deleted) {
+    return `Level ${idLevel} deleted`
+  } else {
+    throw Error(`Could not clear the level ${ idLevel }`);
+  }
 };
 
-const levelUpDate = (idLevel) => {
-  return "Actualiza el level " + idLevel;
+const levelUpDate = async (idLevel, nameLevel) => {
+  const levelExisting = await Level.findOne({ where: { idLevel } });
+
+  if (!levelExisting) {
+    throw Error('Non-existent level')
+  } else {
+    levelExisting.nameLevel = nameLevel;
+    await levelExisting.save();  // Guarda los cambios
+    return { message: 'Level updated successfully', levelExisting };
+  }
+  
 };
 
 module.exports = {

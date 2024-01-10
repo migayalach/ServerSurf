@@ -23,14 +23,14 @@ const postUser = async (request, response) => {
   }
 };
 
-const getUserName = (request, response) => {
+const getUserName = async (request, response) => {
   const { name } = request.query;
   try {
     if (name) {
-      const userName = getNameUser(name);
+      const userName = await getNameUser(name);
       response.status(200).json(userName);
     } else {
-      const allUsers = getAllUser();
+      const allUsers = await getAllUser();
       response.status(200).json(allUsers);
     }
   } catch (error) {
@@ -48,20 +48,20 @@ const getIdUser = async (request, response) => {
   }
 };
 
-const deleteUser = (request, response) => {
+const deleteUser = async (request, response) => {
   const { idUser } = request.params;
   try {
-    const userFind = userDelete(idUser);
+    const userFind = await userDelete(idUser);
     response.status(200).json(userFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const userPut = (request, response) => {
-  const { id } = request.body;
+const userPut = async (request, response) => {
+  const { idUser, idLevel, nameUser, emailUser, user, password } = request.body;
   try {
-    const upDate = userUpDate(id);
+    const upDate = await userUpDate(idUser, idLevel, nameUser, emailUser, user, password);
     response.status(200).json(upDate);
   } catch (error) {
     response.status(400).json({ error: error.message });
