@@ -7,30 +7,40 @@ const {
   getQualitationName,
 } = require("../controllers/qualitationController");
 
-const postQualification = (request, response) => {
-  const { name } = request.body;
+const postQualification = async (request, response) => {
+  const { idUser, idProduct, comment, points } = request.body;
   try {
-    const newComment = createQualitation(name);
+    const newComment = await createQualitation(
+      idUser,
+      +idProduct,
+      comment,
+      points
+    );
     response.status(200).json(newComment);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const updateQualification = (request, response) => {
-  const { idComment, name } = request.body;
+const updateQualification = async (request, response) => {
+  const { idUser, idProduct, comment, points } = request.body;
   try {
-    const commentUpdate = editQualitation(idComment, name);
+    const commentUpdate = await editQualitation(
+      +idUser,
+      +idProduct,
+      comment,
+      points
+    );
     response.status(200).json(commentUpdate);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const deleteQualification = (request, response) => {
-  const { idComment } = request.params;
+const deleteQualification = async (request, response) => {
+  const { idUser, idProduct } = request.params;
   try {
-    const delComment = qualitationDelete(idComment);
+    const delComment = await qualitationDelete(idUser, idProduct);
     response.status(200).json(delComment);
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -47,10 +57,12 @@ const getIdQualification = (request, response) => {
   }
 };
 
-const getQualification = (request, response) => {
+const getQualification = async (request, response) => {
   const { name } = request.query;
   try {
-    const allComment = name ? getQualitationName(name) : getAllQualitation();
+    const allComment = name
+      ? getQualitationName(name)
+      : await getAllQualitation();
     response.status(200).json(allComment);
   } catch (error) {
     response.status(400).json({ error: error.message });
