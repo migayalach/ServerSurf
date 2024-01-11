@@ -15,12 +15,12 @@ const qualificationRouter = require("./qualificationRouter");
 // entry points
 mainRouter.use("/level", levelRouter);
 mainRouter.use("/user", userRouter);
+mainRouter.use("/category", categoryRouter);
+mainRouter.use("/product", productRouter);
+mainRouter.use("/qualification", qualificationRouter);
+mainRouter.use("/favorite", favoriteRouter);
 mainRouter.use("/cart", cartRouter);
 mainRouter.use("/sale", saleRouter);
-mainRouter.use("/product", productRouter);
-mainRouter.use("/favorite", favoriteRouter);
-mainRouter.use("/category", categoryRouter);
 mainRouter.use("/detail", detailRouter);
-mainRouter.use("/qualification", qualificationRouter);
 
 module.exports = mainRouter;
