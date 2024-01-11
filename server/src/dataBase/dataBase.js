@@ -46,22 +46,32 @@ const {
   Category,
   Favorites,
   Cart,
-  Qualification
+  Qualification,
+  DetailSale,
   // UserSale,
-  // DetailSale,
   // SalesCart,
   // CommetProduct,
 } = sequelize.models;
 
-Level.hasMany(User, { foreignKey: "idLevel" });
-Category.hasMany(Product, { foreignKey: "idCategory" });
-User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });
-Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });
-User.hasMany(Sale, { foreignKey: "idUser" });
-User.belongsToMany(Product, { through: Cart, foreignKey: "idUser" });
-Product.belongsToMany(User, { through: Cart, foreignKey: "idProduct" });
-User.belongsToMany(Product, {through: Qualification, foreignKey: "idUser"});
-Product.belongsToMany(User, {through: Qualification, foreignKey: "idProduct"})
+Level.hasMany(User, { foreignKey: "idLevel" });//OK
+Category.hasMany(Product, { foreignKey: "idCategory" });//OK
+User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });//OK
+Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });//OK
+User.belongsToMany(Product, { through: Qualification, foreignKey: "idUser" });//OK
+Product.belongsToMany(User, {
+  through: Qualification,
+  foreignKey: "idProduct",
+});//OK
+User.belongsToMany(Product, { through: Cart, foreignKey: "idUser" });//OK
+Product.belongsToMany(User, { through: Cart, foreignKey: "idProduct" });//OK
+User.hasMany(Sale, { foreignKey: "idUser" }); //cambiar nombre a sale -- OK
+
+Sale.belongsToMany(Product, { through: DetailSale, foreignKey: "saleId" });//ok - probando
+Product.belongsToMany(Sale, { through: DetailSale, foreignKey: "productId" });//ok -- probando
+
+module.exports = { sequelize, ...sequelize.models };
+
+
 
 // Category.hasMany(Product, { foreignKey: "categoryId" });
 
@@ -78,9 +88,6 @@ Product.belongsToMany(User, {through: Qualification, foreignKey: "idProduct"})
 
 // SalesCart.hasMany(Sale, { foreignKey: "saleCartId" });
 
-// Sale.belongsToMany(Product, { through: DetailSale, foreignKey: "saleId" });
-// Product.belongsToMany(Sale, { through: DetailSale, foreignKey: "productId" });
-
 // Product.belongsToMany(Sale, {
 //   through: CommetProduct,
 //   foreignKey: "productId",
@@ -89,8 +96,6 @@ Product.belongsToMany(User, {through: Qualification, foreignKey: "idProduct"})
 //   through: CommetProduct,
 //   foreignKey: "saleId",
 // });
-
-module.exports = { sequelize, ...sequelize.models };
 
 // User.belongsToMany(Sale, { through: UserSale, foreignKey: "userId" });
 // Sale.belongsToMany(User, { through: UserSale, foreignKey: "saleId" });
