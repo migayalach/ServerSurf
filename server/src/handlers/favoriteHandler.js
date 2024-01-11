@@ -13,13 +13,13 @@ const postFav = async (request, response) => {
   }
 };
 
-const deleteFav = (req, res) => {
-  const { idFavorite } = req.params;
+const deleteFav = async (request, response) => {
+  const { idUser, idProduct } = request.params;
   try {
-    const response = deleteFavorite(idFavorite);
-    res.status(200).json(response);
+    const result = await deleteFavorite(+idUser, +idProduct);
+    response.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    response.status(400).json({ error: error.message });
   }
 };
 
