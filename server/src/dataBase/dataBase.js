@@ -59,7 +59,7 @@ User.belongsToMany(Product, { through: Cart, foreignKey: "idUser" });
 Product.belongsToMany(User, { through: Cart, foreignKey: "idProduct" });
 User.hasMany(Sale, { foreignKey: "idUser" });
 
-Sale.belongsToMany(Product, { through: DetailSale, foreignKey: "saleId" });
-Product.belongsToMany(Sale, { through: DetailSale, foreignKey: "productId" });
+Sale.belongsToMany(Product, { through: DetailSale, foreignKey: "idSale" });
+Product.belongsToMany(Sale, { through: DetailSale, foreignKey: "idProduct" });
 
 module.exports = { sequelize, ...sequelize.models };

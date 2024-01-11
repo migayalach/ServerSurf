@@ -7,10 +7,10 @@ const {
   deleteSales,
 } = require("../controllers/saleController");
 
-const postSale = (req, res) => {
-  const { idUser } = req.body;
+const postSale = async (req, res) => {
+  const { idUser, costSale } = req.body;
   try {
-    const newSale = createSale(idUser);
+    const newSale = await createSale(idUser, costSale);
     return res.status(200).json({ create: true, newSale });
   } catch (error) {
     return res.status(400).json({ message: error.message });
