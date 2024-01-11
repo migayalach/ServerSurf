@@ -2,10 +2,8 @@ const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
 //TABLAS INTERMEDIAS
-const userSaleModel = require("../models/UserSale");
 const detailedSaleModel = require("../models/DetailedSale");
 const favoriteModel = require("../models/Favorites");
-const salesCartModel = require("../models/SalesCart");
 const qualificationModel = require("../models/Qualification");
 const cartModel = require("../models/Cart");
 
@@ -30,11 +28,9 @@ levelModel(sequelize);
 userModel(sequelize);
 saleModel(sequelize);
 productModel(sequelize);
-userSaleModel(sequelize);
 detailedSaleModel(sequelize);
 categoryModel(sequelize);
 favoriteModel(sequelize);
-salesCartModel(sequelize);
 cartModel(sequelize);
 qualificationModel(sequelize);
 
@@ -48,54 +44,22 @@ const {
   Cart,
   Qualification,
   DetailSale,
-  // UserSale,
-  // SalesCart,
-  // CommetProduct,
 } = sequelize.models;
 
-Level.hasMany(User, { foreignKey: "idLevel" });//OK
-Category.hasMany(Product, { foreignKey: "idCategory" });//OK
-User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });//OK
-Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });//OK
-User.belongsToMany(Product, { through: Qualification, foreignKey: "idUser" });//OK
+Level.hasMany(User, { foreignKey: "idLevel" });
+Category.hasMany(Product, { foreignKey: "idCategory" });
+User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });
+Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });
+User.belongsToMany(Product, { through: Qualification, foreignKey: "idUser" });
 Product.belongsToMany(User, {
   through: Qualification,
   foreignKey: "idProduct",
-});//OK
-User.belongsToMany(Product, { through: Cart, foreignKey: "idUser" });//OK
-Product.belongsToMany(User, { through: Cart, foreignKey: "idProduct" });//OK
-User.hasMany(Sale, { foreignKey: "idUser" }); //cambiar nombre a sale -- OK
+});
+User.belongsToMany(Product, { through: Cart, foreignKey: "idUser" });
+Product.belongsToMany(User, { through: Cart, foreignKey: "idProduct" });
+User.hasMany(Sale, { foreignKey: "idUser" });
 
-Sale.belongsToMany(Product, { through: DetailSale, foreignKey: "saleId" });//ok - probando
-Product.belongsToMany(Sale, { through: DetailSale, foreignKey: "productId" });//ok -- probando
+Sale.belongsToMany(Product, { through: DetailSale, foreignKey: "saleId" });
+Product.belongsToMany(Sale, { through: DetailSale, foreignKey: "productId" });
 
 module.exports = { sequelize, ...sequelize.models };
-
-
-
-// Category.hasMany(Product, { foreignKey: "categoryId" });
-
-// User.belongsTo(SalesCart, { foreignKey: "userId" });
-
-// SalesCart.belongsToMany(Product, {
-//   through: CartProduct,
-//   foreignKey: "salesCartId",
-// });
-// Product.belongsToMany(SalesCart, {
-//   through: CartProduct,
-//   foreignKey: "productId",
-// });
-
-// SalesCart.hasMany(Sale, { foreignKey: "saleCartId" });
-
-// Product.belongsToMany(Sale, {
-//   through: CommetProduct,
-//   foreignKey: "productId",
-// });
-// Sale.belongsToMany(Product, {
-//   through: CommetProduct,
-//   foreignKey: "saleId",
-// });
-
-// User.belongsToMany(Sale, { through: UserSale, foreignKey: "userId" });
-// Sale.belongsToMany(User, { through: UserSale, foreignKey: "saleId" });
