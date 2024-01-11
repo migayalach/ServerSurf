@@ -4,10 +4,10 @@ const { postLevel, getLevelName, getIdLevel, deleteLevel, levelPut } = require("
 
 const levelRouter = Router();
 
-levelRouter.post("/", postLevel);
-levelRouter.get("/", getLevelName); 
-levelRouter.get("/:idLevel", getIdLevel);
-levelRouter.delete("/:idLevel", deleteLevel);
+levelRouter.post("/", postLevel);//ok
+levelRouter.get("/", getLevelName); //OK -falta el name mejorar
+levelRouter.get("/:idLevel", getIdLevel);//ok
+levelRouter.delete("/:idLevel", deleteLevel);//ok
 levelRouter.put("/", levelPut);
 
 module.exports = levelRouter;
