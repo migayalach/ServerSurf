@@ -1,7 +1,10 @@
-const { User, Sale } = require("../dataBase/dataBase");
+const { User, Sale, Cart } = require("../dataBase/dataBase");
 
-const createSale = (idUser) => {
-  return idUser;
+const createSale = async (idUser, costSale) => {
+  //VERIFICAR EN CART SI EXISTE EL USARIO
+  const date = new Date();
+  const saleData = await Sale.create({ idUser, costSale, date });
+  return saleData;
 };
 
 const getSaleName = (name) => {
