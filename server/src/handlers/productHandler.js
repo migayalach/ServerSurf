@@ -60,23 +60,43 @@ const getIdProduct = async (request, response) => {
   }
 };
 
-const productDeleted = (req, res) => {
-  const { id } = req.params;
+const productDeleted = async (request, response) => {
+  const { id } = request.params;
   try {
-    const productDelete = deleteProduct(id);
-    return res.status(200).json(productDelete);
+    const productDelete = await deleteProduct(id);
+    return response.status(200).json(productDelete);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return response.status(400).json({ message: error.message });
   }
 };
 
-const productUpdated = (req, res) => {
-  const { id } = req.body;
+const productUpdated = async (request, response) => {
+  const {
+    idProduct,
+    idCategory,
+    code,
+    name,
+    type,
+    image,
+    characteristics,
+    priceProduct,
+    description,
+  } = request.body;
   try {
-    const updatedProduct = putSales(id);
-    return res.status(200).json(updatedProduct);
+    const updatedProduct = await putProduct(
+      idProduct,
+      idCategory,
+      code,
+      name,
+      type,
+      image,
+      characteristics,
+      priceProduct,
+      description
+    );
+    return response.status(200).json(updatedProduct);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return response.status(400).json({ message: error.message });
   }
 };
 
