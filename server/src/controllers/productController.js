@@ -55,29 +55,69 @@ const getProductName = async (name, code) => {
 };
 
 const getProductId = async (idProduct) => {
+  if (idProduct) {
+    const existingProduct = await Product.findOne({ where: { idProduct } });
 
-  if(idProduct){ 
-  
-  const existingProduct = await Product.findOne({ where: { idProduct }});
-
-  if(!existingProduct){
-    throw Error (`Producto ${idProduct} no encontrado`)
-  } else {
-    return existingProduct;
+    if (!existingProduct) {
+      throw Error(`Producto ${idProduct} no encontrado`);
+    } else {
+      return existingProduct;
+    }
   }
-}
 };
 
 const getAllProducts = async () => {
   return await Product.findAll();
 };
 
-const putProduct = (id) => {
-  return id;
+const putProduct = async (
+  idProduct,
+  idCategory,
+  code,
+  name,
+  type,
+  image,
+  characteristics,
+  priceProduct,
+  description
+) => {
+  const existingProduct = await Product.findOne({ where: { idProduct } });
+
+  if (!existingProduct) {
+    throw Error(`Producto ${idProduct} no encontrado`);
+  }
+
+  const result = await Product.update({
+    idCategory,
+    code,
+    name,
+    type,
+    image,
+    characteristics,
+    priceProduct,
+    description,
+  }, { where: { idProduct }});
+
+  if(result){
+    return `Información de producto ${idProduct} actualizada con éxito`
+  } else {
+    throw Error (`No se pudo actualizar la información del producto ${idProduct}`)
+  }
 };
 
-const deleteProduct = (id) => {
-  return `Se borró el producto ${id}`;
+const deleteProduct = async (idProduct) => {
+  const existingProduct = await Product.findOne({ where: { idProduct } });
+
+  if (!existingProduct) {
+    throw Error(`No exíste el producto ${idProduct}`);
+  }
+  const result = await Product.destroy({ where: { idProduct } });
+
+  if (result) {
+    return `Producto ${idProduct} borrado con éxito`;
+  } else {
+    throw Error(`No se pudo borrar el producto ${idProduct}`);
+  }
 };
 
 module.exports = {
