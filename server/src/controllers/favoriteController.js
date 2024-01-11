@@ -26,11 +26,25 @@ const addFavorite = async (idUser, idProduct) => {
   }
 
   await Favorites.create({ idUser, idProduct });
-  return `Añadido el producto con exito a favoritos`;
+  return `Añadido el producto con éxito a favoritos`;
 };
 
-const deleteFavorite = (id) => {
-  return `se borro el producto ${id}`;
+const deleteFavorite = async (idUser, idProduct) => {
+
+  const favorite = await Favorites.findOne({
+    where: {
+      idUser,
+      idProduct,
+    },
+  });
+
+  if (!favorite) {
+    throw new Error('Producto favorito no encontrado');
+  }
+  await Favorites.destroy({where: {idUser, idProduct}});
+
+  return { success: true, message: 'Favorito eliminado correctamente' };
+
 };
 
 module.exports = {
