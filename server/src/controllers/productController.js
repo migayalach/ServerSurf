@@ -54,8 +54,18 @@ const getProductName = async (name, code) => {
   }
 };
 
-const getProductId = (id) => {
-  return id;
+const getProductId = async (idProduct) => {
+
+  if(idProduct){ 
+  
+  const existingProduct = await Product.findOne({ where: { idProduct }});
+
+  if(!existingProduct){
+    throw Error (`Producto ${idProduct} no encontrado`)
+  } else {
+    return existingProduct;
+  }
+}
 };
 
 const getAllProducts = async () => {

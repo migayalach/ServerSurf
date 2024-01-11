@@ -50,13 +50,13 @@ const getNameProduct = async (request, response) => {
   }
 };
 
-const getIdProduct = (req, res) => {
-  const { id } = req.params;
+const getIdProduct = async (request, response) => {
+  const { id } = request.params;
   try {
-    const foundProduct = getProductId(id);
-    return res.status(200).json(foundProduct);
+    const foundProduct = await getProductId(id);
+    return response.status(200).json(foundProduct);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return response.status(400).json({ message: error.message });
   }
 };
 
