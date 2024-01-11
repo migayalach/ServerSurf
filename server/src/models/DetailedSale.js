@@ -7,10 +7,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      totalCost: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-      },
     },
     {
       timestamps: false,
