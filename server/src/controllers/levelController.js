@@ -2,11 +2,11 @@ const { Op } = require("sequelize");
 const { Level } = require("../dataBase/dataBase");
 
 const createLevel = async (name) => {
-  const uppercaseName = name.toUpperCase();
+  const upperCaseName = name.toUpperCase();
   const levelExist = await Level.findOne({
     where: {
       nameLevel: {
-        [Op.iLike]: `%${uppercaseName}%`,
+        [Op.iLike]: `%${upperCaseName}%`,
       },
     },
   });
@@ -18,20 +18,20 @@ const createLevel = async (name) => {
     }
   } else {
     await Level.create({
-      nameLevel: uppercaseName,
+      nameLevel: upperCaseName,
     });
   }
 
   const { data } = await allLevel()
   return {
     level: true,
-    message: `Nivel ${uppercaseName} creado con éxito`,
+    message: `Nivel ${upperCaseName} creado con éxito`,
     data
   };
 };
 
 const levelByName = async (name) => {
-  const uppercaseName = name.toUpperCase();
+  const upperCaseName = name.toUpperCase();
   const level = await Level.findAll({
     where: {
       nameLevel: {
@@ -43,13 +43,13 @@ const levelByName = async (name) => {
   if (level.length) {
     return {
       level: true,
-      message: `Nivel ${uppercaseName} encontrado`,
+      message: `Nivel ${upperCaseName} encontrado`,
       data: level
     }
   } else {
     return {
       level: false,
-      message: `El nivel ${uppercaseName} no esta creado`,
+      message: `El nivel ${upperCaseName} no esta creado`,
       data: []
     }
   }

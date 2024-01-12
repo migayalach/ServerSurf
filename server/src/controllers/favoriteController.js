@@ -22,11 +22,35 @@ const addFavorite = async (idUser, idProduct) => {
     .includes(idProduct);
 
   if (favoriteArray) {
-    throw Error`Lo siento no puede haber duplicados`;
+    return {
+      level: false,
+      message: 'Lo siento no puede haber duplicados',
+      data: []
+    }
   }
 
   await Favorites.create({ idUser, idProduct });
-  return `Añadido el producto con éxito a favoritos`;
+
+  const { data } = await allFavorites()
+  return {
+    level: true,
+    message: `Añadido el producto con éxito a favoritos`,
+    data
+  };
+};
+
+const allFavorites = async () => {
+  const dataFavorite = await Favorites.findAll();
+
+  const formatteData = {
+    level: true,
+    message: 'Lista de favoritos',
+    data: dataFavorite.map(fav => ({
+      idUser: fav.idUser,
+      idProduct: fav.idProduct
+    }))
+  }
+  return formatteData;
 };
 
 const deleteFavorite = async (idUser, idProduct) => {
@@ -37,17 +61,28 @@ const deleteFavorite = async (idUser, idProduct) => {
       idProduct,
     },
   });
-
+  
   if (!favorite) {
-    throw new Error('Producto favorito no encontrado');
+    return {
+      level: false,
+      message: 'Producto favorito no encontrado',
+      data: []
+    }
   }
-  await Favorites.destroy({where: {idUser, idProduct}});
 
-  return { success: true, message: 'Favorito eliminado correctamente' };
-
+  const deleted = await Favorites.destroy({where: {idUser, idProduct}});
+  const { data } = await allFavorites()
+  if (deleted) {
+    return {
+      level: true,
+      message: 'Favorito eliminado correctamente',
+      data
+    }
+  } 
 };
 
 module.exports = {
   addFavorite,
+  allFavorites,
   deleteFavorite,
 };

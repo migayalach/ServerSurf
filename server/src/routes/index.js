@@ -23,6 +23,6 @@ mainRouter.use("/favorite", favoriteRouter);
 mainRouter.use("/cart", cartRouter);
 mainRouter.use("/sale", saleRouter);
 mainRouter.use("/detail", detailRouter);
-mainRouter.use("login", loginRouter);
+mainRouter.use("/login", loginRouter);
 
 module.exports = mainRouter;

@@ -47,6 +47,7 @@ const {
 } = sequelize.models;
 
 Level.hasMany(User, { foreignKey: "idLevel" });
+User.belongsTo(Level, { foreignKey: 'idLevel', as: 'level' });  //todo: puse esto, creo que faltaba
 Category.hasMany(Product, { foreignKey: "idCategory" });
 User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });
 Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });

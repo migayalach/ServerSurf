@@ -55,6 +55,11 @@ const userByName = async (name) => {
       nameUser: {
         [Op.iLike]: `%${name}%`
       }
+    },
+    include: {
+      model: Level,
+      attributes: ['idLevel', 'nameLevel'],
+      as: 'level',
     }
   });
 
@@ -62,7 +67,14 @@ const userByName = async (name) => {
     return {
       level: true,
       message: `User ${ConvierteUserName} encontrado`,
-      data: user
+      data: user.map(user => ({
+        idUser: user.idUser,
+        nameUser: user.nameUser,
+        emailUser: user.emailUser,
+        user: user.user,
+        password: user.password,
+        level: user.level,
+      }))
     }
   } else {
     return {
@@ -74,7 +86,13 @@ const userByName = async (name) => {
 };
 
 const userById = async (idUser) => {
-  const idUsers = await User.findOne({ where: { idUser } });
+  const idUsers = await User.findByPk(idUser, {
+    include: {
+      model: Level,
+      attributes: ['idLevel', 'nameLevel'],
+      as: 'level',
+    }
+  });
 
   if (idUsers) {
     return {
@@ -86,7 +104,7 @@ const userById = async (idUser) => {
         emailUser: idUsers.emailUser,
         user: idUsers.user,
         password: idUsers.password,
-        idLevel: idUsers.idLevel,
+        level: idUsers.level,
       }]
     }
   } else {
@@ -99,7 +117,13 @@ const userById = async (idUser) => {
 };
 
 const allUser = async () => {
-  const dataUser = await User.findAll();
+  const dataUser = await User.findAll({
+    include: {
+      model: Level,
+      attributes: ['idLevel', 'nameLevel'],
+      as: 'level',
+    },
+  });
 
   const formatteData = {
     level: true,
@@ -110,7 +134,7 @@ const allUser = async () => {
       emailUser: users.emailUser,
       user: users.user,
       password: users.password,
-      idLevel: users.idLevel
+      level: users.level,
     }))
   }
   return formatteData;
