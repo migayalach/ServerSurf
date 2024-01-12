@@ -2,26 +2,33 @@ const { Op } = require("sequelize");
 const { Level, User } = require("../dataBase/dataBase");
 
 const createUser = async (idLevel, nameUser, emailUser, user, password) => {
-  const existUser = await Level.findOne({
+  const levelExist = await Level.findOne({
     where: {
       idLevel,
     },
   });
-  if (!existUser) {
-    throw Error(`El nivel que intenta asignar no se encuentra registrado`);
+  if (!levelExist) {
+    return {
+      level: false,
+      message: `El nivel ${idLevel} que intenta asignar no se encuentra registrado`,
+      data: []
+    }
   }
-  const existEmail = await User.findOne({
+
+  const emailExist = await User.findOne({
     where: {
       emailUser,
     },
   });
-  if (existEmail) {
-    throw Error(
-      `Lo siento no puede haber dos cuentas con la misma dirección email`
-    );
+  if (emailExist) {
+    return {
+      level: false,
+      message: 'Lo siento no puede haber dos cuentas con la misma dirección email',
+      data: []
+    }
   }
 
-  const newUser = await User.create({
+  await User.create({
     nameUser,
     emailUser,
     user,
@@ -29,57 +36,105 @@ const createUser = async (idLevel, nameUser, emailUser, user, password) => {
     idLevel,
   });
 
-  return newUser;
+  const { data } = await allUser()
+  return {
+    level: true,
+    message: `Usuario ${nameUser} creado con éxito`,
+    data
+  };
 };
 
-const getNameUser = async (name) => {
-  const nameUser = await User.findAll({ where: { nameUser: name } });
+const userByName = async (name) => {
+  const FirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  const ConvierteUserName = FirstLetter(name);
 
-  if (nameUser) {
-    return nameUser
+  const user = await User.findAll({
+    where: {
+      nameUser: {
+        [Op.iLike]: `%${name}%`
+      }
+    }
+  });
+
+  if (user.length) {
+    return {
+      level: true,
+      message: `User ${ConvierteUserName} encontrado`,
+      data: user
+    }
   } else {
-    throw Error('Name not found');
+    return {
+      level: false,
+      message: `User ${ConvierteUserName} no encontrado`,
+      data: []
+    }
   }
 };
 
-const getUserId = async (idUser) => {
-  const dataUser = await User.findOne({
-    where: {
-      idUser,
-    },
-  });
+const userById = async (idUser) => {
+  const idUsers = await User.findOne({ where: { idUser } });
 
-  if (!dataUser) {
-    throw Error(`El usuario que usted busca, no existe`);
+  if (idUsers) {
+    return {
+      level: true,
+      message: `User ${idUser} encontrado`,
+      data: [{
+        idUser: idUsers.idUser,
+        nameUser: idUsers.nameUser,
+        emailUser: idUsers.emailUser,
+        user: idUsers.user,
+        password: idUsers.password,
+        idLevel: idUsers.idLevel,
+      }]
+    }
+  } else {
+    return {
+      level: false,
+      message: `El user ${idUser} no existe`,
+      data: []
+    }
   }
-
-  const dataLevel = await Level.findOne({
-    where: {
-      idLevel: dataUser.idLevel,
-    },
-  });
-
-  return { dataUser, dataLevel };
 };
 
-const getAllUser = async () => {
+const allUser = async () => {
   const dataUser = await User.findAll();
-  return dataUser;
+
+  const formatteData = {
+    level: true,
+    message: 'Lista de users',
+    data: dataUser.map(users => ({
+      idUser: users.idUser,
+      nameUser: users.nameUser,
+      emailUser: users.emailUser,
+      user: users.user,
+      password: users.password,
+      idLevel: users.idLevel
+    }))
+  }
+  return formatteData;
 };
 
 const userDelete = async (idUser) => {
-  const userExisting = await User.findOne({ where: { idUser } });
+  const userExisting = await User.findOne({ where: { idUser } }, { attributes: ['nameLevel'] });
 
   if (!userExisting) {
-    throw Error('Non-existent user')
+    return {
+      level: false,
+      message: `No existe el user ${idUser} para eliminar`,
+      data: []
+    }
   }
 
   const deleted = await User.destroy({ where: { idUser } });
-
+  const { data } = await allUser()
   if (deleted) {
-    return `User ${idUser} deleted`
-  } else {
-    throw Error(`Could not clear the user ${ idUser }`);
+    return {
+      level: true,
+      message: `User ${userExisting.nameUser} eliminado`,
+      data
+    }
   }
 };
 
@@ -87,23 +142,32 @@ const userUpDate = async (idUser, idLevel, nameUser, emailUser, user, password) 
   const userExisting = await User.findOne({ where: { idUser } });
 
   if (!userExisting) {
-    throw Error('Non-existent user')
+    return {
+      level: false,
+      message: `No existe el user ID ${idUser} para actualizar`,
+      data: []
+    }
   } else {
     userExisting.password = password;
     userExisting.nameUser = nameUser;
     userExisting.idLevel = idLevel;
     userExisting.emailUser = emailUser;
     userExisting.user = user;
-    await userExisting.save();  // Guarda los cambios
-    return { message: 'User updated successfully', userExisting };
+    await userExisting.save();
+    const { data } = await allUser();
+    return {
+      level: true,
+      message: `User actualizado exitosamente: ${nameUser}`,
+      data
+    };
   }
 };
 
 module.exports = {
   createUser,
-  getNameUser,
-  getUserId,
-  getAllUser,
+  userByName,
+  userById,
+  allUser,
   userDelete,
   userUpDate,
 };
