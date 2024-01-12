@@ -14,10 +14,10 @@ const qualificationRouter = require("./qualificationRouter");
 const loginRouter = require("./loginRouter");
 
 // entry points
-mainRouter.use("/level", levelRouter);
+mainRouter.use("/level", levelRouter); //ok
 mainRouter.use("/user", userRouter);
-mainRouter.use("/category", categoryRouter);
-mainRouter.use("/product", productRouter);
+mainRouter.use("/category", categoryRouter); //ok
+mainRouter.use("/product", productRouter); //ok
 mainRouter.use("/qualification", qualificationRouter);
 mainRouter.use("/favorite", favoriteRouter);
 mainRouter.use("/cart", cartRouter);
