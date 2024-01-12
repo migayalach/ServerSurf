@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { Product, Category } = require("../dataBase/dataBase");
+const { filterProducts, orderProduct } = require("../helpers/filterOrder");
 
 const clearObj = (obj, nameCategory) => {
   return {
@@ -224,6 +225,29 @@ const deleteProduct = async (idProduct) => {
   }
 };
 
+const filterProduct = async (
+  nameCategory,
+  orderBy,
+  priceStart,
+  priceEnd,
+  stockBy
+) => {
+  const listProducts = await listProductsPromisse();
+
+  const dataSearch = {};
+  return {
+    message: `Productos filtrados`,
+    productData: orderProduct(
+      listProducts,
+      nameCategory,
+      orderBy,
+      priceStart,
+      priceEnd,
+      stockBy
+    ),
+  };
+};
+
 module.exports = {
   createProduct,
   getProductName,
@@ -231,4 +255,5 @@ module.exports = {
   getAllProducts,
   putProduct,
   deleteProduct,
+  filterProduct,
 };
