@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
         type: DataTypes.DOUBLE,
         allowNull: false,
       },
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
