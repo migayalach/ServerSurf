@@ -1,8 +1,8 @@
 const {
   createLevel,
-  getNameLevel,
-  getLevelId,
-  getAllLevel,
+  levelByName,
+  levelById,
+  allLevel,
   levelDelete,
   levelUpDate,
 } = require("../controllers/levelController");
@@ -10,21 +10,21 @@ const {
 const postLevel = async (request, response) => {
   const { name } = request.body;
   try {
-    const newLevel = await createLevel(name);
-    response.status(200).json({ create: true, newLevel });
+    const responseData = await createLevel(name)
+    response.status(200).json(responseData);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
 
-const getLevelName = async(request, response) => {
+const getLevelByName = async(request, response) => {
   const { name } = request.query;
   try {
     if (name) {
-      const levelName = await getNameLevel(name);
+      const levelName = await levelByName(name);
       response.status(200).json(levelName);
     } else {
-      const allLevels = await getAllLevel();
+      const allLevels = await allLevel();
       response.status(200).json(allLevels);
     }
   } catch (error) {
@@ -32,10 +32,10 @@ const getLevelName = async(request, response) => {
   }
 };
 
-const getIdLevel = async (request, response) => {
+const getLevelById = async (request, response) => {
   const { idLevel } = request.params;
   try {
-    const levelFind = await getLevelId(idLevel);
+    const levelFind = await levelById(idLevel);
     response.status(200).json(levelFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
@@ -52,7 +52,7 @@ const deleteLevel = async (request, response) => {
   }
 };
 
-const levelPut = async (request, response) => {
+const upDateLevel = async (request, response) => {
   const { idLevel, nameLevel } = request.body;
   try {
     const upDate = await levelUpDate(idLevel, nameLevel);
@@ -64,8 +64,8 @@ const levelPut = async (request, response) => {
 
 module.exports = {
   postLevel,
-  getLevelName,
-  getIdLevel,
+  getLevelByName,
+  getLevelById,
   deleteLevel,
-  levelPut,
+  upDateLevel,
 };

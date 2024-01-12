@@ -1,21 +1,14 @@
 const { Router } = require("express");
 
-const {
-  getCategory,
-  getCategoryById,
-  getCategoryByName,
-  postCategory,
-  deleteCategory,
-  updateCategory,
-} = require("../handlers/categoryHandler");
+const { postCategory, getCategoryByName, getCategoryById, deleteCategory, upDateCategory } = require("../handlers/categoryHandler");
 
 const categoryRouter = Router();
 
-categoryRouter.get("/:idCategory", getCategoryById); //ok
-categoryRouter.get("/", getCategoryByName); //ok
-categoryRouter.post("/", postCategory); //ok
-categoryRouter.delete("/:idCategory", deleteCategory); //ok
-categoryRouter.put("/", updateCategory) //ok
+categoryRouter.post("/", postCategory); //OK.
+categoryRouter.get("/", getCategoryByName); //OK.
+categoryRouter.get("/:idCategory", getCategoryById); //OK.
+categoryRouter.delete("/:idCategory", deleteCategory); //OK.
+categoryRouter.put("/", upDateCategory) //OK.
 
 
 module.exports = categoryRouter;
