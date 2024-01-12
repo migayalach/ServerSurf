@@ -2,6 +2,7 @@ const valor = (text) => {
   let character = text.split("")[0];
   return character.charCodeAt();
 };
+
 const orderByASCDESC = (array, search) => {
   let n = array.length,
     aux = 0,
