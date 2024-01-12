@@ -16,10 +16,11 @@ const postProduct = async (request, response) => {
     image,
     characteristics,
     priceProduct,
+    stock,
     description,
   } = request.body;
   try {
-    const newProduct = await createProduct(
+    const { message, dataNewProduct, listProducts } = await createProduct(
       idCategory,
       code,
       name,
@@ -27,11 +28,19 @@ const postProduct = async (request, response) => {
       image,
       characteristics,
       priceProduct,
+      stock,
       description
     );
-    return response.status(200).json({ create: true, newProduct });
+    return response.status(200).json({
+      createProduct: true,
+      message,
+      dataNewProduct,
+      listProducts,
+    });
   } catch (error) {
-    return response.status(400).json({ message: error.message });
+    return response
+      .status(400)
+      .json({ createProduct: false, message: error.message, listProducts: [] });
   }
 };
 
@@ -39,34 +48,54 @@ const getNameProduct = async (request, response) => {
   const { name, code } = request.query;
   try {
     if (name || code) {
-      const sale = await getProductName(name, code);
-      return response.status(200).json(sale);
+      const { message, productData } = await getProductName(name, code);
+      return response
+        .status(200)
+        .json({ getProduct: true, message, listProducts: productData });
     } else {
-      const allProducts = await getAllProducts();
-      return response.status(200).json(allProducts);
+      const allProducts = await getAllProducts(true);
+      return response.status(200).json({
+        getProduct: true,
+        message: `Lista de productos`,
+        listProducts: allProducts,
+      });
     }
   } catch (error) {
-    return response.status(400).json({ message: error.message });
+    return response.status(400).json({
+      getProduct: false,
+      message: error.message,
+      listProducts: [],
+    });
   }
 };
 
 const getIdProduct = async (request, response) => {
-  const { id } = request.params;
+  const { idProduct } = request.params;
   try {
-    const foundProduct = await getProductId(id);
-    return response.status(200).json(foundProduct);
+    const { message, product } = await getProductId(idProduct);
+    return response
+      .status(200)
+      .json({ getProductoId: true, message, listProducts: [product] });
   } catch (error) {
-    return response.status(400).json({ message: error.message });
+    return response
+      .status(400)
+      .json({ getProductoId: false, message: error.message, listProducts: [] });
   }
 };
 
 const productDeleted = async (request, response) => {
-  const { id } = request.params;
+  const { idProduct } = request.params;
   try {
-    const productDelete = await deleteProduct(id);
-    return response.status(200).json(productDelete);
+    const { message, dataDeleteProduct, listProducts } = await deleteProduct(
+      idProduct
+    );
+    return response
+      .status(200)
+      .json({ deleteProduct: true, message, dataDeleteProduct, listProducts });
   } catch (error) {
-    return response.status(400).json({ message: error.message });
+    return response
+      .status(400)
+      .json({ deleteProduct: false, message: error.message, listProducts: [] });
   }
 };
 
@@ -80,10 +109,15 @@ const productUpdated = async (request, response) => {
     image,
     characteristics,
     priceProduct,
+    stock,
     description,
   } = request.body;
   try {
-    const updatedProduct = await putProduct(
+    const {
+      message,
+      dataUpdateProduct: { product },
+      listProducts,
+    } = await putProduct(
       idProduct,
       idCategory,
       code,
@@ -92,11 +126,19 @@ const productUpdated = async (request, response) => {
       image,
       characteristics,
       priceProduct,
+      stock,
       description
     );
-    return response.status(200).json(updatedProduct);
+    return response.status(200).json({
+      updateProduct: true,
+      message,
+      dataUpdateProduct: product,
+      listProducts,
+    });
   } catch (error) {
-    return response.status(400).json({ message: error.message });
+    return response
+      .status(400)
+      .json({ updateProduct: false, message: error.message, listProducts: [] });
   }
 };
 
