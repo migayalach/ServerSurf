@@ -5,6 +5,7 @@ const {
   getAllProducts,
   putProduct,
   deleteProduct,
+  filterProduct,
 } = require("../controllers/productController");
 
 const postProduct = async (request, response) => {
@@ -45,10 +46,26 @@ const postProduct = async (request, response) => {
 };
 
 const getNameProduct = async (request, response) => {
-  const { name, code } = request.query;
+  const { name, code, nameCategory, orderBy, priceStart, priceEnd, stockBy } =
+    request.query;
   try {
     if (name || code) {
       const { message, productData } = await getProductName(name, code);
+      return response
+        .status(200)
+        .json({ getProduct: true, message, listProducts: productData });
+    } else if (
+      (nameCategory || orderBy || priceStart || priceEnd || stockBy) &&
+      !name &&
+      !code
+    ) {
+      const { message, productData } = await filterProduct(
+        nameCategory,
+        orderBy,
+        +priceStart,
+        +priceEnd,
+        stockBy
+      );
       return response
         .status(200)
         .json({ getProduct: true, message, listProducts: productData });
