@@ -8,9 +8,9 @@ const {
 } = require("../controllers/detailController");
 
 const postDetail = async (request, response) => {
-  const { idSale, idProduct, amount } = request.body;
+  const { idSale, listProducts } = request.body;
   try {
-    const newDetail = await createDetail(idSale, idProduct, amount);
+    const newDetail = await createDetail(idSale, listProducts);
     response.status(200).json(newDetail);
   } catch (error) {
     response.status(400).json({ error: error.message });

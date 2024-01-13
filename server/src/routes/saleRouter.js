@@ -9,10 +9,10 @@ const {
 
 const saleRouter = Router();
 
-saleRouter.post('/', postSale);
-saleRouter.get('/', getNameSale);
-saleRouter.get('/:id', getIdSale);
-saleRouter.delete('/:id', saleDeleted);
-saleRouter.put('/', saleUpdated)
+saleRouter.post("/", postSale); //ok --- falta detalle
+saleRouter.get("/", getNameSale);
+saleRouter.get("/:id", getIdSale);
+saleRouter.delete("/:id", saleDeleted);
+saleRouter.put("/", saleUpdated);
 
 module.exports = saleRouter;

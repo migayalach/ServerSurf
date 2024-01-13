@@ -33,10 +33,22 @@ const cartPromisseData = async (idUser) => {
   return clearData(arrayData);
 };
 
+const costProduct = (array) => {
+  let precio = 0;
+  for (let i = 0; i < array.length; i++) {
+    let sum = array[i].priceProduct * array[i].amount;
+    precio = precio + sum;
+    sum = 0;
+  }
+  return (precio = Math.round(precio * 100) / 100);
+};
+
 const getCartUserId = async (idUser) => {
+  const costEnd = await cartPromisseData(idUser);
   return {
     message: "Carrito cargado satisfactoriamente",
-    cartList: await cartPromisseData(idUser),
+    cost: costProduct(costEnd),
+    cartList: costEnd,
   };
 };
 
@@ -65,8 +77,10 @@ const addCart = async (idProduct, idUser, amount) => {
 
   await Cart.create({ idProduct, idUser, amount });
   const { cartList } = await getCartUserId(idUser);
+
   return {
     message: `Carrito lista`,
+    cost: costProduct(cartList),
     cartList,
   };
 };
@@ -79,7 +93,11 @@ const updateCart = async (idProduct, idUser, amount) => {
   if (amount <= stock) {
     await Cart.update({ amount }, { where: { idProduct, idUser } });
     const { cartList } = await getCartUserId(idUser);
-    return { message: `Actualizacion completa`, cartList };
+    return {
+      message: `Actualizacion completa`,
+      cost: costProduct(cartList),
+      cartList,
+    };
   }
   throw Error`Lo siento la cantidad que intenta agregar: ${amount}, supera nuestro stock`;
 };
@@ -91,7 +109,7 @@ const cartDelete = async (idUser) => {
   }
   await Cart.destroy({ where: { idUser } });
   const { cartList } = await getCartUserId(idUser);
-  return { message: `success`, cartList };
+  return { message: `success`, cost: costProduct(cartList), cartList };
 };
 
 module.exports = {
