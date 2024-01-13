@@ -1,5 +1,45 @@
 const { User, Product, Cart } = require("../dataBase/dataBase");
 
+const clearObj = (obj, producto) => {
+  return {
+    idProduct: producto.idProduct,
+    code: producto.code,
+    name: producto.name,
+    type: producto.type,
+    image: producto.image,
+    characteristics: producto.characteristics,
+    priceProduct: producto.priceProduct,
+    amount: obj.amount,
+  };
+};
+
+const clearData = async (arrayData) => {
+  const promisse = arrayData.map(async ({ amount, idUser, idProduct }) => {
+    const producto = await Product.findByPk(idProduct);
+    const obj = {
+      idUser,
+      idProduct,
+      amount,
+    };
+    return clearObj(obj, producto);
+  });
+  return await Promise.all(promisse);
+};
+
+const cartPromisseData = async (idUser) => {
+  const arrayData = await Cart.findAll({
+    where: { idUser },
+  });
+  return clearData(arrayData);
+};
+
+const getCartUserId = async (idUser) => {
+  return {
+    message: "Carrito cargado satisfactoriamente",
+    cartList: await cartPromisseData(idUser),
+  };
+};
+
 const addCart = async (idProduct, idUser, amount) => {
   const existUser = await User.findOne({ where: { idUser } });
   if (!existUser) {
@@ -24,16 +64,39 @@ const addCart = async (idProduct, idUser, amount) => {
   }
 
   await Cart.create({ idProduct, idUser, amount });
-  return await getDetailCart(idUser);
+  const { cartList } = await getCartUserId(idUser);
+  return {
+    message: `Carrito lista`,
+    cartList,
+  };
 };
 
-const getDetailCart = async (idUser) => {
-  return await Cart.findAll({ where: { idUser } });
+const updateCart = async (idProduct, idUser, amount) => {
+  if (amount < 0) {
+    throw Error`Lo siento no hay stock negativo`;
+  }
+  const { stock } = await Product.findOne({ where: { idProduct } });
+  if (amount <= stock) {
+    await Cart.update({ amount }, { where: { idProduct, idUser } });
+    const { cartList } = await getCartUserId(idUser);
+    return { message: `Actualizacion completa`, cartList };
+  }
+  throw Error`Lo siento la cantidad que intenta agregar: ${amount}, supera nuestro stock`;
 };
 
-const cartDelete = () => {};
+const cartDelete = async (idUser) => {
+  const existUser = await User.findOne({ where: { idUser } });
+  if (!existUser) {
+    throw Error`Lo siento el usario que introdujo no existe`;
+  }
+  await Cart.destroy({ where: { idUser } });
+  const { cartList } = await getCartUserId(idUser);
+  return { message: `success`, cartList };
+};
 
 module.exports = {
+  getCartUserId,
   addCart,
   cartDelete,
+  updateCart,
 };

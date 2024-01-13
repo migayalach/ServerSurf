@@ -20,7 +20,7 @@ mainRouter.use("/category", categoryRouter); //ok
 mainRouter.use("/product", productRouter); //ok
 mainRouter.use("/qualification", qualificationRouter);
 mainRouter.use("/favorite", favoriteRouter);
-mainRouter.use("/cart", cartRouter);
+mainRouter.use("/cart", cartRouter);//ok
 mainRouter.use("/sale", saleRouter);
 mainRouter.use("/detail", detailRouter);
 mainRouter.use("/login", loginRouter);
