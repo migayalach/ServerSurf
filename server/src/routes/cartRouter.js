@@ -1,11 +1,16 @@
 const { Router } = require("express");
-const { postCart, deleteCart } = require("../handlers/cartHandler");
+const {
+  postCart,
+  deleteCart,
+  getCartProduct,
+  putCart,
+} = require("../handlers/cartHandler");
 
 const cartRouter = Router();
 
-cartRouter.post("/", postCart);     //OK
-cartRouter.get("", );
-cartRouter.put("/");
-cartRouter.delete("");
+cartRouter.get("/:idUser", getCartProduct);
+cartRouter.post("/", postCart);
+cartRouter.put("/", putCart);
+cartRouter.delete("/:idUser", deleteCart);
 
 module.exports = cartRouter;
