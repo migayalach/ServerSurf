@@ -1,5 +1,6 @@
 const {
   addFavorite,
+  allFavorites,
   deleteFavorite,
 } = require("../controllers/favoriteController");
 
@@ -8,6 +9,15 @@ const postFav = async (request, response) => {
   try {
     const newFavorite = await addFavorite(idUser, +idProduct);
     response.status(200).json(newFavorite);
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
+
+const favoritesAll = async (request, response) => {
+  try {
+    const favorites = await allFavorites();
+    response.status(200).json(favorites);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
@@ -26,4 +36,5 @@ const deleteFav = async (request, response) => {
 module.exports = {
   postFav,
   deleteFav,
+  favoritesAll
 };
