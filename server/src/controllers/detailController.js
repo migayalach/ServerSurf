@@ -1,9 +1,12 @@
 const { DetailSale, Sale, Product } = require("../dataBase/dataBase");
 
 // verificar el idVenta, el producto, usar promose all para enviar n datos(productos)
-const createDetail = async (idSale, idProduct, amount) => {
-  const detailData = await DetailSale.create({ idSale, idProduct, amount });
-  return detailData;
+const createDetail = async (idSale, listProducts) => {
+  const promisseDetail = listProducts.map(async ({ idProduct, amount }) => {
+    const detail = await DetailSale.create({ idSale, idProduct, amount });
+    return detail;
+  });
+  return await Promise.all(promisseDetail);
 };
 
 const editDetail = (idDetail, name) => {
