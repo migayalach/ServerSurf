@@ -3,7 +3,7 @@ const { Router } = require("express");
 const loginRouter = Router();
 
 loginRouter.post(
-  "/" //ruta
+  "/" //loginUser
 );
 
 module.exports = loginRouter;
