@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 const { Level, User } = require("../dataBase/dataBase");
 
-const createUser = async (idLevel, nameUser, emailUser, user, password) => {
+const createUser = async (idLevel, nameUser, emailUser, lastName, password) => {
   const levelExist = await Level.findOne({
     where: {
       idLevel,
@@ -32,7 +32,7 @@ const createUser = async (idLevel, nameUser, emailUser, user, password) => {
   await User.create({
     nameUser,
     emailUser,
-    user,
+    lastName,
     password,
     idLevel,
   });
@@ -70,11 +70,12 @@ const userByName = async (name) => {
       message: `User ${ConvierteUserName} encontrado`,
       data: user.map((user) => ({
         idUser: user.idUser,
+        idLevel: user.level.idLevel,
+        nameLevel: user.level.nameLevel,
         nameUser: user.nameUser,
         emailUser: user.emailUser,
-        user: user.user,
+        lastName: user.lastName,
         password: user.password,
-        level: user.level,
       })),
     };
   } else {
@@ -102,11 +103,12 @@ const userById = async (idUser) => {
       data: [
         {
           idUser: idUsers.idUser,
+          idLevel: idUsers.level.idLevel,
+          nameLevel: idUsers.level.nameLevel,
           nameUser: idUsers.nameUser,
           emailUser: idUsers.emailUser,
-          user: idUsers.user,
+          lastName: idUsers.lastName,
           password: idUsers.password,
-          level: idUsers.level,
         },
       ],
     };
@@ -137,7 +139,7 @@ const allUser = async () => {
       nameLevel: users.level.nameLevel,
       nameUser: users.nameUser,
       emailUser: users.emailUser,
-      user: users.user,
+      lastName: users.lastName,
       password: users.password,
     })),
   };
@@ -174,7 +176,7 @@ const userUpDate = async (
   idLevel,
   nameUser,
   emailUser,
-  user,
+  lastName,
   password
 ) => {
   const userExisting = await User.findOne({ where: { idUser } });
@@ -190,7 +192,7 @@ const userUpDate = async (
     userExisting.nameUser = nameUser;
     userExisting.idLevel = idLevel;
     userExisting.emailUser = emailUser;
-    userExisting.user = user;
+    userExisting.lastName = lastName;
     await userExisting.save();
     const { data } = await allUser();
     return {
