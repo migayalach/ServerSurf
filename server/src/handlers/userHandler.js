@@ -13,14 +13,14 @@ const FirstLetter = (string) => {
 };
 
 const postUser = async (request, response) => {
-  const { idLevel, nameUser, emailUser, user, password } = request.body;
+  const { idLevel, nameUser, emailUser, lastName, password } = request.body;
   const ConvierteUserName = FirstLetter(nameUser);
   try {
     const newUser = await createUser(
       idLevel,
       ConvierteUserName,
       emailUser,
-      user,
+      lastName,
       password
     );
     response.status(200).json(newUser);
@@ -65,10 +65,18 @@ const deleteUser = async (request, response) => {
 };
 
 const upDateUser = async (request, response) => {
-  const { idUser, idLevel, nameUser, emailUser, user, password } = request.body;
+  const { idUser, idLevel, nameUser, emailUser, lastName, password } =
+    request.body;
   const ConvierteUserName = FirstLetter(nameUser);
   try {
-    const upDate = await userUpDate(idUser, idLevel, ConvierteUserName, emailUser, user, password);
+    const upDate = await userUpDate(
+      idUser,
+      idLevel,
+      ConvierteUserName,
+      emailUser,
+      lastName,
+      password
+    );
     response.status(200).json(upDate);
   } catch (error) {
     response.status(400).json({ error: error.message });
