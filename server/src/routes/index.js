@@ -11,6 +11,8 @@ const favoriteRouter = require("./favoriteRouter");
 const categoryRouter = require("./categotyRouter");
 const detailRouter = require("./detailRouter");
 const qualificationRouter = require("./qualificationRouter");
+const brandRouter = require("./brandRouter");
+const colorRouter = require("./colorRouter")
 const loginRouter = require("./loginRouter");
 
 // entry points
@@ -23,6 +25,8 @@ mainRouter.use("/favorite", favoriteRouter);
 mainRouter.use("/cart", cartRouter); //ok
 mainRouter.use("/sale", saleRouter); //o
 mainRouter.use("/detail", detailRouter); //o
+mainRouter.use("/brand", brandRouter);
+mainRouter.use("/color", colorRouter)
 mainRouter.use("/login", loginRouter);
 
 module.exports = mainRouter;

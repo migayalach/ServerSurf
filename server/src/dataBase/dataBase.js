@@ -6,6 +6,8 @@ const detailedSaleModel = require("../models/DetailedSale");
 const favoriteModel = require("../models/Favorites");
 const qualificationModel = require("../models/Qualification");
 const cartModel = require("../models/Cart");
+const brandModel = require("../models/Brand");
+const colorModer = require("../models/Color");
 
 // TABLAS
 const levelModel = require("../models/Level");
@@ -33,6 +35,8 @@ categoryModel(sequelize);
 favoriteModel(sequelize);
 cartModel(sequelize);
 qualificationModel(sequelize);
+brandModel(sequelize);
+colorModer(sequelize);
 
 const {
   Level,
@@ -44,11 +48,15 @@ const {
   Cart,
   Qualification,
   DetailSale,
+  Brand,
+  Color,
 } = sequelize.models;
 
 Level.hasMany(User, { foreignKey: "idLevel" });
-User.belongsTo(Level, { foreignKey: 'idLevel', as: 'level' });  //todo: puse esto, creo que faltaba
+User.belongsTo(Level, { foreignKey: "idLevel", as: "level" }); //todo: puse esto, creo que faltaba
 Category.hasMany(Product, { foreignKey: "idCategory" });
+Color.hasMany(Product, { foreignKey: "idColor" });
+Brand.hasMany(Product, { foreignKey: "idBrand" });
 User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });
 Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });
 User.belongsToMany(Product, { through: Qualification, foreignKey: "idUser" });
@@ -59,7 +67,6 @@ Product.belongsToMany(User, {
 User.belongsToMany(Product, { through: Cart, foreignKey: "idUser" });
 Product.belongsToMany(User, { through: Cart, foreignKey: "idProduct" });
 User.hasMany(Sale, { foreignKey: "idUser" });
-
 Sale.belongsToMany(Product, { through: DetailSale, foreignKey: "idSale" });
 Product.belongsToMany(Sale, { through: DetailSale, foreignKey: "idProduct" });
 
