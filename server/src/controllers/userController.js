@@ -1,5 +1,8 @@
 const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
 const { Level, User } = require("../dataBase/dataBase");
+
+const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
 const createUser = async (idLevel, nameUser, emailUser, lastName, password) => {
   const levelExist = await Level.findOne({
@@ -33,7 +36,7 @@ const createUser = async (idLevel, nameUser, emailUser, lastName, password) => {
     nameUser,
     emailUser,
     lastName,
-    password,
+    password: await hashedPassword(`${password}`),
     idLevel,
   });
 
@@ -75,7 +78,7 @@ const userByName = async (name) => {
         nameUser: user.nameUser,
         emailUser: user.emailUser,
         lastName: user.lastName,
-        password: user.password,
+        //password: user.password,
       })),
     };
   } else {
@@ -108,7 +111,7 @@ const userById = async (idUser) => {
           nameUser: idUsers.nameUser,
           emailUser: idUsers.emailUser,
           lastName: idUsers.lastName,
-          password: idUsers.password,
+          //password: idUsers.password,
         },
       ],
     };
@@ -140,7 +143,7 @@ const allUser = async () => {
       nameUser: users.nameUser,
       emailUser: users.emailUser,
       lastName: users.lastName,
-      password: users.password,
+      //password: users.password,
     })),
   };
   return formatteData;
@@ -188,7 +191,7 @@ const userUpDate = async (
       data: [],
     };
   } else {
-    userExisting.password = password;
+    userExisting.password = await hashedPassword(password);
     userExisting.nameUser = nameUser;
     userExisting.idLevel = idLevel;
     userExisting.emailUser = emailUser;
