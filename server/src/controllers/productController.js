@@ -143,36 +143,66 @@ const getProductName = async (name, code) => {
   }
 };
 
+//VIEJO COMPARAR CON NUEVO
+
+// const getProductId = async (idProduct) => {
+//   if (idProduct) {
+//     const listProducts = await Product.findOne({ where: { idProduct } });
+//     if (!listProducts) {
+//       throw Error(`El producto que busca no pudo ser encontrado`);
+//     }
+//     const existCategory = await Category.findOne(
+//       { where: { idCategory: listProducts.idCategory } },
+//       { attribute: [`nameCategory`] }
+//     );
+
+//     const existColor = await Color.findOne(
+//       { where: { idColor: listProducts.idColor } },
+//       { attribute: [`nameColor`] }
+//     );
+
+//     const existBrand = await Brand.findOne(
+//       { where: { idBrand: listProducts.idBrand } },
+//       { attribute: [`brandName`] }
+//     );
+
+//     return {
+//       message: `Producto encontrado con exito`,
+//       product: clearObj(
+//         listProducts,
+//         existCategory.nameCategory,
+//         existColor.nameColor,
+//         existBrand.brandName
+//       ),
+//     };
+//   }
+// };
+
+
+/**** */
+
+//NUEVO PARA PRESENTAR
 const getProductId = async (idProduct) => {
   if (idProduct) {
-    const listProducts = await Product.findOne({ where: { idProduct } });
-    if (!listProducts) {
-      throw Error(`El producto que busca no pudo ser encontrado`);
-    }
-    const existCategory = await Category.findOne(
-      { where: { idCategory: listProducts.idCategory } },
-      { attribute: [`nameCategory`] }
-    );
+      const listProducts = await Product.findOne({ where: { idProduct } });
+      if (!listProducts) {
+        throw new Error("El producto que busca no pudo ser encontrado");
+      }
+      const [existCategory, existColor, existBrand] = await Promise.all([
+        Category.findOne({ where: { idCategory: listProducts.idCategory } }),
+        Color.findOne({ where: { idColor: listProducts.idColor } }),
+        Brand.findOne({ where: { idBrand: listProducts.idBrand } }),
+      ]);
 
-    const existColor = await Color.findOne(
-      { where: { idColor: listProducts.idColor } },
-      { attribute: [`nameColor`] }
-    );
-
-    const existBrand = await Brand.findOne(
-      { where: { idBrand: listProducts.idBrand } },
-      { attribute: [`brandName`] }
-    );
-
-    return {
-      message: `Producto encontrado con exito`,
-      product: clearObj(
-        listProducts,
-        existCategory.nameCategory,
-        existColor.nameColor,
-        existBrand.brandName
-      ),
-    };
+      return {
+        message:" Producto encontrado con exito",
+        product: clearObj(
+          listProducts,
+          existCategory?.nameCategory,
+          existColor?.nameColor,
+          existBrand?.brandName
+        ),
+      };
   }
 };
 
