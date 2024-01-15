@@ -11,6 +11,8 @@ const {
 const postProduct = async (request, response) => {
   const {
     idCategory,
+    idColor,
+    idBrand,
     code,
     name,
     type,
@@ -23,6 +25,8 @@ const postProduct = async (request, response) => {
   try {
     const { message, dataNewProduct, listProducts } = await createProduct(
       idCategory,
+      idColor,
+      idBrand,
       code,
       name,
       type,
@@ -120,6 +124,8 @@ const productUpdated = async (request, response) => {
   const {
     idProduct,
     idCategory,
+    idColor,
+    idBrand,
     code,
     name,
     type,
@@ -137,6 +143,8 @@ const productUpdated = async (request, response) => {
     } = await putProduct(
       idProduct,
       idCategory,
+      idColor,
+      idBrand,
       code,
       name,
       type,

@@ -1,17 +1,21 @@
 const { Op } = require("sequelize");
-const { Product, Category } = require("../dataBase/dataBase");
+const { Product, Category, Brand, Color } = require("../dataBase/dataBase");
 const { filterProducts, orderProduct } = require("../helpers/filterOrder");
 
-const clearObj = (obj, nameCategory) => {
+const clearObj = (obj, nameCategory, brandName, nameColor) => {
   return {
     idProduct: obj.idProduct,
     idCategory: obj.idCategory,
+    idColor: obj.idColor,
+    idBrand: obj.idBrand,
     nameCategory,
     code: obj.code,
     name: obj.name,
     type: obj.type,
     image: obj.image,
     characteristics: obj.characteristics,
+    brandName,
+    nameColor,
     priceProduct: obj.priceProduct,
     stock: obj.stock,
     description: obj.description,
@@ -30,6 +34,8 @@ const listProductsPromisse = async (productData) => {
     async ({
       idProduct,
       idCategory,
+      idColor,
+      idBrand,
       code,
       name,
       type,
@@ -40,9 +46,13 @@ const listProductsPromisse = async (productData) => {
       description,
     }) => {
       const { nameCategory } = await Category.findByPk(idCategory);
+      const { brandName } = await Brand.findByPk(idBrand);
+      const { nameColor } = await Color.findByPk(idColor);
       const obj = {
         idProduct,
         idCategory,
+        idColor,
+        idBrand,
         code,
         name,
         type,
@@ -52,7 +62,7 @@ const listProductsPromisse = async (productData) => {
         stock,
         description,
       };
-      return clearObj(obj, nameCategory);
+      return clearObj(obj, nameCategory, brandName, nameColor);
     }
   );
   return await Promise.all(promisse);
@@ -60,6 +70,8 @@ const listProductsPromisse = async (productData) => {
 
 const createProduct = async (
   idCategory,
+  idColor,
+  idBrand,
   code,
   name,
   type,
@@ -86,6 +98,8 @@ const createProduct = async (
 
   let newProduct = await Product.create({
     idCategory,
+    idColor,
+    idBrand,
     code,
     name,
     type,
@@ -139,9 +153,25 @@ const getProductId = async (idProduct) => {
       { where: { idCategory: listProducts.idCategory } },
       { attribute: [`nameCategory`] }
     );
+
+    const existColor = await Color.findOne(
+      { where: { idColor: listProducts.idColor } },
+      { attribute: [`nameColor`] }
+    );
+
+    const existBrand = await Brand.findOne(
+      { where: { idBrand: listProducts.idBrand } },
+      { attribute: [`brandName`] }
+    );
+
     return {
       message: `Producto encontrado con exito`,
-      product: clearObj(listProducts, existCategory.nameCategory),
+      product: clearObj(
+        listProducts,
+        existCategory.nameCategory,
+        existColor.nameColor,
+        existBrand.brandName
+      ),
     };
   }
 };
@@ -158,6 +188,8 @@ const getAllProducts = async (flag) => {
 const putProduct = async (
   idProduct,
   idCategory,
+  idColor,
+  idBrand,
   code,
   name,
   type,
@@ -176,6 +208,8 @@ const putProduct = async (
   const result = await Product.update(
     {
       idCategory,
+      idColor,
+      idBrand,
       code,
       name,
       type,
