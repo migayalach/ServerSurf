@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
         unique: true,
       },
-      name: {
+      nameColor: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
