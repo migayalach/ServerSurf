@@ -15,6 +15,7 @@ const createColor = async (name) => {
     return {
       level: false,
       message: `Ya existe este color con ese nombre: ${ColorExist.nameColor}`,
+      data: []
     };
   } else {
     await Color.create({
@@ -43,13 +44,13 @@ const colorByName = async (name) => {
   if (color.length) {
     return {
       level: true,
-      message: `Color ${uppercaseName} encontrada`,
+      message: `Color ${uppercaseName} encontrado`,
       data: color,
     };
   } else {
     return {
       level: false,
-      message: `El color ${uppercaseName} no esta creada`,
+      message: `El color ${uppercaseName} no esta creado`,
       data: []
     };
   }
@@ -61,7 +62,7 @@ const colorById = async (idColor) => {
   if (idColors) {
     return {
       level: true,
-      message: `Color ${idColor} encontrada`,
+      message: `Color ${idColor} encontrado`,
       data: [
         {
           idColor: idColors.idColor,
@@ -72,7 +73,7 @@ const colorById = async (idColor) => {
   } else {
     return {
       level: false,
-      message: `El color ${idColor} no esta creada`,
+      message: `El color ${idColor} no esta creado`,
       data: [],
     };
   }
@@ -83,7 +84,7 @@ const allColor = async () => {
 
   const formatteData = {
     level: true,
-    message: "Lista de categorias",
+    message: "Lista de colores",
     data: dataColor.map((color) => ({
       idColor: color.idColor,
       nameColor: color.nameColor,
@@ -121,7 +122,7 @@ const colorUpDate = async (idColor, nameColor) => {
   const upperCaseName = nameColor.toUpperCase();
   const colorExisting = await Color.findOne({ where: { idColor } });
 
-  if (!categoryExisting) {
+  if (!colorExisting) {
     return {
       level: false,
       message: `No existe el color ID ${idColor} para actualizar`,
@@ -129,7 +130,7 @@ const colorUpDate = async (idColor, nameColor) => {
     };
   } else {
     colorExisting.nameColor = upperCaseName;
-    await categoryExisting.save();
+    await colorExisting.save();
     const { data } = await allColor();
     return {
       level: true,

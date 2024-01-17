@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const {postColor, getColorByName, getColorById, deleteColor, upDateColor}= require("../handlers/colorHandler");
+const { postColor, getColorByName, getColorById, deleteColor, upDateColor } = require("../handlers/colorHandler");
 
 const colorRouter = Router();
 

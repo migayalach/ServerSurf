@@ -26,8 +26,7 @@ const createUser = async (idLevel, nameUser, emailUser, lastName, password) => {
   if (emailExist) {
     return {
       level: false,
-      message:
-        "Lo siento no puede haber dos cuentas con la misma dirección email",
+      message: "Lo siento no puede haber dos cuentas con la misma dirección email",
       data: [],
     };
   }
@@ -52,7 +51,7 @@ const userByName = async (name) => {
   const FirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  const ConvierteUserName = FirstLetter(name);
+  const convierteUserName = FirstLetter(name);
 
   const user = await User.findAll({
     where: {
@@ -70,7 +69,7 @@ const userByName = async (name) => {
   if (user.length) {
     return {
       level: true,
-      message: `User ${ConvierteUserName} encontrado`,
+      message: `User ${convierteUserName} encontrado`,
       data: user.map((user) => ({
         idUser: user.idUser,
         idLevel: user.level.idLevel,
@@ -78,13 +77,12 @@ const userByName = async (name) => {
         nameUser: user.nameUser,
         emailUser: user.emailUser,
         lastName: user.lastName,
-        //password: user.password,
       })),
     };
   } else {
     return {
       level: false,
-      message: `User ${ConvierteUserName} no encontrado`,
+      message: `User ${convierteUserName} no encontrado`,
       data: [],
     };
   }
@@ -111,7 +109,6 @@ const userById = async (idUser) => {
           nameUser: idUsers.nameUser,
           emailUser: idUsers.emailUser,
           lastName: idUsers.lastName,
-          //password: idUsers.password,
         },
       ],
     };
@@ -143,7 +140,6 @@ const allUser = async () => {
       nameUser: users.nameUser,
       emailUser: users.emailUser,
       lastName: users.lastName,
-      //password: users.password,
     })),
   };
   return formatteData;

@@ -20,7 +20,7 @@ const postCategory = async (request, response) => {
 const getCategoryByName = async (request, response) => {
   const { name } = request.query;
   try {
-    if(name){
+    if (name) {
       const categoryName = await categoryByName(name);
       response.status(200).json(categoryName);
     } else {

@@ -7,7 +7,8 @@ const favoriteModel = require("../models/Favorites");
 const qualificationModel = require("../models/Qualification");
 const cartModel = require("../models/Cart");
 const brandModel = require("../models/Brand");
-const colorModer = require("../models/Color");
+const colorModel = require("../models/Color");
+const sizeModel = require("../models/Sizes");
 
 // TABLAS
 const levelModel = require("../models/Level");
@@ -36,7 +37,8 @@ favoriteModel(sequelize);
 cartModel(sequelize);
 qualificationModel(sequelize);
 brandModel(sequelize);
-colorModer(sequelize);
+colorModel(sequelize);
+sizeModel(sequelize);
 
 const {
   Level,
@@ -50,6 +52,7 @@ const {
   DetailSale,
   Brand,
   Color,
+  Size,
 } = sequelize.models;
 
 Level.hasMany(User, { foreignKey: "idLevel" });
@@ -57,6 +60,7 @@ User.belongsTo(Level, { foreignKey: "idLevel", as: "level" }); //todo: puse esto
 Category.hasMany(Product, { foreignKey: "idCategory" });
 Color.hasMany(Product, { foreignKey: "idColor" });
 Brand.hasMany(Product, { foreignKey: "idBrand" });
+Size.hasMany(Product, { foreignKey: "idSize" });
 User.belongsToMany(Product, { through: Favorites, foreignKey: "idUser" });
 Product.belongsToMany(User, { through: Favorites, foreignKey: "idProduct" });
 User.belongsToMany(Product, { through: Qualification, foreignKey: "idUser" });
