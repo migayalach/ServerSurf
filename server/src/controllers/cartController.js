@@ -74,15 +74,18 @@ const addCart = async (idProduct, idUser, amount) => {
   if (favoriteArray) {
     throw Error`Lo siento no puede haber duplicados`;
   }
+  // SI EL USUARIO SECCIONO UN ARTICULO Y UNA CANTIDAD ¿DESCONTAR DEL STOCK ACTUAL?
+  if (amount <= existProduct.stock) {
+    await Cart.create({ idProduct, idUser, amount });
+    const { cartList } = await getCartUserId(idUser);
 
-  await Cart.create({ idProduct, idUser, amount });
-  const { cartList } = await getCartUserId(idUser);
-
-  return {
-    message: `Carrito lista`,
-    cost: costProduct(cartList),
-    cartList,
-  };
+    return {
+      message: `Carrito lista`,
+      cost: costProduct(cartList),
+      cartList,
+    };
+  }
+  throw Error`Lo siento la cantidad que desea reservar excede nuestro stock`;
 };
 
 const updateCart = async (idProduct, idUser, amount) => {
