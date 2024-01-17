@@ -7,20 +7,20 @@ const {
   userUpDate,
 } = require("../controllers/userController");
 
-// Función para convertir la primera letra a mayúscula
 const FirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 const postUser = async (request, response) => {
   const { idLevel, nameUser, emailUser, lastName, password } = request.body;
-  const ConvierteUserName = FirstLetter(nameUser);
+  const convierteUserName = FirstLetter(nameUser);
+  const convierteLastName = FirstLetter(lastName);
   try {
     const newUser = await createUser(
       idLevel,
-      ConvierteUserName,
+      convierteUserName,
       emailUser,
-      lastName,
+      convierteLastName,
       password
     );
     response.status(200).json(newUser);

@@ -10,18 +10,19 @@ const createCategory = async (name) => {
       },
     },
   });
-  
+
   if (categoryExist) {
     return {
       level: false,
-      message: `Ya existe esta categoria con ese nombre: ${categoryExist.nameCategory}`
+      message: `Ya existe esta categoria con ese nombre: ${categoryExist.nameCategory}`,
+      data: []
     }
   } else {
     await Category.create({
-      nameCategory: uppercaseName 
+      nameCategory: uppercaseName
     });
   }
-  
+
   const { data } = await allCategory()
   return {
     level: true,

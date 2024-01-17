@@ -18,17 +18,17 @@ const postColor = async (request, response) => {
 };
 
 const getColorByName = async (request, response) => {
-  const {name} = request.query;
-  try{
-    if(name){
-      const colorName= await colorByName(name);
+  const { name } = request.query;
+  try {
+    if (name) {
+      const colorName = await colorByName(name);
       response.status(200).json(colorName);
     } else {
       const allColors = await allColor();
       response.status(200).json(allColors);
     }
   } catch (error) {
-    response.status(400).json({error: error.message});
+    response.status(400).json({ error: error.message });
   }
 };
 

@@ -17,7 +17,7 @@ const postLevel = async (request, response) => {
   }
 };
 
-const getLevelByName = async(request, response) => {
+const getLevelByName = async (request, response) => {
   const { name } = request.query;
   try {
     if (name) {

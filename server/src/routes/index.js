@@ -14,6 +14,7 @@ const qualificationRouter = require("./qualificationRouter");
 const brandRouter = require("./brandRouter");
 const colorRouter = require("./colorRouter");
 const loginRouter = require("./loginRouter");
+const sizeRouter = require("./sizeRouter");
 
 // entry points
 mainRouter.use("/level", levelRouter); //ok
@@ -28,6 +29,7 @@ mainRouter.use("/detail", detailRouter); //o
 mainRouter.use("/brand", brandRouter);
 mainRouter.use("/color", colorRouter);
 mainRouter.use("/login", loginRouter);
+mainRouter.use("/size", sizeRouter);
 
 
 module.exports = mainRouter;

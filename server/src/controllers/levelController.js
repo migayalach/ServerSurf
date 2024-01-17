@@ -14,7 +14,8 @@ const createLevel = async (name) => {
   if (levelExist) {
     return {
       level: false,
-      message: `Ya existe un nivel con este nombre: ${levelExist.nameLevel}`
+      message: `Ya existe un nivel con este nombre: ${levelExist.nameLevel}`,
+      data: []
     }
   } else {
     await Level.create({
@@ -36,8 +37,8 @@ const levelByName = async (name) => {
     where: {
       nameLevel: {
         [Op.iLike]: `%${name}%`
-      } 
-    } 
+      }
+    }
   });
 
   if (level.length) {
@@ -57,7 +58,7 @@ const levelByName = async (name) => {
 
 const levelById = async (idLevel) => {
   const idLevels = await Level.findOne({ where: { idLevel } });
-  
+
   if (idLevels) {
     return {
       level: true,
@@ -78,7 +79,7 @@ const levelById = async (idLevel) => {
 
 const allLevel = async () => {
   const dataLevel = await Level.findAll();
-  
+
   const formatteData = {
     level: true,
     message: 'Lista de niveles',
@@ -109,7 +110,7 @@ const levelDelete = async (idLevel) => {
       message: `Nivel ${levelExisting.nameLevel} eliminado`,
       data
     }
-  } 
+  }
 };
 
 const levelUpDate = async (idLevel, nameLevel) => {
