@@ -12,12 +12,11 @@ const FirstLetter = (string) => {
 };
 
 const postUser = async (request, response) => {
-  const { idLevel, nameUser, emailUser, lastName, password } = request.body;
+  const { nameUser, emailUser, lastName, password } = request.body;
   const convierteUserName = FirstLetter(nameUser);
   const convierteLastName = FirstLetter(lastName);
   try {
     const newUser = await createUser(
-      idLevel,
       convierteUserName,
       emailUser,
       convierteLastName,

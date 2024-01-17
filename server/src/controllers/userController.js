@@ -4,20 +4,36 @@ const { Level, User } = require("../dataBase/dataBase");
 
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
-const createUser = async (idLevel, nameUser, emailUser, lastName, password) => {
-  const levelExist = await Level.findOne({
-    where: {
-      idLevel,
-    },
-  });
-  if (!levelExist) {
+const createUser = async (nameUser, emailUser, lastName, password) => {
+  const countUser = await User.count();
+  if (countUser < 1) {
+    const [level] = await Level.findAll({
+      where: { nameLevel: { [Op.like]: 'ADMIN' } },
+    });
+    //PREGUNTAR SI HAY LEVEL(level.length) 
+    //si no hay nada manda no existe este nivel y si hay crear
+    if (!level) {
+      const createdLevel = await Level.create({ nameLevel: 'ADMIN' });
+      level = createdLevel;
+    }
+
+    await User.create({
+      idLevel: level.idLevel,
+      nameUser,
+      emailUser,
+      lastName,
+      password: await hashedPassword(`${password}`),
+    });
+
+    const { data } = await allUser();
     return {
-      level: false,
-      message: `El nivel ${idLevel} que intenta asignar no se encuentra registrado`,
-      data: [],
+      level: true,
+      message: `Usuario ${nameUser} creado con éxito`,
+      data,
     };
   }
 
+  // SI HAY USUARIOS REGISTRADOS CREAR TODOS COMO STANDAR
   const emailExist = await User.findOne({
     where: {
       emailUser,
@@ -31,12 +47,28 @@ const createUser = async (idLevel, nameUser, emailUser, lastName, password) => {
     };
   }
 
+  const level = await Level.findAll({
+    where: {
+      nameLevel: {
+        [Op.not]: 'ADMIN',
+      },
+    },
+  });
+
+  const [dataLevel] = level.filter(({ nameLevel }) => nameLevel === 'STANDAR');
+  //PREGUNTAR SI HAY LEVEL(level.length) 
+  //si no hay nada manda no existe este nivel y si hay crear
+  if (!dataLevel) {
+    const createdLevel = await Level.create({ nameLevel: 'STANDAR' });
+    dataLevel = createdLevel;
+  }
+
   await User.create({
+    idLevel: dataLevel.idLevel,
     nameUser,
     emailUser,
     lastName,
     password: await hashedPassword(`${password}`),
-    idLevel,
   });
 
   const { data } = await allUser();
