@@ -4,11 +4,11 @@ const { postColor, getColorByName, getColorById, deleteColor, upDateColor } = re
 
 const colorRouter = Router();
 
-colorRouter.post("/", postColor);
-colorRouter.get("/", getColorByName);
-colorRouter.get("/:idColor", getColorById);
-colorRouter.delete("/:idColor", deleteColor);
-colorRouter.put("/", upDateColor);
+colorRouter.post("/", postColor); //OK.
+colorRouter.get("/", getColorByName); //OK.
+colorRouter.get("/:idColor", getColorById); //OK.
+colorRouter.delete("/:idColor", deleteColor); //OK.
+colorRouter.put("/", upDateColor); //OK.
 
 
 module.exports = colorRouter;

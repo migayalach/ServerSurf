@@ -40,15 +40,30 @@ const addFavorite = async (idUser, idProduct) => {
 };
 
 const allFavorites = async () => {
-  const dataFavorite = await Favorites.findAll();
+  const dataFavorite = await Favorites.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ["nameUser"],
+      },
+      {
+        model: Product,
+        attributes: ["name", "priceProduct", "image"],
+      },
+    ],
+  });
 
   const formatteData = {
     level: true,
     message: 'Lista de favoritos',
-    data: dataFavorite.map(fav => ({
+    data: dataFavorite.map((fav) => ({
       idUser: fav.idUser,
-      idProduct: fav.idProduct
-    }))
+      nameUser: fav.User.nameUser,
+      idProduct: fav.idProduct,
+      name: fav.Product.name,
+      priceProduct: fav.Product.priceProduct,
+      image: fav.Product.image,
+    })),
   }
   return formatteData;
 };

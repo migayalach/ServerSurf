@@ -11,7 +11,7 @@ const createBrand = async (name) => {
       },
     },
   });
-  console.log(brandExist)
+  
   if (brandExist) {
     return {
       level: false,

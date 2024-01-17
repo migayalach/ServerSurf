@@ -143,11 +143,13 @@ const userById = async (idUser) => {
 
 const allUser = async () => {
   const dataUser = await User.findAll({
-    include: {
-      model: Level,
-      attributes: ["idLevel", "nameLevel"],
-      as: "level",
-    },
+    include: [
+      {
+        model: Level,
+        attributes: ["idLevel", "nameLevel"],
+        as: "level",
+      },
+    ]
   });
 
   const formatteData = {
