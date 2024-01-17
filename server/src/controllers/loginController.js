@@ -1,4 +1,4 @@
-const { User } = require("../dataBase/dataBase");
+const { User, Level } = require("../dataBase/dataBase");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 
