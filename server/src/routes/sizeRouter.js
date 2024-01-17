@@ -4,10 +4,10 @@ const { postSize, getSizeByName, getSizeById, deleteSize, upDateSize } = require
 
 const sizeRouter = Router();
 
-sizeRouter.post("/", postSize);
-sizeRouter.get("/", getSizeByName);
-sizeRouter.get("/:idSize", getSizeById);
-sizeRouter.delete("/:idSize", deleteSize);
-sizeRouter.put("/", upDateSize );
+sizeRouter.post("/", postSize); //OK.
+sizeRouter.get("/", getSizeByName); //OK.
+sizeRouter.get("/:idSize", getSizeById); //OK.
+sizeRouter.delete("/:idSize", deleteSize); //OK.
+sizeRouter.put("/", upDateSize ); //OK.
 
 module.exports = sizeRouter;

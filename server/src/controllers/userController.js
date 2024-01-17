@@ -5,71 +5,59 @@ const { Level, User } = require("../dataBase/dataBase");
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
 const createUser = async (nameUser, emailUser, lastName, password) => {
+  const existingUser = await User.findOne({  // Verificar si el correo electrónico ya está registrado
+    where: {
+      emailUser,
+    },
+  });
+
+  if (existingUser) {
+    return {
+      level: false,
+      message: 'Ya existe un usuario con este correo electrónico',
+      data: [],
+    };
+  }
+
   const countUser = await User.count();
-  if (countUser < 1) {
-    const [level] = await Level.findAll({
-      where: { nameLevel: { [Op.like]: 'ADMIN' } },
-    });
-    //PREGUNTAR SI HAY LEVEL(level.length) 
-    //si no hay nada manda no existe este nivel y si hay crear
-    if (!level) {
-      const createdLevel = await Level.create({ nameLevel: 'ADMIN' });
-      level = createdLevel;
+
+  if (countUser < 1) { // Verificar si es el primer usuario
+    let adminLevel = await Level.findOne({ where: { nameLevel: 'ADMIN' } });
+
+    if (!adminLevel) {
+      const createdAdminLevel = await Level.create({ nameLevel: 'ADMIN' });
+      adminLevel = createdAdminLevel;
     }
 
-    await User.create({
-      idLevel: level.idLevel,
+    let standarLevel = await Level.findOne({ where: { nameLevel: 'STANDAR' } }); // Crear el nivel 'STANDAR' si no existe
+
+    if (!standarLevel) {
+      const createdStandarLevel = await Level.create({ nameLevel: 'STANDAR' });
+      standarLevel = createdStandarLevel;
+    }
+
+    await User.create({  // Crear el usuario con nivel 'ADMIN'
+      idLevel: adminLevel.idLevel,
       nameUser,
       emailUser,
       lastName,
       password: await hashedPassword(`${password}`),
     });
+  } else {
+    let standarLevel = await Level.findOne({ where: { nameLevel: 'STANDAR' } });
+    if (!standarLevel) {
+      const createdStandarLevel = await Level.create({ nameLevel: 'STANDAR' });
+      standarLevel = createdStandarLevel;
+    }
 
-    const { data } = await allUser();
-    return {
-      level: true,
-      message: `Usuario ${nameUser} creado con éxito`,
-      data,
-    };
-  }
-
-  // SI HAY USUARIOS REGISTRADOS CREAR TODOS COMO STANDAR
-  const emailExist = await User.findOne({
-    where: {
+    await User.create({
+      idLevel: standarLevel.idLevel,
+      nameUser,
       emailUser,
-    },
-  });
-  if (emailExist) {
-    return {
-      level: false,
-      message: "Lo siento no puede haber dos cuentas con la misma dirección email",
-      data: [],
-    };
+      lastName,
+      password: await hashedPassword(`${password}`),
+    });
   }
-
-  const level = await Level.findAll({
-    where: {
-      nameLevel: {
-        [Op.not]: 'ADMIN',
-      },
-    },
-  });
-
-  const [dataLevel] = level.filter(({ nameLevel }) => nameLevel === 'STANDAR');
-  //PREGUNTAR SI HAY LEVEL(level.length) 
-  //si no hay nada manda no existe este nivel y si hay crear
-  if (!dataLevel) {
-    const createdLevel = await Level.create({ nameLevel: 'STANDAR' });
-    dataLevel = createdLevel;
-  }
-
-  await User.create({
-    idLevel: dataLevel.idLevel,
-    nameUser,
-    emailUser,
-    lastName,
-    password: await hashedPassword(`${password}`),
-  });
 
   const { data } = await allUser();
   return {
