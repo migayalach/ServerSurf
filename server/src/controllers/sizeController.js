@@ -60,18 +60,18 @@ const sizeById = async (idSize) => {
   if (idSizes) {
     return {
       level: true,
-      message: `Talle ${idSize} encontrado`,
+      message: `Talle con ID: ${idSize} encontrado`,
       data: [
         {
           idSize: idSizes.idSize,
-          name: idSizes.nameSize,
+          nameSize: idSizes.nameSize,
         },
       ],
     };
   } else {
     return {
       level: false,
-      message: `El talle ${idSize} no esta creado`,
+      message: `El talle con ID: ${idSize} no esta creado`,
       data: [],
     };
   }
@@ -85,7 +85,7 @@ const allSize = async () => {
     message: "Lista de talles",
     data: dataSize.map((size) => ({
       idSize: size.idSize,
-      name: size.nameSize,
+      nameSize: size.nameSize,
     })),
   };
   return formatteData;
@@ -100,7 +100,7 @@ const sizeDelete = async (idSize) => {
   if (!sizeExisting) {
     return {
       level: false,
-      message: `No existe el talle ${idSize} para eliminar`,
+      message: `No existe el talle con ID: ${idSize} para eliminar`,
       data: [],
     };
   }
@@ -110,7 +110,7 @@ const sizeDelete = async (idSize) => {
   if (deleted) {
     return {
       level: true,
-      message: `Talle ${sizeExisting.nameSize} eliminado`,
+      message: `Talle ${sizeExisting.nameSize} eliminado exitosamente`,
       data,
     };
   }
@@ -123,7 +123,7 @@ const sizeUpDate = async (idSize, nameSize) => {
   if (!sizeExisting) {
     return {
       level: false,
-      message: `No existe el talle ID ${idSize} para actualizar`,
+      message: `No existe el talle con ID: ${idSize} para actualizar`,
       data: [],
     };
   } else {
@@ -132,7 +132,7 @@ const sizeUpDate = async (idSize, nameSize) => {
     const { data } = await allSize();
     return {
       level: true,
-      message: `Talle actualizado exitosamente: ${upperCaseName}`,
+      message: `Talle con ID: ${idSize} actualizado exitosamente: ${upperCaseName}`,
       data,
     };
   }

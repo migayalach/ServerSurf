@@ -4,10 +4,10 @@ const { postQualification, getQualificationByName, getQualificationById, deleteQ
 
 const qualificationRouter = Router();
 
-qualificationRouter.post("/", postQualification);
-qualificationRouter.get("/", getQualificationByName);
-qualificationRouter.get("/:idQualification", getQualificationById);
-qualificationRouter.delete("/:idUser/:idProduct", deleteQualification);
-qualificationRouter.put("/", upDateQualification);
+qualificationRouter.post("/", postQualification); //OK.
+qualificationRouter.get("/", getQualificationByName); //OK.
+qualificationRouter.get("/:idQualification", getQualificationById); //OK.
+qualificationRouter.delete("/:idUser/:idProduct", deleteQualification); //OK.
+qualificationRouter.put("/", upDateQualification); //OK.
 
 module.exports = qualificationRouter;

@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { User, Product, Qualification } = require("../dataBase/dataBase");
+const { User, Product, Qualification, Cart } = require("../dataBase/dataBase");
 
 const createQualitation = async (idUser, idProduct, comment, points) => {
   const existUser = await User.findOne({ where: { idUser } });
@@ -20,6 +20,21 @@ const createQualitation = async (idUser, idProduct, comment, points) => {
     }
   }
 
+  const hasCart = await Cart.findOne({
+    where: {
+      idUser,
+      idProduct,
+    },
+  });
+
+  if (!hasCart) {
+    return {
+      level: false,
+      message: `El usuario no ha comprado el producto. No se puede realizar un comentario.`,
+      data: []
+    };
+  }
+
   const duplicateQualification = await Qualification.findAll({
     where: { idUser },
     attribute: ["idProduct"],
@@ -34,11 +49,14 @@ const createQualitation = async (idUser, idProduct, comment, points) => {
   }
 
   await Qualification.create({ idUser, idProduct, comment, points });
+
+  const userData = await User.findOne({ where: { idUser }, attributes: ["nameUser"] });
+  const productName = existProduct.name;
   
   const { data } = await allQualification();
   return {
     level: true,
-    message: `Comentario creado con exito`,
+    message: `Comentario de ${userData.nameUser} al producto ${productName} creado con éxito`,
     data
   }
 };
@@ -69,17 +87,31 @@ const allQualification = async () => {
 
 const qualificationDelete = async (idUser, idProduct) => {
   
-  const qualification = await Qualification.findOne({
+  const qualificationUser = await Qualification.findOne({
     where: {
       idUser,
+    }
+  });
+
+  if (!qualificationUser) {
+    return {
+      level: false,
+      message: `El user con ID: ${idUser} no tiene comentarios`,
+      data: []
+    }
+  }
+
+  const qualificationProduct = await Qualification.findOne({
+    where: {
       idProduct
     }
   });
 
-  if (!qualification) {
+  if (!qualificationProduct) {
     return {
       level: false,
-      message: 'Comentario no encontrado'
+      message: `El producto con ID: ${idProduct} no tiene comentarios`,
+      data: []
     }
   }
 
@@ -100,7 +132,7 @@ const qualificationUpDate = async (idUser, idProduct, comment, points) => {
   if (!existUser) {
     return {
       level: false,
-      message: `No existe el user ID ${idUser} para actualizar`,
+      message: `No existe el user con ID: ${idUser} para actualizar`,
       data: [],
     };
   }
@@ -109,7 +141,7 @@ const qualificationUpDate = async (idUser, idProduct, comment, points) => {
   if (!existProduct) {
     return {
       level: false,
-      message: `No existe el producto con ID ${idUser} para actualizar`,
+      message: `No existe el producto con ID: ${idUser} para actualizar`,
       data: [],
     };
   }
@@ -119,10 +151,17 @@ const qualificationUpDate = async (idUser, idProduct, comment, points) => {
     qualificationExisting.comment = comment;
     qualificationExisting.points = points;
     await qualificationExisting.save();
+
+    const userData = await User.findOne({
+      where: { idUser },
+      attributes: ["nameUser"],
+    });
+    const productName = existProduct.name;
+
     const { data } = await allQualification();
     return {
       level: true,
-      message: 'Comentario actualizado exitosamente',
+      message: `Comentario de ${userData.nameUser} sobre el producto ${productName} actualizado exitosamente`,
       data
     }
   }
