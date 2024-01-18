@@ -10,5 +10,4 @@ categoryRouter.get("/:idCategory", getCategoryById); //OK.
 categoryRouter.delete("/:idCategory", deleteCategory); //OK.
 categoryRouter.put("/", upDateCategory) //OK.
 
-
 module.exports = categoryRouter;

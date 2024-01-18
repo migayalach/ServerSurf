@@ -62,7 +62,7 @@ const createUser = async (nameUser, emailUser, lastName, password) => {
   const { data } = await allUser();
   return {
     level: true,
-    message: `Usuario ${nameUser} creado con éxito`,
+    message: `Usuario ${nameUser} ${lastName} creado con éxito`,
     data,
   };
 };
@@ -102,7 +102,7 @@ const userByName = async (name) => {
   } else {
     return {
       level: false,
-      message: `User ${convierteUserName} no encontrado`,
+      message: `El user ${convierteUserName} no existe `,
       data: [],
     };
   }
@@ -120,7 +120,7 @@ const userById = async (idUser) => {
   if (idUsers) {
     return {
       level: true,
-      message: `User ${idUser} encontrado`,
+      message: `User con ID: ${idUser} encontrado`,
       data: [
         {
           idUser: idUsers.idUser,
@@ -135,7 +135,7 @@ const userById = async (idUser) => {
   } else {
     return {
       level: false,
-      message: `El user ${idUser} no existe`,
+      message: `El user con ID: ${idUser} no existe`,
       data: [],
     };
   }
@@ -176,7 +176,7 @@ const userDelete = async (idUser) => {
   if (!userExisting) {
     return {
       level: false,
-      message: `No existe el user ${idUser} para eliminar`,
+      message: `No existe el user con ID: ${idUser} para eliminar`,
       data: [],
     };
   }
@@ -186,7 +186,7 @@ const userDelete = async (idUser) => {
   if (deleted) {
     return {
       level: true,
-      message: `User ${userExisting.nameUser} eliminado`,
+      message: `User ${userExisting.nameUser} ${userExisting.lastName} eliminado`,
       data,
     };
   }
@@ -205,7 +205,7 @@ const userUpDate = async (
   if (!userExisting) {
     return {
       level: false,
-      message: `No existe el user ID ${idUser} para actualizar`,
+      message: `No existe el user con ID: ${idUser} para actualizar`,
       data: [],
     };
   } else {
@@ -218,7 +218,7 @@ const userUpDate = async (
     const { data } = await allUser();
     return {
       level: true,
-      message: `User actualizado exitosamente: ${nameUser}`,
+      message: `User ${nameUser} ${lastName} con ID: ${idUser} actualizado exitosamente`,
       data,
     };
   }

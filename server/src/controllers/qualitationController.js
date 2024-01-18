@@ -1,15 +1,23 @@
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 const { User, Product, Qualification } = require("../dataBase/dataBase");
 
 const createQualitation = async (idUser, idProduct, comment, points) => {
   const existUser = await User.findOne({ where: { idUser } });
   if (!existUser) {
-    throw Error`El usario no existe`;
+    return {
+      level: false,
+      message: `El usuario con ID: ${idUser} no existe`,
+      data: []
+    }
   }
 
   const existProduct = await Product.findOne({ where: { idProduct } });
   if (!existProduct) {
-    throw Error`El producto no existe`;
+    return {
+      level: false,
+      message: `El producto con ID: ${idProduct} no existe`,
+      data: []
+    }
   }
 
   const duplicateQualification = await Qualification.findAll({
@@ -26,77 +34,105 @@ const createQualitation = async (idUser, idProduct, comment, points) => {
   }
 
   await Qualification.create({ idUser, idProduct, comment, points });
-  //MOSTRAR TODAS LAS CALIFICACIONES
-  return `Comentario creado con exito`;
+  
+  const { data } = await allQualification();
+  return {
+    level: true,
+    message: `Comentario creado con exito`,
+    data
+  }
 };
 
-const editQualitation = async (idUser, idProduct, comment, points) => {
-  const existUser = await User.findOne({ where: { idUser } });
-  if (!existUser) {
-    throw Error`El usario no existe`;
-  }
-
-  const existProduct = await Product.findOne({ where: { idProduct } });
-  if (!existProduct) {
-    throw Error`El producto no existe`;
-  }
-
-  const duplicateQualification = await Qualification.findOne({
-    where: { idProduct, idUser },
-  });
-
-  if (!duplicateQualification) {
-    throw Error`Lo siento no se pudo encontrar resultados`;
-  }
-
-  await Qualification.update(
-    { comment, points },
-    { where: { idUser, idProduct } }
-  );
-
-  return await getAllQualitation();
+const qualificationByName = (name) => {
+  return `get nombre ${name}`;
 };
 
-const qualitationDelete = async (idUser, idProduct) => {
-  const existUser = await User.findOne({ where: { idUser } });
-  if (!existUser) {
-    throw Error`El usario no existe`;
-  }
+const qualificationById = (idUser) => {
+  return `por id ${idUser}`;
+};
 
-  const existProduct = await Product.findOne({ where: { idProduct } });
-  if (!existProduct) {
-    throw Error`El producto no existe`;
-  }
+const allQualification = async () => {
+  const dataQualification = await Qualification.findAll();
 
-  const qualificationDelete = await Qualification.destroy({
+  const formatteData = {
+    level: true,
+    message: 'Lista de comentarios',
+    data: dataQualification.map(quali => ({
+      idUser: quali.idUser,
+      idProduct: quali.idProduct,
+      comment: quali.comment,
+      points: quali.points
+    }))
+  }
+  return formatteData;
+};
+
+const qualificationDelete = async (idUser, idProduct) => {
+  
+  const qualification = await Qualification.findOne({
     where: {
       idUser,
-      idProduct,
-    },
+      idProduct
+    }
   });
-  if (qualificationDelete) {
-    return await getAllQualitation();
+
+  if (!qualification) {
+    return {
+      level: false,
+      message: 'Comentario no encontrado'
+    }
   }
-  throw Error(`No se pudo eliminar`);
+
+  const deleted = await Qualification.destroy({ where: { idUser, idProduct } });
+  const { data } = await allQualification()
+  if (deleted) {
+    return {
+      level: true,
+      message: 'Comentario eliminado correctamente',
+      data
+    }
+  }
 };
 
-const getAllQualitation = async () => {
-  return await Qualification.findAll();
-};
+const qualificationUpDate = async (idUser, idProduct, comment, points) => {
+  const existUser = await User.findOne({ where: { idUser } });
 
-const getQualitationId = (idComment) => {
-  return `por id ${idComment}`;
-};
+  if (!existUser) {
+    return {
+      level: false,
+      message: `No existe el user ID ${idUser} para actualizar`,
+      data: [],
+    };
+  }
 
-const getQualitationName = (name) => {
-  return `get nombre ${name}`;
+  const existProduct = await Product.findOne({ where: { idProduct } });
+  if (!existProduct) {
+    return {
+      level: false,
+      message: `No existe el producto con ID ${idUser} para actualizar`,
+      data: [],
+    };
+  }
+
+  const qualificationExisting = await Qualification.findOne({ where: { idUser, idProduct } });
+  if (qualificationExisting) {
+    qualificationExisting.comment = comment;
+    qualificationExisting.points = points;
+    await qualificationExisting.save();
+    const { data } = await allQualification();
+    return {
+      level: true,
+      message: 'Comentario actualizado exitosamente',
+      data
+    }
+  }
 };
 
 module.exports = {
   createQualitation,
-  editQualitation,
-  qualitationDelete,
-  getAllQualitation,
-  getQualitationId,
-  getQualitationName,
+  qualificationByName,
+  qualificationById,
+  allQualification,
+  qualificationDelete,
+  qualificationUpDate,
 };

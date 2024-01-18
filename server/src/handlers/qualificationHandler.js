@@ -1,10 +1,10 @@
 const {
   createQualitation,
-  editQualitation,
-  qualitationDelete,
-  getQualitationId,
-  getAllQualitation,
-  getQualitationName,
+  qualificationByName,
+  qualificationById,
+  allQualification,
+  qualificationDelete,
+  qualificationUpDate,
 } = require("../controllers/qualitationController");
 
 const postQualification = async (request, response) => {
@@ -22,10 +22,45 @@ const postQualification = async (request, response) => {
   }
 };
 
-const updateQualification = async (request, response) => {
+const getQualificationByName = async (request, response) => {
+  const { name } = request.query;
+  try {
+    if (name) {
+      const qualificationName = await qualificationByName(name);
+      response.status(200).json(qualificationName);
+    } else {
+      const allQualifications = await allQualification();
+      response.status(200).json(allQualifications);
+    }
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
+
+const getQualificationById = async (request, response) => {
+  const { idUser } = request.params;
+  try {
+    const commentId = await qualificationById(idUser);
+    response.status(200).json(commentId);
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
+
+const deleteQualification = async (request, response) => {
+  const { idUser, idProduct } = request.params;
+  try {
+    const deleteComment = await qualificationDelete(+idUser, +idProduct);
+    response.status(200).json(deleteComment);
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
+
+const upDateQualification = async (request, response) => {
   const { idUser, idProduct, comment, points } = request.body;
   try {
-    const commentUpdate = await editQualitation(
+    const commentUpdate = await qualificationUpDate(
       +idUser,
       +idProduct,
       comment,
@@ -37,42 +72,10 @@ const updateQualification = async (request, response) => {
   }
 };
 
-const deleteQualification = async (request, response) => {
-  const { idUser, idProduct } = request.params;
-  try {
-    const delComment = await qualitationDelete(idUser, idProduct);
-    response.status(200).json(delComment);
-  } catch (error) {
-    response.status(400).json({ error: error.message });
-  }
-};
-
-const getIdQualification = (request, response) => {
-  const { idComment } = request.params;
-  try {
-    const commentId = getQualitationId(idComment);
-    response.status(200).json(commentId);
-  } catch (error) {
-    response.status(400).json({ error: error.message });
-  }
-};
-
-const getQualification = async (request, response) => {
-  const { name } = request.query;
-  try {
-    const allComment = name
-      ? getQualitationName(name)
-      : await getAllQualitation();
-    response.status(200).json(allComment);
-  } catch (error) {
-    response.status(400).json({ error: error.message });
-  }
-};
-
 module.exports = {
   postQualification,
-  updateQualification,
+  getQualificationByName,
+  getQualificationById,
   deleteQualification,
-  getIdQualification,
-  getQualification,
+  upDateQualification,
 };

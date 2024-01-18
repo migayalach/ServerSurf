@@ -62,7 +62,7 @@ const levelById = async (idLevel) => {
   if (idLevels) {
     return {
       level: true,
-      message: `Nivel ${idLevel} encontrado`,
+      message: `Nivel con ID: ${idLevel} encontrado`,
       data: [{
         idLevel: idLevels.idLevel,
         name: idLevels.nameLevel
@@ -71,7 +71,7 @@ const levelById = async (idLevel) => {
   } else {
     return {
       level: false,
-      message: `El nivel ${idLevel} no esta creado`,
+      message: `El nivel con ID: ${idLevel} no esta creado`,
       data: []
     }
   }
@@ -97,7 +97,7 @@ const levelDelete = async (idLevel) => {
   if (!levelExisting) {
     return {
       level: false,
-      message: `No existe el nivel ${idLevel} para eliminar`,
+      message: `No existe el nivel con ID: ${idLevel} para eliminar`,
       data: []
     }
   }
@@ -107,7 +107,7 @@ const levelDelete = async (idLevel) => {
   if (deleted) {
     return {
       level: true,
-      message: `Nivel ${levelExisting.nameLevel} eliminado`,
+      message: `Nivel ${levelExisting.nameLevel} eliminado exitosamente`,
       data
     }
   }
@@ -120,7 +120,7 @@ const levelUpDate = async (idLevel, nameLevel) => {
   if (!levelExisting) {
     return {
       level: false,
-      message: `No existe el nivel ID ${idLevel} para actualizar`,
+      message: `No existe el nivel con el ID: ${idLevel} para actualizar`,
       data: []
     }
   } else {
@@ -129,7 +129,7 @@ const levelUpDate = async (idLevel, nameLevel) => {
     const { data } = await allLevel();
     return {
       level: true,
-      message: `Nivel actualizado exitosamente: ${upperCaseName}`,
+      message: `Nivel con ID: ${idLevel} actualizado exitosamente: ${upperCaseName}`,
       data
     };
   }
