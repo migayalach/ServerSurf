@@ -8,17 +8,15 @@ const {
   filterProduct,
 } = require("../controllers/productController");
 
+// SE ELIMINO CODE, TYPE y CHARACTERISTICS
 const postProduct = async (request, response) => {
   const {
     idCategory,
     idColor,
     idBrand,
     idSize,
-    code,
     name,
-    type, //CHAU
     image,
-    characteristics, //CHAU
     priceProduct,
     stock,
     description,
@@ -29,11 +27,8 @@ const postProduct = async (request, response) => {
       idColor,
       idBrand,
       idSize,
-      code,
       name,
-      type,
       image,
-      characteristics,
       priceProduct,
       stock,
       description
@@ -128,13 +123,12 @@ const productUpdated = async (request, response) => {
     idCategory,
     idColor,
     idBrand,
-    code,
+    idSize,
     name,
-    type,
     image,
-    characteristics,
     priceProduct,
     stock,
+    status,
     description,
   } = request.body;
   try {
@@ -147,13 +141,12 @@ const productUpdated = async (request, response) => {
       idCategory,
       idColor,
       idBrand,
-      code,
+      idSize,
       name,
-      type,
       image,
-      characteristics,
       priceProduct,
       stock,
+      status,
       description
     );
     return response.status(200).json({
