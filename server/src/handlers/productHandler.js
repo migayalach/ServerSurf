@@ -16,9 +16,9 @@ const postProduct = async (request, response) => {
     idSize,
     code,
     name,
-    type,
+    type, //CHAU
     image,
-    characteristics,
+    characteristics, //CHAU
     priceProduct,
     stock,
     description,

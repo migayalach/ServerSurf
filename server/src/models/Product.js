@@ -17,17 +17,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       image: {
         type: DataTypes.TEXT,
         allowNull: true,
-      },
-      characteristics: {
-        type: DataTypes.JSONB,
-        allowNull: false,
       },
       priceProduct: {
         type: DataTypes.DOUBLE,
@@ -40,6 +32,10 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.TEXT,
         allowNull: true,
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
     },
     {
