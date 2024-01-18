@@ -59,9 +59,9 @@ const putCart = async (request, response) => {
 };
 
 const deleteCart = async (request, response) => {
-  const { idUser } = request.params;
+  const { idUser, idProduct } = request.params;
   try {
-    const { message, cost, cartList } = await cartDelete(+idUser);
+    const { message, cost, cartList } = await cartDelete(+idUser, idProduct);
     response
       .status(200)
       .json({ cartDelete: true, message, costSale: cost, cartList });
