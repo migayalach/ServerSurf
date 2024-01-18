@@ -9,9 +9,9 @@ const {
 
 const saleRouter = Router();
 
-saleRouter.post("/", postSale); //ok --- falta detalle
+saleRouter.post("/", postSale);
 saleRouter.get("/", getNameSale);
-saleRouter.get("/:id", getIdSale);
+saleRouter.get("/:idSale", getIdSale);
 saleRouter.delete("/:id", saleDeleted);
 saleRouter.put("/", saleUpdated);
 
