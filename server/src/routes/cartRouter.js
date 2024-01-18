@@ -11,6 +11,6 @@ const cartRouter = Router();
 cartRouter.get("/:idUser", getCartProduct);
 cartRouter.post("/", postCart);
 cartRouter.put("/", putCart);
-cartRouter.delete("/:idUser", deleteCart);
+cartRouter.delete("/:idUser/:idProduct?", deleteCart);
 
 module.exports = cartRouter;
