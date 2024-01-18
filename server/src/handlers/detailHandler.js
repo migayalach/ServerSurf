@@ -8,10 +8,22 @@ const {
 } = require("../controllers/detailController");
 
 const postDetail = async (request, response) => {
-  const { idSale, listProducts } = request.body;
+  const { idSale, idUser, listProducts } = request.body;
   try {
-    const newDetail = await createDetail(idSale, listProducts);
-    response.status(200).json(newDetail);
+    const { message, data } = await createDetail(idSale, idUser, listProducts);
+    response.status(200).json({ detail: true, message, data });
+  } catch (error) {
+    response
+      .status(400)
+      .json({ detail: false, error: error.message, data: [] });
+  }
+};
+
+const getIdDetail = async (request, response) => {
+  const { idSale } = request.params;
+  try {
+    const { message, data } = await getDetailId(idSale);
+    response.status(200).json({ getDetail: true, message, data });
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
@@ -32,16 +44,6 @@ const deleteDetail = (request, response) => {
   try {
     const delDetail = detailDelete(idDetail);
     response.status(200).json(delDetail);
-  } catch (error) {
-    response.status(400).json({ error: error.message });
-  }
-};
-
-const getIdDetail = (request, response) => {
-  const { idDetail } = request.params;
-  try {
-    const detailId = getDetailId(idDetail);
-    response.status(200).json(detailId);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
