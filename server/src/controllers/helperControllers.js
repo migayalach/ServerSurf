@@ -1,4 +1,11 @@
-const { Product, Category, Brand, Color, User } = require("../dataBase/dataBase");
+const {
+  Product,
+  Category,
+  Brand,
+  Color,
+  User,
+  Size,
+} = require("../dataBase/dataBase");
 const { clearObj } = require("../helpers/dataClear");
 
 async function categoryExist(idCategory) {
@@ -34,6 +41,10 @@ async function userExist(idUser) {
   return await User.findOne({ where: { idUser } });
 }
 
+async function sizeExist(idSize) {
+  return await Size.findOne({ where: { idSize } });
+}
+
 const listProductsPromisse = async (productData) => {
   const promisse = productData.map(
     async ({
@@ -41,33 +52,34 @@ const listProductsPromisse = async (productData) => {
       idCategory,
       idColor,
       idBrand,
+      idSize,
       code,
       name,
-      type,
       image,
-      characteristics,
       priceProduct,
       stock,
+      status,
       description,
     }) => {
       const { nameCategory } = await Category.findByPk(idCategory);
       const { brandName } = await Brand.findByPk(idBrand);
       const { nameColor } = await Color.findByPk(idColor);
+      const { nameSize } = await Size.findByPk(idSize);
       const obj = {
         idProduct,
         idCategory,
         idColor,
         idBrand,
+        idSize,
         code,
         name,
-        type,
         image,
-        characteristics,
         priceProduct,
         stock,
+        status,
         description,
       };
-      return clearObj(obj, nameCategory, brandName, nameColor);
+      return clearObj(obj, nameCategory, brandName, nameColor, nameSize);
     }
   );
   return await Promise.all(promisse);
@@ -81,4 +93,5 @@ module.exports = {
   productIdExist,
   listProductsPromisse,
   userExist,
+  sizeExist
 };
