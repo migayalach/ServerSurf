@@ -74,8 +74,11 @@ const addCart = async (idProduct, idUser, amount) => {
   if (favoriteArray) {
     throw Error`Lo siento no puede haber duplicados`;
   }
-  // SI EL USUARIO SECCIONO UN ARTICULO Y UNA CANTIDAD ¿DESCONTAR DEL STOCK ACTUAL?
+
   if (amount <= existProduct.stock) {
+    if (!existProduct.status) {
+      throw Error`EL producto: ${existProduct.name}, no se encuentra habilitado`;
+    }
     await Cart.create({ idProduct, idUser, amount });
     const { cartList } = await getCartUserId(idUser);
 
@@ -105,14 +108,38 @@ const updateCart = async (idProduct, idUser, amount) => {
   throw Error`Lo siento la cantidad que intenta agregar: ${amount}, supera nuestro stock`;
 };
 
-const cartDelete = async (idUser) => {
+const cartDelete = async (idUser, idProduct) => {
   const existUser = await User.findOne({ where: { idUser } });
   if (!existUser) {
     throw Error`Lo siento el usario que introdujo no existe`;
   }
+
+  if (idProduct !== undefined) {
+    const duplicateCart = await Cart.findAll({
+      where: {
+        idUser,
+      },
+      attributes: ["idProduct"],
+    });
+    const productList = duplicateCart
+      .map(({ idProduct }) => idProduct)
+      .includes(+idProduct);
+
+    if (!productList) {
+      throw Error`El producto que quiere eliminar no existe en el carrito`;
+    }
+    await Cart.destroy({ where: { idProduct, idUser } });
+    const { cartList } = await getCartUserId(idUser);
+    return {
+      message: `Producto eliminado con exito`,
+      cost: costProduct(cartList),
+      cartList,
+    };
+  }
+  // ELIMINAR TODO EL CARRITO
   await Cart.destroy({ where: { idUser } });
   const { cartList } = await getCartUserId(idUser);
-  return { message: `success`, cost: costProduct(cartList), cartList };
+  return { message: `Carrito limpio`, cost: costProduct(cartList), cartList };
 };
 
 module.exports = {
