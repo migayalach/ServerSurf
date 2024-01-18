@@ -5,6 +5,7 @@ const {
   colorExist,
   brandExist,
   productExist,
+  sizeExist,
   productIdExist,
   listProductsPromisse,
 } = require("./helperControllers");
@@ -16,11 +17,8 @@ const createProduct = async (
   idColor,
   idBrand,
   idSize,
-  code,
   name,
-  type,
   image,
-  characteristics,
   priceProduct,
   stock,
   description
@@ -40,24 +38,27 @@ const createProduct = async (
     throw Error`La marca que intenta asignar no se encuentra registrado`;
   }
 
-  const existCode = await productExist(code);
-  if (existCode) {
-    throw Error`El codigo: ${code} que introdujo ya esta registrado`;
+  const existSize = await sizeExist(idSize);
+  if (!existSize) {
+    throw Error`La talla que intenta asignar no se encuentra registrada`;
   }
+  // CODE SE DEBE GENERAR AUTOMATICAMENTE
+
+  let statusCreate = false;
+  if (stock > 0) statusCreate = true;
 
   let newProduct = await Product.create({
     idCategory,
     idColor,
     idBrand,
     idSize,
-    code,
+    code: "SOY UN QR",
     name,
-    type,
     image,
-    characteristics,
     priceProduct,
     stock,
     description,
+    status: statusCreate,
   });
   const allData = await getAllProducts();
 
@@ -67,7 +68,8 @@ const createProduct = async (
       newProduct,
       existCategory.nameCategory,
       existBrand.brandName,
-      existColor.nameColor
+      existColor.nameColor,
+      existSize.nameSize
     ),
     listProducts: await listProductsPromisse(allData),
   };
@@ -92,7 +94,7 @@ const getProductId = async (idProduct) => {
   };
 };
 
-// ELIMINACION DE PRODUCTOS 
+// ELIMINACION DE PRODUCTOS
 const deleteProduct = async (idProduct) => {
   const existingProduct = await productIdExist(idProduct);
   if (!existingProduct) {
@@ -135,19 +137,18 @@ const getProductName = async (name, code) => {
   }
 };
 
-// EDITAR PRODUCTO 
+// EDITAR PRODUCTO
 const putProduct = async (
   idProduct,
   idCategory,
   idColor,
   idBrand,
-  code,
+  idSize,
   name,
-  type,
   image,
-  characteristics,
   priceProduct,
   stock,
+  status,
   description
 ) => {
   const existingProduct = await productIdExist(idProduct);
@@ -155,19 +156,29 @@ const putProduct = async (
   if (!existingProduct) {
     throw Error(`Producto no encontrado`);
   }
+  if (+stock < 0) {
+    throw Error`Lo siento no puede haber stock, negativo`;
+  }
+
+  // let statusCreate = status;
+  // if (+stock === 0) {
+  //   statusCreate = false;
+  // } else if (+stock > 0) {
+  //   statusCreate = true;
+  // }
 
   const result = await Product.update(
     {
       idCategory,
       idColor,
       idBrand,
-      code,
+      idSize,
       name,
-      type,
       image,
-      characteristics,
       priceProduct,
       stock,
+      // status: statusCreate,
+      status,
       description,
     },
     { where: { idProduct } }
