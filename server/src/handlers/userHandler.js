@@ -64,16 +64,16 @@ const deleteUser = async (request, response) => {
 };
 
 const upDateUser = async (request, response) => {
-  const { idUser, idLevel, nameUser, emailUser, lastName, password } =
-    request.body;
-  const ConvierteUserName = FirstLetter(nameUser);
+  const { idUser, idLevel, nameUser, emailUser, lastName, password } = request.body;
+  const convierteUserName = FirstLetter(nameUser);
+  const convierteLastName = FirstLetter(lastName);
   try {
     const upDate = await userUpDate(
       idUser,
       idLevel,
-      ConvierteUserName,
+      convierteUserName,
       emailUser,
-      lastName,
+      convierteLastName,
       password
     );
     response.status(200).json(upDate);

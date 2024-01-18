@@ -62,16 +62,16 @@ const categoryById = async (idCategory) => {
   if (idCategorys) {
     return {
       level: true,
-      message: `Categoria ${idCategory} encontrada`,
+      message: `Categoria con ID: ${idCategory} encontrada`,
       data: [{
         idCategory: idCategorys.idCategory,
-        name: idCategorys.nameCategory
+        nameCategory: idCategorys.nameCategory
       }]
     }
   } else {
     return {
       level: false,
-      message: `La categoria ${idCategory} no esta creada`,
+      message: `La categoria con ID: ${idCategory} no esta creada`,
       data: []
     }
   }
@@ -85,7 +85,7 @@ const allCategory = async () => {
     message: 'Lista de categorias',
     data: dataCategory.map(category => ({
       idCategory: category.idCategory,
-      name: category.nameCategory
+      nameCategory: category.nameCategory
     }))
   }
   return formatteData;
@@ -97,7 +97,7 @@ const categoryDelete = async (idCategory) => {
   if (!categoryExisting) {
     return {
       level: false,
-      message: `No existe la categoria ${idCategory} para eliminar`,
+      message: `No existe la categoria con ID: ${idCategory} para eliminar`,
       data: []
     }
   }
@@ -107,7 +107,7 @@ const categoryDelete = async (idCategory) => {
   if (deleted) {
     return {
       level: true,
-      message: `Categoria ${categoryExisting.nameCategory} eliminado`,
+      message: `Categoria ${categoryExisting.nameCategory} eliminado con exito`,
       data
     }
   }
@@ -120,7 +120,7 @@ const categoryUpDate = async (idCategory, nameCategory) => {
   if (!categoryExisting) {
     return {
       level: false,
-      message: `No existe la categoria ID ${idCategory} para actualizar`,
+      message: `No existe la categoria con ID: ${idCategory} para actualizar`,
       data: []
     }
   } else {
@@ -129,7 +129,7 @@ const categoryUpDate = async (idCategory, nameCategory) => {
     const { data } = await allCategory();
     return {
       level: true,
-      message: `Categoria actualizada exitosamente: ${upperCaseName}`,
+      message: `Categoria con ID: ${idCategory} actualizada exitosamente: ${upperCaseName}`,
       data
     };
   }

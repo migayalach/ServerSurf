@@ -63,7 +63,7 @@ const brandById = async (idBrand) => {
   if (idBrands) {
     return {
       level: true,
-      message: `Marca ${idBrand} encontrada`,
+      message: `Marca con ID: ${idBrand} encontrada`,
       data: [{
         idBrand: idBrands.idBrand,
         name: idBrands.brandName
@@ -72,7 +72,7 @@ const brandById = async (idBrand) => {
   } else {
     return {
       level: false,
-      message: `La marca ${idBrand} no está creada`,
+      message: `La marca con ID: ${idBrand} no está creada`,
       data: []
     }
   }
@@ -98,7 +98,7 @@ const brandDelete = async (idBrand) => {
   if (!brandExisting) {
     return {
       level: false,
-      message: `No existe la marca ${idBrand} para eliminar`,
+      message: `No existe la marca con ID: ${idBrand} para eliminar`,
       data: []
     }
   }
@@ -108,7 +108,7 @@ const brandDelete = async (idBrand) => {
   if (deleted) {
     return {
       level: true,
-      message: `Marca ${brandExisting.brandName} eliminado`,
+      message: `Marca ${brandExisting.brandName} eliminada exitosamente`,
       data
     }
   }
@@ -121,7 +121,7 @@ const brandUpDate = async (idBrand, brandName) => {
   if (!brandExisting) {
     return {
       level: false,
-      message: `No existe la marca ID ${idBrand} para actualizar`,
+      message: `No existe la marca con ID: ${idBrand} para actualizar`,
       data: []
     }
   } else {
@@ -130,7 +130,7 @@ const brandUpDate = async (idBrand, brandName) => {
     const { data } = await allBrand();
     return {
       level: true,
-      message: `Marca actualizada exitosamente: ${upperCaseName}`,
+      message: `Marca con ID: ${idBrand} actualizada exitosamente: ${upperCaseName}`,
       data
     };
   }
