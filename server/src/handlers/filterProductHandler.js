@@ -1,15 +1,26 @@
 const searchProductData = require("../controllers/filterProductController");
 
 const getfilterProduct = async (request, response) => {
-  const { category, color, size, orderBy, minPrice, maxPrice } = request.query;
+  const {
+    idCategory,
+    idColor,
+    idSize,
+    idBrand,
+    orderBy,
+    minPrice,
+    maxPrice,
+    key,
+  } = request.query;
   try {
     const data = await searchProductData(
-      category,
-      color,
-      size,
-      orderBy,
+      idCategory,
+      idColor,
+      idSize,
+      idBrand,
       minPrice,
-      maxPrice
+      maxPrice,
+      orderBy,
+      key
     );
     response.status(200).json(data);
   } catch (error) {
