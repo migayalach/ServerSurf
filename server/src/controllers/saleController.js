@@ -17,8 +17,9 @@ const createSale = async (idUser, costSale) => {
     throw Error`Lo siento el usuario no existe`;
   }
   const date = new Date();
-  await Sale.create({ idUser, costSale, date });
+  const { idSale } = await Sale.create({ idUser, costSale, date });
   return {
+    idSale,
     date,
     message: `Compra realizada con exito`,
   };
@@ -63,11 +64,6 @@ const getAllSales = async () => {
   const saleData = await Sale.findAll();
   return { message: `Lista de compras`, data: await clearSaleData(saleData) };
 };
-
-
-
-
-
 
 // BUSCAR PUEDE SER POR FECHAS, NAMEUSER, O EMAIL
 const getSaleName = (name) => {

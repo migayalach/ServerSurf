@@ -1,16 +1,53 @@
-const { DetailSale, Sale, Product, Cart } = require("../dataBase/dataBase");
-const { userExist, listProductsPromisse } = require("./helperControllers");
+const { Sequelize } = require("sequelize");
+const {
+  DetailSale,
+  Sale,
+  Product,
+  Cart,
+  Category,
+  Color,
+  Brand,
+  Size,
+} = require("../dataBase/dataBase");
+const { userExist } = require("./helperControllers");
 
-//NO OLVIDAR SIZE NI AMOUNT POR PRODUCTO
-async function listDetail(listProducts) {
-  const promiseData = Promise.all(
-    listProducts.map(async (index) => await Product.findByPk(index))
-  );
-  const data = await promiseData;
-  return await listProductsPromisse(data);
+async function productDetail(arrayProduct) {
+  const data = arrayProduct.map(async ({ idProduct, amount }) => {
+    const {
+      code,
+      name,
+      image,
+      priceProduct,
+      description,
+      idCategory,
+      idColor,
+      idBrand,
+      idSize,
+    } = await Product.findByPk(idProduct);
+    const { nameCategory } = await Category.findByPk(idCategory);
+    const { nameColor } = await Color.findByPk(idColor);
+    const { brandName } = await Brand.findByPk(idBrand);
+    const { nameSize } = await Size.findByPk(idSize);
+    const priceTotal = Math.round(amount * priceProduct * 100) / 100;
+    const obj = {
+      idProduct,
+      code,
+      name,
+      nameCategory,
+      nameColor,
+      nameSize,
+      brandName,
+      amount,
+      priceProductUnit: priceProduct,
+      priceTotal,
+      image,
+      description,
+    };
+    return obj;
+  });
+  return await Promise.all(data);
 }
 
-// verificar el idVenta, el producto, usar promose all para enviar n datos(productos)
 const createDetail = async (idSale, idUser, listProducts) => {
   //PREGUNTAR SI EXISTE EL USUARIO
   const existUser = await userExist(idUser);
@@ -53,17 +90,29 @@ const createDetail = async (idSale, idUser, listProducts) => {
       const detail = await DetailSale.create({ idSale, idProduct, amount });
       return detail;
     });
-    await Promise.all(promisseDetail);
+    const detailResponse = await Promise.all(promisseDetail);
+    const mapDetailData = detailResponse.map(({ idProduct, amount }) => {
+      return { idProduct, amount };
+    });
+
     //! descontar del stock
+    const stockPromisse = mapDetailData.map(async ({ idProduct, amount }) => {
+      await Product.update(
+        { stock: Sequelize.literal(`stock - ${amount}`) },
+        { where: { idProduct } }
+      );
+    });
+
+    await Promise.all(stockPromisse);
+
     return {
       message: `Lista de detalle`,
-      data: await listDetail(listProducts),
+      data: await productDetail(mapDetailData),
     };
   }
   throw Error`Los productos no son los mismos`;
 };
 
-//idSale,
 const getDetailId = async (idSale) => {
   const existSale = await Sale.findOne({ where: { idSale } });
   if (!existSale) {
@@ -71,14 +120,16 @@ const getDetailId = async (idSale) => {
   }
   const dataDetail = await DetailSale.findAll({
     where: { idSale },
-    attributes: ["idProduct"],
+    attributes: ["idProduct", "amount"],
   });
 
-  const arrayIdProduct = dataDetail.map(({ idProduct }) => idProduct);
+  const arrayIdProduct = dataDetail.map(({ idProduct, amount }) => {
+    return { idProduct, amount };
+  });
 
   return {
     message: `Detalle de la fecha ${existSale.date}`,
-    data: await listDetail(arrayIdProduct),
+    data: await productDetail(arrayIdProduct),
   };
 };
 
