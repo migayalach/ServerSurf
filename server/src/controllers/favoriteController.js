@@ -3,11 +3,19 @@ const { User, Product, Favorites } = require("../dataBase/dataBase");
 const addFavorite = async (idUser, idProduct) => {
   const existUser = await User.findOne({ where: { idUser } });
   if (!existUser) {
-    throw Error`El usario no existe`;
+    return {
+      level: false,
+      message: `El usario con ID: ${idUser} no existe`,
+      data: []
+    }
   }
   const existProduct = await Product.findOne({ where: { idProduct } });
   if (!existProduct) {
-    throw Error`El producto no existe`;
+    return {
+      level: false,
+      message: `El producto con ID: ${idProduct} no existe`,
+      data: []
+    }
   }
 
   const duplicateFavorite = await Favorites.findAll({
@@ -24,17 +32,19 @@ const addFavorite = async (idUser, idProduct) => {
   if (favoriteArray) {
     return {
       level: false,
-      message: 'Lo siento no puede haber duplicados',
+      message: 'Lo siento no puede haber favoritos duplicados',
       data: []
     }
   }
 
   await Favorites.create({ idUser, idProduct });
 
+  const addedProduct = await Product.findOne({ where: { idProduct } });
+
   const { data } = await allFavorites()
   return {
     level: true,
-    message: `Añadido el producto con éxito a favoritos`,
+    message: `Añadido el producto ${addedProduct.name} con éxito a favoritos`,
     data
   };
 };
@@ -68,24 +78,70 @@ const allFavorites = async () => {
   return formatteData;
 };
 
-const deleteFavorite = async (idUser, idProduct) => {
-
-  const favorite = await Favorites.findOne({
+const favoriteById = async (idUser) => {
+  const favorites = await Favorites.findAll({
     where: {
       idUser,
-      idProduct,
+    },
+    include: [
+      {
+        model: Product,
+        attributes: ["name", "priceProduct", "image"],
+      },
+    ],
+  });
+
+  if (favorites.length > 0) {
+    return {
+      level: true,
+      message: `Lista de favoritos para el usuario con ID: ${idUser}`,
+      data: favorites.map((fav) => ({
+        idProduct: fav.idProduct,
+        name: fav.Product.name,
+        priceProduct: fav.Product.priceProduct,
+        image: fav.Product.image,
+      })),
+    };
+  } else {
+    return {
+      level: false,
+      message: `No se encontraron favoritos para el usuario con ID: ${idUser}`,
+      data: [],
+    };
+  }
+};
+
+const deleteFavorite = async (idUser, idProduct) => {
+
+  const favoriteUser = await Favorites.findOne({
+    where: {
+      idUser
     },
   });
   
-  if (!favorite) {
+  if (!favoriteUser) {
     return {
       level: false,
-      message: 'Producto favorito no encontrado',
+      message: `El user con ID: ${idUser} no tiene favoritos`,
       data: []
     }
   }
 
-  const deleted = await Favorites.destroy({where: {idUser, idProduct}});
+  const favoriteProduct = await Favorites.findOne({
+    where: {
+      idProduct
+    }
+  });
+
+  if (!favoriteProduct) {
+    return {
+      level: false,
+      message: `El producto con ID: ${idProduct} no esta en favoritos`,
+      data: []
+    }
+  }
+
+  const deleted = await Favorites.destroy({ where: { idUser, idProduct } });
   const { data } = await allFavorites()
   if (deleted) {
     return {
@@ -100,4 +156,5 @@ module.exports = {
   addFavorite,
   allFavorites,
   deleteFavorite,
+  favoriteById,
 };

@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
-const { Level, User } = require("../dataBase/dataBase");
+const { Level, User, Favorite } = require("../dataBase/dataBase");
+const { favoriteById } = require("./favoriteController");
 
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
@@ -152,18 +153,30 @@ const allUser = async () => {
     ]
   });
 
+  const usersWithFavorites = await Promise.all(
+    dataUser.map(async (user) => {
+      // Obtiene favoritos de cada usuario
+      const favorites = await favoriteById(user.idUser);
+
+      // Retorna un objeto con la información combinada
+      return {
+        idUser: user.idUser,
+        idlevel: user.level.idLevel,
+        nameLevel: user.level.nameLevel,
+        nameUser: user.nameUser,
+        emailUser: user.emailUser,
+        lastName: user.lastName,
+        favorites,
+      };
+    })
+  );
+
   const formatteData = {
     level: true,
     message: "Lista de users",
-    data: dataUser.map((users) => ({
-      idUser: users.idUser,
-      idlevel: users.level.idLevel,
-      nameLevel: users.level.nameLevel,
-      nameUser: users.nameUser,
-      emailUser: users.emailUser,
-      lastName: users.lastName,
-    })),
+    data: usersWithFavorites,
   };
+
   return formatteData;
 };
 

@@ -2,6 +2,7 @@ const {
   addFavorite,
   allFavorites,
   deleteFavorite,
+  favoriteById
 } = require("../controllers/favoriteController");
 
 const postFav = async (request, response) => {
@@ -23,6 +24,16 @@ const favoritesAll = async (request, response) => {
   }
 };
 
+const getFavoriteById = async (request, response) => {
+  const { idUser } = request.params;
+  try {
+    const favoriteFind = await favoriteById(idUser);
+    response.status(200).json(favoriteFind);
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
+
 const deleteFav = async (request, response) => {
   const { idUser, idProduct } = request.params;
   try {
@@ -36,5 +47,6 @@ const deleteFav = async (request, response) => {
 module.exports = {
   postFav,
   deleteFav,
-  favoritesAll
+  favoritesAll,
+  getFavoriteById
 };
