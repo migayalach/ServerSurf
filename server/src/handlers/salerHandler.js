@@ -10,10 +10,10 @@ const {
 const postSale = async (request, response) => {
   const { idUser, costSale } = request.body;
   try {
-    const { date, message } = await createSale(idUser, costSale);
+    const { idSale, date, message } = await createSale(idUser, costSale);
     return response
       .status(200)
-      .json({ createSale: true, idUser, date, costSale, message });
+      .json({ createSale: true, idUser, idSale, date, costSale, message });
   } catch (error) {
     return response
       .status(400)

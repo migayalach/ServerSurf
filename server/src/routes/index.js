@@ -16,6 +16,7 @@ const colorRouter = require("./colorRouter");
 const loginRouter = require("./loginRouter");
 const sizeRouter = require("./sizeRouter");
 const paymentRouter = require("./paymentRouter");
+const filterProductRouter = require("./filterProductRouter");
 
 // entry points
 mainRouter.use("/level", levelRouter); //ok
@@ -32,5 +33,6 @@ mainRouter.use("/color", colorRouter);
 mainRouter.use("/login", loginRouter);
 mainRouter.use("/size", sizeRouter);
 mainRouter.use("/mecado", paymentRouter);
+mainRouter.use("/filterProduct", filterProductRouter);
 
 module.exports = mainRouter;
