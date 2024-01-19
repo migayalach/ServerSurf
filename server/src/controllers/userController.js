@@ -88,22 +88,30 @@ const userByName = async (name) => {
   });
 
   if (user.length) {
+    const usersWithFavorites = await Promise.all(
+      user.map(async (user) => {
+        const favorites = await favoriteById(user.idUser);
+        return {
+          idUser: user.idUser,
+          idLevel: user.level.idLevel,
+          nameLevel: user.level.nameLevel,
+          nameUser: user.nameUser,
+          emailUser: user.emailUser,
+          lastName: user.lastName,
+          favorites,
+        };
+      })
+    );
+
     return {
       level: true,
-      message: `User ${convierteUserName} encontrado`,
-      data: user.map((user) => ({
-        idUser: user.idUser,
-        idLevel: user.level.idLevel,
-        nameLevel: user.level.nameLevel,
-        nameUser: user.nameUser,
-        emailUser: user.emailUser,
-        lastName: user.lastName,
-      })),
+      message: `Users con nombre similar a ${convierteUserName} encontrados`,
+      data: usersWithFavorites,
     };
   } else {
     return {
       level: false,
-      message: `El user ${convierteUserName} no existe `,
+      message: `No se encontraron users con nombre similar a ${convierteUserName}`,
       data: [],
     };
   }
@@ -119,6 +127,8 @@ const userById = async (idUser) => {
   });
 
   if (idUsers) {
+    const favorites = await favoriteById(idUser);
+
     return {
       level: true,
       message: `User con ID: ${idUser} encontrado`,
@@ -130,6 +140,7 @@ const userById = async (idUser) => {
           nameUser: idUsers.nameUser,
           emailUser: idUsers.emailUser,
           lastName: idUsers.lastName,
+          favorites,
         },
       ],
     };

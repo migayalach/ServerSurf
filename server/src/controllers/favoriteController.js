@@ -88,6 +88,10 @@ const favoriteById = async (idUser) => {
         model: Product,
         attributes: ["name", "priceProduct", "image"],
       },
+      {
+        model: User,
+        attributes: ["nameUser"]
+      }
     ],
   });
 
@@ -96,6 +100,7 @@ const favoriteById = async (idUser) => {
       level: true,
       message: `Lista de favoritos para el usuario con ID: ${idUser}`,
       data: favorites.map((fav) => ({
+        nameUser: fav.User.nameUser,
         idProduct: fav.idProduct,
         name: fav.Product.name,
         priceProduct: fav.Product.priceProduct,
