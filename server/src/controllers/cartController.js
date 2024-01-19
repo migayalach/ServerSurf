@@ -1,12 +1,14 @@
 const { User, Product, Cart } = require("../dataBase/dataBase");
 
 const clearObj = (obj, producto) => {
+  console.log(producto.description);
   return {
     idProduct: producto.idProduct,
     code: producto.code,
     name: producto.name,
     type: producto.type,
     image: producto.image,
+    description: producto.description,
     characteristics: producto.characteristics,
     priceProduct: producto.priceProduct,
     amount: obj.amount,
