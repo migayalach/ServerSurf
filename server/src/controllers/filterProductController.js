@@ -1,4 +1,7 @@
 const valor = (text) => {
+  if (!text) {
+    return 0
+  }
   let character = text.split("")[0];
   return character.charCodeAt();
 };
@@ -93,38 +96,72 @@ const searchProductData = async (
 ) => {
   const listProducts = await productClear(await Product.findAll());
 
-  // TODO
-  return orderByASCDESC(
-    (auxCategori = listProducts
-      .filter((index) => index.idCategory === +idCategory)
-      .filter((index) => index.idColor === +idColor)
-      .filter((index) => index.idSize === +idSize)
-      .filter((index) => index.idBrand === +idBrand)
-      .filter(
-        (index) =>
-          index.priceProduct > minPrice && index.priceProduct < maxPrice
-      )),
-    orderBy,
-    key
+  if (idCategory && idColor && idSize && idBrand && minPrice && maxPrice) {
+    const filteredProducts = listProducts
+    .filter((index) => index.idCategory === +idCategory)
+    .filter((index) => index.idColor === +idColor)
+    .filter((index) => index.idSize === +idSize)
+    .filter((index) => index.idBrand === +idBrand)
+    .filter(
+      (index) =>
+        index.priceProduct >= minPrice && index.priceProduct <= maxPrice
+    );
+
+    if (filteredProducts.length > 0) {
+      const orderedProducts = orderByASCDESC(filteredProducts, orderBy, key);
+      return {
+        level: true,
+        message: 'Productos encontrados',
+        data: orderedProducts,
+      };
+    } else {
+      return {
+        level: false,
+        message: 'No se encontraron productos con los criterios especificados',
+        data: [],
+      };
+    }
+    // const orderedProducts = orderByASCDESC(filteredProducts, orderBy, key);
+    // return {
+    //   level: true,
+    //   message: 'chau',
+    //   data: orderedProducts
+    // }
+  }
+
+  const filteredProducts = listProducts
+  .filter((index) => (idCategory ? index.idCategory === +idCategory : true))
+  .filter((index) => (idColor ? index.idColor === +idColor : true))
+  .filter((index) => (idSize ? index.idSize === +idSize : true))
+  .filter((index) => (idBrand ? index.idBrand === +idBrand : true))
+  .filter(
+    (index) => 
+      (minPrice ? index.priceProduct >= minPrice : true) &&
+      (maxPrice ? index.priceProduct <= maxPrice : true)
   );
+
+  if (filteredProducts.length > 0) {
+    const orderedProducts = orderByASCDESC(filteredProducts, orderBy, key);
+    return {
+      level: true,
+      message: 'Productos encontrados',
+      data: orderedProducts,
+    };
+  } else {
+    return {
+      level: false,
+      message: 'No se encontraron productos con los criterios especificados',
+      data: [],
+    };
+  }
+  // const orderedProducts = orderByASCDESC(filteredProducts, orderBy, key);
+  // return {
+  //   level: true,
+  //   message: 'hola',
+  //   data: orderedProducts
+  // }
 };
 
 module.exports = searchProductData;
 
-//* CASOS - TODO EN 1
-//!   TRAER TODOS LOS PRODUCTOS DE UNA CATEGORIA                          2         OK
-//!   TRAER TODOS LOS PRODUCTOS DE UN COLOR                               3         OK
-//!   TRAER TODOS LOS PRODUCTOS DE UNA TALLA                              4
-//!   TRAER TODOS LOS PRODUCTOS DE UNA MARCA
-//!   TRAER TODOS LOS PRODUCTOS DE UN RANGO DE PRECIO DE INICIO Y FIN   10 - 73
-//!   ORDENAR ASC O DESC - PRECIO o NOMBRE                                ACS
-//!   SI NO ENCUIENTRA NADA DEVOLVER TODO O NADA ---
 //*  [1,2,3,4] === [1,2,3,4] si es igualito devolver no se encontro nada
-
-//* CASO 2 - CASOS SEPARADOS -- {}
-//!   TRAER TODOS LOS PRODUCTOS DE UNA CATEGORIA  
-//!   TRAER TODOS LOS PRODUCTOS DE UN COLOR
-//!   TRAER TODOS LOS PRODUCTOS DE UNA TALLA 
-//!   TRAER TODOS LOS PRODUCTOS DE UNA MARCA
-//!   TRAER TODOS LOS PRODUCTOS DE UN RANGO DE PRECIO DE INICIO Y FIN   10 - 73
-//!   ORDENAR ASC O DESC - PRECIO o NOMBRE   
