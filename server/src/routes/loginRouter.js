@@ -4,6 +4,8 @@ const postLogin = require("../handlers/loginHandler");
 
 const loginRouter = Router();
 
-loginRouter.post("/", validateLogin, postLogin);
+loginRouter.post("/", 
+//validateLogin, 
+postLogin);
 
 module.exports = loginRouter;
