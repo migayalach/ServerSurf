@@ -1,15 +1,14 @@
 const userAccess = require("../controllers/loginController");
 
 const postLogin = async (request, response) => {
-  const { email, password } = request.body;
+  const { nameUser, emailUser, password, uniqueId } = request.body;
+  const userName = nameUser;
   try {
-    const { access, idLevel, idUser, name, level, message } = await userAccess(
-      email,
-      password
-    );
+    const { access, idLevel, idUser, level, nameUser, message } =
+      await userAccess(userName, emailUser, password, uniqueId);
     response
       .status(200)
-      .json({ access, idLevel, idUser, name, level, message });
+      .json({ access, idLevel, idUser, level, nameUser, message });
   } catch (error) {
     response.status(400).json({ access: false, message: error.message });
   }

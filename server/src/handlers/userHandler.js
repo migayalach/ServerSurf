@@ -12,21 +12,25 @@ const FirstLetter = (string) => {
 };
 
 const postUser = async (request, response) => {
-  const { nameUser, emailUser, lastName, password } = request.body;
+  const { nameUser, emailUser, password, uniqueId } = request.body;
   const convierteUserName = FirstLetter(nameUser);
-  const convierteLastName = FirstLetter(lastName);
   try {
     const newUser = await createUser(
       convierteUserName,
       emailUser,
-      convierteLastName,
-      password
+      password,
+      uniqueId
     );
     response.status(200).json(newUser);
   } catch (error) {
     response.status(400).json({ error: error.message });
   }
 };
+
+
+
+
+
 
 const getUserByName = async (request, response) => {
   const { name } = request.query;
@@ -64,7 +68,8 @@ const deleteUser = async (request, response) => {
 };
 
 const upDateUser = async (request, response) => {
-  const { idUser, idLevel, nameUser, emailUser, lastName, password } = request.body;
+  const { idUser, idLevel, nameUser, emailUser, lastName, password } =
+    request.body;
   const convierteUserName = FirstLetter(nameUser);
   const convierteLastName = FirstLetter(lastName);
   try {

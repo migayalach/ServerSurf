@@ -1,72 +1,88 @@
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
+const _categories = require("../dataBase/dataCategory");
 const { Level, User, Favorite } = require("../dataBase/dataBase");
 const { favoriteById } = require("./favoriteController");
 
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
-const createUser = async (nameUser, emailUser, lastName, password) => {
-  const existingUser = await User.findOne({  // Verificar si el correo electrónico ya está registrado
-    where: {
-      emailUser,
-    },
+async function countCategories() {
+  return await User.count();
+}
+
+async function createGoogle(idLevel, nameUser, emailUser, uniqueId) {
+  await User.create({
+    idLevel,
+    nameUser,
+    emailUser,
+    password: await hashedPassword(`${emailUser}`),
+    uniqueId,
   });
+  return `Creado con exito ||||| mediante - google `;
+}
 
-  if (existingUser) {
-    return {
-      level: false,
-      message: 'Ya existe un usuario con este correo electrónico',
-      data: [],
-    };
-  }
+async function createForm(idLevel, nameUser, emailUser, password) {
+  await User.create({
+    idLevel,
+    nameUser,
+    emailUser,
+    uniqueId: "null",
+    password: await hashedPassword(`${password}`),
+  });
+  return `Creado con exito ||||| mediante form`;
+}
 
-  const countUser = await User.count();
+async function levelData(nameLevel) {
+  return await Level.findOne({
+    where: {
+      nameLevel: {
+        [Op.like]: `${nameLevel}`,
+      },
+    },
+    attributes: ["idLevel"],
+  });
+}
 
-  if (countUser < 1) { // Verificar si es el primer usuario
-    let adminLevel = await Level.findOne({ where: { nameLevel: 'ADMIN' } });
-
-    if (!adminLevel) {
-      const createdAdminLevel = await Level.create({ nameLevel: 'ADMIN' });
-      adminLevel = createdAdminLevel;
+async function userCreate(nameUser, emailUser, password, uniqueId) {
+  if ((await countCategories()) < 1) {
+    const { idLevel } = await levelData("admin");
+    if (uniqueId) {
+      return await createGoogle(idLevel, nameUser, emailUser, uniqueId);
+    } else if (password) {
+      return await createForm(idLevel, nameUser, emailUser, password);
     }
-
-    let standarLevel = await Level.findOne({ where: { nameLevel: 'STANDAR' } }); // Crear el nivel 'STANDAR' si no existe
-
-    if (!standarLevel) {
-      const createdStandarLevel = await Level.create({ nameLevel: 'STANDAR' });
-      standarLevel = createdStandarLevel;
-    }
-
-    await User.create({  // Crear el usuario con nivel 'ADMIN'
-      idLevel: adminLevel.idLevel,
-      nameUser,
-      emailUser,
-      lastName,
-      password: await hashedPassword(`${password}`),
-    });
   } else {
-    let standarLevel = await Level.findOne({ where: { nameLevel: 'STANDAR' } });
-    if (!standarLevel) {
-      const createdStandarLevel = await Level.create({ nameLevel: 'STANDAR' });
-      standarLevel = createdStandarLevel;
+    const { idLevel } = await levelData("standar");
+    if (uniqueId) {
+      return await createGoogle(idLevel, nameUser, emailUser, uniqueId);
+    } else if (password) {
+      return await createForm(idLevel, nameUser, emailUser, password);
     }
-
-    await User.create({
-      idLevel: standarLevel.idLevel,
-      nameUser,
-      emailUser,
-      lastName,
-      password: await hashedPassword(`${password}`),
-    });
   }
+}
 
-  const { data } = await allUser();
-  return {
-    level: true,
-    message: `Usuario ${nameUser} ${lastName} creado con éxito`,
-    data,
-  };
+// SERIA SUPER QUE LUEDO DE CREAR LA CUENTA, MANDE UN EMAIL DE BIENVENIDA
+const createUser = async (nameUser, emailUser, password, uniqueId) => {
+  // FORM
+  if (nameUser && emailUser && password) {
+    return await userCreate(nameUser, emailUser, password, "");
+    // GOOGLE
+  } else if (nameUser && emailUser && uniqueId) {
+    return await userCreate(nameUser, emailUser, "", uniqueId);
+  }
 };
+
+
+
+
+
+
+
+
+
+
+
+
 
 const userByName = async (name) => {
   const FirstLetter = (string) => {
@@ -161,7 +177,7 @@ const allUser = async () => {
         attributes: ["idLevel", "nameLevel"],
         as: "level",
       },
-    ]
+    ],
   });
 
   const usersWithFavorites = await Promise.all(
