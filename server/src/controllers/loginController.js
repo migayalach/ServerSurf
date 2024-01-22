@@ -54,7 +54,6 @@ async function userAccess(nameUser, emailUser, password, uniqueId) {
     if (idUser && idLevel && password) {
       const { nameLevel } = await dataLevel(idLevel);
       if (await bcrypt.compare(userPassword, password))
-      console.log("");
         return responseData(idLevel, idUser, nameLevel, nameUser);
     }
     errorUser();
