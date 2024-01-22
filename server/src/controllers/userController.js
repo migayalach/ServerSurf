@@ -95,6 +95,7 @@ const userById = async (idUser) => {
           nameLevel: idUsers.level.nameLevel,
           nameUser: idUsers.nameUser,
           emailUser: idUsers.emailUser,
+          uniqueId: idUsers.uniqueId,
           favorites,
         },
       ],
