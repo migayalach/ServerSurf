@@ -1,5 +1,7 @@
+const uuid = require('uuid');
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
+
 const _categories = require("../dataBase/dataCategory");
 const { Level, User, Favorite } = require("../dataBase/dataBase");
 const { favoriteById } = require("./favoriteController");
@@ -26,7 +28,7 @@ async function createForm(idLevel, nameUser, emailUser, password) {
     idLevel,
     nameUser,
     emailUser,
-    uniqueId: "null",
+    uniqueId: uuid.v4(),
     password: await hashedPassword(`${password}`),
   });
   return `Creado con exito ||||| mediante form`;
@@ -72,67 +74,6 @@ const createUser = async (nameUser, emailUser, password, uniqueId) => {
   }
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-const userByName = async (name) => {
-  const FirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-  const convierteUserName = FirstLetter(name);
-
-  const user = await User.findAll({
-    where: {
-      nameUser: {
-        [Op.iLike]: `%${name}%`,
-      },
-    },
-    include: {
-      model: Level,
-      attributes: ["idLevel", "nameLevel"],
-      as: "level",
-    },
-  });
-
-  if (user.length) {
-    const usersWithFavorites = await Promise.all(
-      user.map(async (user) => {
-        const favorites = await favoriteById(user.idUser);
-        return {
-          idUser: user.idUser,
-          idLevel: user.level.idLevel,
-          nameLevel: user.level.nameLevel,
-          nameUser: user.nameUser,
-          emailUser: user.emailUser,
-          lastName: user.lastName,
-          favorites,
-        };
-      })
-    );
-
-    return {
-      level: true,
-      message: `Users con nombre similar a ${convierteUserName} encontrados`,
-      data: usersWithFavorites,
-    };
-  } else {
-    return {
-      level: false,
-      message: `No se encontraron users con nombre similar a ${convierteUserName}`,
-      data: [],
-    };
-  }
-};
-
 const userById = async (idUser) => {
   const idUsers = await User.findByPk(idUser, {
     include: {
@@ -144,7 +85,6 @@ const userById = async (idUser) => {
 
   if (idUsers) {
     const favorites = await favoriteById(idUser);
-
     return {
       level: true,
       message: `User con ID: ${idUser} encontrado`,
@@ -155,7 +95,6 @@ const userById = async (idUser) => {
           nameLevel: idUsers.level.nameLevel,
           nameUser: idUsers.nameUser,
           emailUser: idUsers.emailUser,
-          lastName: idUsers.lastName,
           favorites,
         },
       ],
@@ -192,7 +131,6 @@ const allUser = async () => {
         nameLevel: user.level.nameLevel,
         nameUser: user.nameUser,
         emailUser: user.emailUser,
-        lastName: user.lastName,
         favorites,
       };
     })
@@ -226,22 +164,22 @@ const userDelete = async (idUser) => {
   if (deleted) {
     return {
       level: true,
-      message: `User ${userExisting.nameUser} ${userExisting.lastName} eliminado`,
+      message: `User ${userExisting.nameUser} eliminado`,
       data,
     };
   }
 };
 
+// SI EL LOGIN FORM LO REALIZA UNA PERSONA QUE SE REGISTRO POR GOOGLE
+// EDITAR SU UUID
 const userUpDate = async (
   idUser,
   idLevel,
   nameUser,
   emailUser,
-  lastName,
   password
 ) => {
   const userExisting = await User.findOne({ where: { idUser } });
-
   if (!userExisting) {
     return {
       level: false,
@@ -253,13 +191,65 @@ const userUpDate = async (
     userExisting.nameUser = nameUser;
     userExisting.idLevel = idLevel;
     userExisting.emailUser = emailUser;
-    userExisting.lastName = lastName;
     await userExisting.save();
     const { data } = await allUser();
     return {
       level: true,
-      message: `User ${nameUser} ${lastName} con ID: ${idUser} actualizado exitosamente`,
+      message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
       data,
+    };
+  }
+};
+
+
+
+
+
+
+const userByName = async (name) => {
+  const FirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  const convierteUserName = FirstLetter(name);
+
+  const user = await User.findAll({
+    where: {
+      nameUser: {
+        [Op.iLike]: `%${name}%`,
+      },
+    },
+    include: {
+      model: Level,
+      attributes: ["idLevel", "nameLevel"],
+      as: "level",
+    },
+  });
+
+  if (user.length) {
+    const usersWithFavorites = await Promise.all(
+      user.map(async (user) => {
+        const favorites = await favoriteById(user.idUser);
+        return {
+          idUser: user.idUser,
+          idLevel: user.level.idLevel,
+          nameLevel: user.level.nameLevel,
+          nameUser: user.nameUser,
+          emailUser: user.emailUser,
+          favorites,
+        };
+      })
+    );
+
+    return {
+      level: true,
+      message: `Users con nombre similar a ${convierteUserName} encontrados`,
+      data: usersWithFavorites,
+    };
+  } else {
+    return {
+      level: false,
+      message: `No se encontraron users con nombre similar a ${convierteUserName}`,
+      data: [],
     };
   }
 };

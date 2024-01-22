@@ -27,10 +27,15 @@ const postUser = async (request, response) => {
   }
 };
 
-
-
-
-
+const getUserById = async (request, response) => {
+  const { idUser } = request.params;
+  try {
+    const userFind = await userById(idUser);
+    response.status(200).json(userFind);
+  } catch (error) {
+    response.status(400).json({ error: error.message });
+  }
+};
 
 const getUserByName = async (request, response) => {
   const { name } = request.query;
@@ -47,16 +52,6 @@ const getUserByName = async (request, response) => {
   }
 };
 
-const getUserById = async (request, response) => {
-  const { idUser } = request.params;
-  try {
-    const userFind = await userById(idUser);
-    response.status(200).json(userFind);
-  } catch (error) {
-    response.status(400).json({ error: error.message });
-  }
-};
-
 const deleteUser = async (request, response) => {
   const { idUser } = request.params;
   try {
@@ -68,17 +63,15 @@ const deleteUser = async (request, response) => {
 };
 
 const upDateUser = async (request, response) => {
-  const { idUser, idLevel, nameUser, emailUser, lastName, password } =
+  const { idUser, idLevel, nameUser, emailUser, password } =
     request.body;
   const convierteUserName = FirstLetter(nameUser);
-  const convierteLastName = FirstLetter(lastName);
   try {
     const upDate = await userUpDate(
       idUser,
       idLevel,
       convierteUserName,
       emailUser,
-      convierteLastName,
       password
     );
     response.status(200).json(upDate);
