@@ -64,7 +64,7 @@ const deleteUser = async (request, response) => {
 };
 
 const upDateUser = async (request, response) => {
-  const { idUser, idLevel, nameUser, emailUser, password } =
+  const { idUser, idLevel, nameUser, emailUser, password, uniqueId } =
     request.body;
   const convierteUserName = FirstLetter(nameUser);
   try {
@@ -73,7 +73,8 @@ const upDateUser = async (request, response) => {
       idLevel,
       convierteUserName,
       emailUser,
-      password
+      password,
+      uniqueId
     );
     response.status(200).json(upDate);
   } catch (error) {
