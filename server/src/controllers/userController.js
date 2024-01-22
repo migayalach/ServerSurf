@@ -54,12 +54,12 @@ async function levelData(nameLevel) {
 
 async function userCreate(nameUser, emailUser, password, uniqueId) {
   let idLevel;
-
-   // Determinar el nivel (ADMIN o STANDAR)
+  // Determinar el nivel (ADMIN o STANDAR)
   if ((await countCategories()) < 1) {
     idLevel = (await levelData("ADMIN")).idLevel;
   } else {
     idLevel = (await levelData("STANDAR")).idLevel;
+    console.log(idLevel,nameUser, emailUser, password, uniqueId);
   }
 
   if (uniqueId) {
@@ -197,7 +197,8 @@ const userUpDate = async (
   idLevel,
   nameUser,
   emailUser,
-  password
+  password,
+  uniqueId
 ) => {
   const userExisting = await User.findOne({ where: { idUser } });
   if (!userExisting) {
@@ -206,13 +207,29 @@ const userUpDate = async (
       message: `No existe el user con ID: ${idUser} para actualizar`,
       data: [],
     };
-  } else {
-    userExisting.password = await hashedPassword(password);
-    userExisting.nameUser = nameUser;
-    userExisting.idLevel = idLevel;
-    userExisting.emailUser = emailUser;
-    await userExisting.save();
-    const { data } = await allUser();
+  }
+  // EDITAR DATOS MENOS PASSWORD NI UNIQUEID YA QUE ESTE SOLO ES SHITCH
+  if (uniqueId && !password) {
+    const data = await User.update(
+      {
+        nameUser, emailUser,
+      },
+      { where: { idUser } }
+    )
+    return {
+      level: true,
+      message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
+      data,
+    };
+  }
+  // CAMBIA CONTRASEÑA MENOS UNICID
+  else if (password && !uniqueId) {
+    const data = await User.update(
+      {
+        nameUser, emailUser, password: await hashedPassword(`${password}`),
+      },
+      { where: { idUser } }
+    )
     return {
       level: true,
       message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
