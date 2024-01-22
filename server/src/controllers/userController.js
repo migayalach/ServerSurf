@@ -39,7 +39,7 @@ async function levelData(nameLevel) {
   const level = await Level.findOne({
     where: {
       nameLevel: {
-        [Op.like]: `${nameLevel}`,
+        [Op.iLike]: `${nameLevel}`,
       },
     },
     attributes: ["idLevel"],
