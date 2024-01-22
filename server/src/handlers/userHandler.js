@@ -23,7 +23,7 @@ const postUser = async (request, response) => {
     );
     response.status(200).json(newUser);
   } catch (error) {
-    response.status(400).json({ error: error.message });
+    response.status(400).json({ error: "Error al crear el usuario", details: error.message });
   }
 };
 

@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const _categories = require("../dataBase/dataCategory");
 const { Level, User, Favorite } = require("../dataBase/dataBase");
 const { favoriteById } = require("./favoriteController");
+const resendEmail = require('../helpers/resendEmail');
 
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
@@ -13,14 +14,14 @@ async function countCategories() {
 }
 
 async function createGoogle(idLevel, nameUser, emailUser, uniqueId) {
-  await User.create({
+  const user = await User.create({
     idLevel,
     nameUser,
     emailUser,
     password: await hashedPassword(`${emailUser}`),
     uniqueId,
   });
-  return `Creado con exito ||||| mediante - google `;
+  return { user, isGoogleRegistration: true };
 }
 
 async function createForm(idLevel, nameUser, emailUser, password) {
@@ -35,7 +36,7 @@ async function createForm(idLevel, nameUser, emailUser, password) {
 }
 
 async function levelData(nameLevel) {
-  return await Level.findOne({
+  const level = await Level.findOne({
     where: {
       nameLevel: {
         [Op.like]: `${nameLevel}`,
@@ -43,34 +44,52 @@ async function levelData(nameLevel) {
     },
     attributes: ["idLevel"],
   });
+
+  if (level && level.idLevel) {
+    return level
+  } else {
+    throw Error(`No se encontró el nivel con nameLevel: ${nameLevel}`);
+  }
 }
 
 async function userCreate(nameUser, emailUser, password, uniqueId) {
+  let idLevel;
+
+   // Determinar el nivel (ADMIN o STANDAR)
   if ((await countCategories()) < 1) {
-    const { idLevel } = await levelData("admin");
-    if (uniqueId) {
-      return await createGoogle(idLevel, nameUser, emailUser, uniqueId);
-    } else if (password) {
-      return await createForm(idLevel, nameUser, emailUser, password);
-    }
+    idLevel = (await levelData("ADMIN")).idLevel;
   } else {
-    const { idLevel } = await levelData("standar");
-    if (uniqueId) {
-      return await createGoogle(idLevel, nameUser, emailUser, uniqueId);
-    } else if (password) {
-      return await createForm(idLevel, nameUser, emailUser, password);
-    }
+    idLevel = (await levelData("STANDAR")).idLevel;
   }
+
+  if (uniqueId) {
+    // Registro mediante Google
+    const { user, isGoogleRegistration } = await createGoogle(idLevel, nameUser, emailUser, uniqueId);
+    return isGoogleRegistration ? user : null;
+  } else if (password) {
+    // Registro mediante formulario
+    return await createForm(idLevel, nameUser, emailUser, password);
+  }
+
+  return null; // Manejar otros casos o errores según sea necesario
 }
 
 // SERIA SUPER QUE LUEDO DE CREAR LA CUENTA, MANDE UN EMAIL DE BIENVENIDA
 const createUser = async (nameUser, emailUser, password, uniqueId) => {
   // FORM
   if (nameUser && emailUser && password) {
-    return await userCreate(nameUser, emailUser, password, "");
+    const result = await userCreate(nameUser, emailUser, password, "");
+    if (result && result.includes('Creado con exito')) {
+      await resendEmail.sendWelcomeEmail(emailUser, nameUser);
+    }
+    return result;
     // GOOGLE
   } else if (nameUser && emailUser && uniqueId) {
-    return await userCreate(nameUser, emailUser, "", uniqueId);
+    const { user, isGoogleRegistration } = await userCreate(nameUser, emailUser, "", uniqueId);
+    if (user && isGoogleRegistration) {
+      await resendEmail.sendWelcomeEmail(emailUser, nameUser, true);
+    }
+    return user;
   }
 };
 
