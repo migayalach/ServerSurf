@@ -1,7 +1,6 @@
 const { Resend } = require("resend");
 
-// const resendEmail = new Resend('re_WtQ66vUE_2i11ZJLnH5LUzDN7pKVTEdKc')  // ACA VA LA API KEY
-const resendEmail = new Resend(`re_5yBs8AuT_MyMvod7yt9RDwQuvTUZXM2WR`);
+const resendEmail = new Resend('re_WtQ66vUE_2i11ZJLnH5LUzDN7pKVTEdKc')  // ACA VA LA API KEY ESTA ES DE MATIAS 
 const sendWelcomeEmail = async (
   emailUser,
   nameUser,
@@ -32,7 +31,26 @@ const sendWelcomeEmail = async (
   }
 };
 
+const sendConfirmationEmail = async (emailUser, nameUser, idSale, costSale) => {
+  try {
+    const { data, error } = await resendEmail.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: [emailUser],
+      subject: "Confirmación de Compra",
+      html: `<p>Hola ${nameUser},</p><p>¡Gracias por tu compra!</p><p>Tu compra con el ID ${idSale} se ha realizado con éxito.</p><p>Costo total: ${costSale}</p><p>¡Esperamos verte de nuevo pronto!</p>`,
+    });
+    if (error) {
+      console.error("Error al enviar el correo de confirmación de compra:", error.response.body);
+    } else {
+      console.log("Correo de confirmación de compra enviado con éxito:", data);
+    }
+  } catch (error) {
+    console.error("Error inesperado al enviar el correo de confirmación de compra:", error);
+  }
+};
+
 module.exports = {
   resendEmail,
   sendWelcomeEmail,
+  sendConfirmationEmail,
 };

@@ -1,5 +1,6 @@
 const { User, Sale, Cart } = require("../dataBase/dataBase");
 const { userExist } = require("../controllers/helperControllers");
+const  { sendConfirmationEmail } = require("../helpers/resendEmail");
 
 const destrucDataUser = async (idUser) =>
   ({ nameUser, lastName, emailUser } = await User.findOne({
@@ -18,6 +19,13 @@ const createSale = async (idUser, costSale) => {
   }
   const date = new Date();
   const { idSale } = await Sale.create({ idUser, costSale, date });
+
+  const userData = await destrucDataUser(idUser);
+  const { nameUser, emailUser } = userData;
+  const r = await sendConfirmationEmail(emailUser, nameUser, idSale, costSale);
+  console.log(r)
+  
+
   return {
     idSale,
     date,
