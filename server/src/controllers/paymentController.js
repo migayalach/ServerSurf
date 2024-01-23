@@ -1,13 +1,13 @@
 require("dotenv").config;
 // const {TOKEN_MP} = process.env;
 const mercadopago = require("mercadopago");
-const token = "TEST-4630204173961447-011821-aaaf346216fd8f3d4cdc241d641b7a94-1643639191";
+const token = "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-1650020163";
   
   const createOrder = async (items) => {
     try {
   
       mercadopago.configure({
-        access_token: token,
+        access_token: "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-1650020163",
       
       });
   
@@ -21,14 +21,16 @@ const token = "TEST-4630204173961447-011821-aaaf346216fd8f3d4cdc241d641b7a94-164
             unit_price: item.price,
             picture_url: item.image,
             quantity: item.quantity,
+            
+            
           };
         }),
         back_urls: {
-          failure: "http://localhost:5173/",
-          pending: "http://localhost:5173/",
-          success: "http://localhost:5173/",
+          failure: "https://client-server-swart.vercel.app/",
+          pending: "https://client-server-swart.vercel.app/",
+          success: "https://client-server-swart.vercel.app/",
         },
-        notification_url: "http://localhost:5173/",
+        notification_url: "https://client-server-swart.vercel.app/",
       });
   
       const order = placeOrder.body.init_point;
