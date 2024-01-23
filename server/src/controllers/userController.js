@@ -59,7 +59,6 @@ async function userCreate(nameUser, emailUser, password, uniqueId) {
     idLevel = (await levelData("ADMIN")).idLevel;
   } else {
     idLevel = (await levelData("STANDAR")).idLevel;
-    console.log(idLevel,nameUser, emailUser, password, uniqueId);
   }
 
   if (uniqueId) {
