@@ -5,6 +5,6 @@ const PORT = process.env.PORT;
 const { sequelize } = require("./src/dataBase/dataBase");
 
 app.listen(PORT, () => {
-  sequelize.sync({ force: true });
+  sequelize.sync({ alter: true });
   console.log(`Servidor levantado en el puerto: ${PORT}`);
 });
