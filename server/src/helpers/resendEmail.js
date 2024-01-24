@@ -1,23 +1,22 @@
 const { Resend } = require("resend");
+const { EMAIL_SEND } = process.env;
 
-const resendEmail = new Resend('re_BD2T45UD_DgDKNqqava1iXW5DT5jeiX9w')  // ACA VA LA API KEY ESTA ES DE MATIAS 
+const resendEmail = new Resend(EMAIL_SEND)  // ACA VA LA API KEY 
 const sendWelcomeEmail = async (
   emailUser,
   nameUser,
   isGoogleRegistration = false
 ) => {
   try {
-    let welcomeMessage = `<p>Hola ${nameUser},</p><p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p><p>Esperamos que disfrutes de tu experiencia con nosotros.</p>`;
-
     if (isGoogleRegistration) {
       let email = emailUser.trim();
-      // Incluir enlace para cambiar contraseña específico para Google
-      welcomeMessage += `<p><a href="URL_PARA_CAMBIAR_CONTRASEÑA">Cambiar contraseña</a></p>`;
       const { data, error } = await resendEmail.emails.send({
         from: "Acme <onboarding@resend.dev>",
         to: [email],
         subject: "¡Bienvenido a Nuestro Sitio!",
-        html: `<p>Hola ${nameUser},</p><p>¡! .</p><p>Esperamos que disfrutes de tu experiencia con nosotros.</p><p><a href="http://localhost:5173/">Ingresa aquí</a></p>`,
+        html: `<p>Hola ${nameUser},</p><p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p>
+        <p>Esperamos que disfrutes de tu experiencia con nosotros.</p><p><a href="http://localhost:5173/">Ingresa aquí</a></p>
+        <p><a href="URL_PARA_CAMBIAR_CONTRASEÑA">Te invitamos a que por favor cambies tu contraseña, muchas gracias.</a></p>`
       });
       if (error) {
         console.error("Error al enviar el correo de bienvenida:", error);
@@ -30,9 +29,9 @@ const sendWelcomeEmail = async (
       from: "Acme <onboarding@resend.dev>",
       to: [emailUser],
       subject: "¡Bienvenido a Nuestro Sitio!",
-      html: `<p>Hola ${nameUser},</p><p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p><p>Esperamos que disfrutes de tu experiencia con nosotros.</p><p><a href="http://localhost:5173/">Ingresa aquí</a></p>`,
+      html: `<p>Hola ${nameUser},</p><p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p>
+      <p>Esperamos que disfrutes de tu experiencia con nosotros.</p><p><a href="http://localhost:5173/">Ingresa aquí</a></p>`,
     });
-
     if (error) {
       console.error("Error al enviar el correo de bienvenida:", error);
     } else {
@@ -49,7 +48,7 @@ const sendConfirmationEmail = async (emailUser, nameUser, idSale, costSale) => {
       from: "Acme <onboarding@resend.dev>",
       to: [emailUser],
       subject: "Confirmación de Compra",
-      html: `<p>Hola ${nameUser},</p><p>¡Gracias por tu compra!</p><p>${nameUser} tu compra con se ha realizado con éxito.</p><p>Costo total: ${costSale}</p><p>¡Esperamos verte de nuevo pronto!</p>`,
+      html: `<p>Hola ${nameUser},</p><p>¡Gracias por tu compra!</p><p>Tu compra con se ha realizado con éxito.</p><p>Costo total: ${costSale}</p><p>¡Esperamos verte de nuevo pronto!</p>`,
     });
     if (error) {
       console.error("Error al enviar el correo de confirmación de compra:", error.response.body);
