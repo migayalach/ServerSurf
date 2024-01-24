@@ -245,6 +245,21 @@ const userUpDate = async (
       data,
     };
   }
+  else if(uniqueId && password){
+    const data = await User.update(
+      {
+        nameUser,
+        emailUser,
+        password: await hashedPassword(`${password}`),
+      },
+      { where: { idUser } }
+    );
+    return {
+      level: true,
+      message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
+      data,
+    };
+  }
 };
 
 const userByName = async (name) => {
