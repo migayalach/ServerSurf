@@ -1,11 +1,11 @@
-const uuid = require('uuid');
+const uuid = require("uuid");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 
 const _categories = require("../dataBase/dataCategory");
 const { Level, User, Favorite } = require("../dataBase/dataBase");
 const { favoriteById } = require("./favoriteController");
-const resendEmail = require('../helpers/resendEmail');
+const resendEmail = require("../helpers/resendEmail");
 
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
@@ -46,7 +46,7 @@ async function levelData(nameLevel) {
   });
 
   if (level && level.idLevel) {
-    return level
+    return level;
   } else {
     throw Error(`No se encontró el nivel con nameLevel: ${nameLevel}`);
   }
@@ -63,8 +63,15 @@ async function userCreate(nameUser, emailUser, password, uniqueId) {
 
   if (uniqueId) {
     // Registro mediante Google
-    const { user, isGoogleRegistration } = await createGoogle(idLevel, nameUser, emailUser, uniqueId);
-    return isGoogleRegistration ? user : null;
+    const { user, isGoogleRegistration } = await createGoogle(
+      idLevel,
+      nameUser,
+      emailUser,
+      uniqueId
+    );
+    // console.log(isGoogleRegistration, user);
+    return { user, isGoogleRegistration };
+    // return isGoogleRegistration ? user : null;
   } else if (password) {
     // Registro mediante formulario
     return await createForm(idLevel, nameUser, emailUser, password);
@@ -78,14 +85,14 @@ const createUser = async (nameUser, emailUser, password, uniqueId) => {
   // FORM
   if (nameUser && emailUser && password) {
     const result = await userCreate(nameUser, emailUser, password, "");
-    if (result && result.includes('Creado con exito')) {
+    if (result && result.includes("Creado con exito")) {
       await resendEmail.sendWelcomeEmail(emailUser, nameUser);
     }
     return result;
     // GOOGLE
   } else if (nameUser && emailUser && uniqueId) {
     const { user, isGoogleRegistration } = await userCreate(nameUser, emailUser, "", uniqueId);
-    if (user && isGoogleRegistration) {
+    if (user) {
       await resendEmail.sendWelcomeEmail(emailUser, nameUser, true);
     }
     return user;
@@ -211,10 +218,11 @@ const userUpDate = async (
   if (uniqueId && !password) {
     const data = await User.update(
       {
-        nameUser, emailUser,
+        nameUser,
+        emailUser,
       },
       { where: { idUser } }
-    )
+    );
     return {
       level: true,
       message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
@@ -225,10 +233,12 @@ const userUpDate = async (
   else if (password && !uniqueId) {
     const data = await User.update(
       {
-        nameUser, emailUser, password: await hashedPassword(`${password}`),
+        nameUser,
+        emailUser,
+        password: await hashedPassword(`${password}`),
       },
       { where: { idUser } }
-    )
+    );
     return {
       level: true,
       message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
@@ -236,11 +246,6 @@ const userUpDate = async (
     };
   }
 };
-
-
-
-
-
 
 const userByName = async (name) => {
   const FirstLetter = (string) => {
@@ -298,5 +303,3 @@ module.exports = {
   userDelete,
   userUpDate,
 };
-
-
