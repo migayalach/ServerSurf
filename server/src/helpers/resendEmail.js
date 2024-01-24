@@ -37,7 +37,7 @@ const sendConfirmationEmail = async (emailUser, nameUser, idSale, costSale) => {
       from: "Acme <onboarding@resend.dev>",
       to: [emailUser],
       subject: "Confirmación de Compra",
-      html: `<p>Hola ${nameUser},</p><p>¡Gracias por tu compra!</p><p>Tu compra con el ID ${idSale} se ha realizado con éxito.</p><p>Costo total: ${costSale}</p><p>¡Esperamos verte de nuevo pronto!</p>`,
+      html: `<p>Hola ${nameUser},</p><p>¡Gracias por tu compra!</p><p>${nameUser} tu compra con se ha realizado con éxito.</p><p>Costo total: ${costSale}</p><p>¡Esperamos verte de nuevo pronto!</p>`,
     });
     if (error) {
       console.error("Error al enviar el correo de confirmación de compra:", error.response.body);
