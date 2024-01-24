@@ -31,7 +31,6 @@ const getUserById = async (request, response) => {
   const { idUser } = request.params;
   try {
     const userFind = await userById(idUser);
-    console.log(userFind);
     response.status(200).json(userFind);
   } catch (error) {
     response.status(400).json({ error: error.message });
