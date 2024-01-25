@@ -9,10 +9,7 @@ const destrucDataUser = async (idUser) =>
 
 const createSale = async (idUser, costSale) => {
   // EXTRA VERIFICAR SI ESTE USUARIO TIENE PRODUCTOS EN EL CARRITO
-  const cartUser = await Cart.findAll({ where: { idUser } });
-  if (!cartUser.length) {
-    throw Error`Lo siento usted no cuenta con productos en el carrito`;
-  }
+  
   const existUser = await userExist(idUser);
   if (!existUser) {
     throw Error`Lo siento el usuario no existe`;
@@ -20,10 +17,7 @@ const createSale = async (idUser, costSale) => {
   const date = new Date();
   const { idSale } = await Sale.create({ idUser, costSale, date });
 
-  const userData = await destrucDataUser(idUser);
-  const { nameUser, emailUser } = userData;
-  const r = await sendConfirmationEmail(emailUser, nameUser, idSale, costSale);
-  console.log(r)
+ 
   
 
   return {

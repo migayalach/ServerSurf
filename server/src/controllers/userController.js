@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const _categories = require("../dataBase/dataCategory");
 const { Level, User, Favorite } = require("../dataBase/dataBase");
 const { favoriteById } = require("./favoriteController");
-const resendEmail = require("../helpers/resendEmail");
+
 
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
