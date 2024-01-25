@@ -7,7 +7,7 @@ const sendWelcomeEmail = async (
   nameUser,
   isGoogleRegistration = false
 ) => {
-  try {
+  // try {
     if (isGoogleRegistration) {
       let email = emailUser.trim();
       const { data, error } = await resendEmail.emails.send({
@@ -23,23 +23,25 @@ const sendWelcomeEmail = async (
       } else {
         console.log("Correo de bienvenida enviado con éxito:", data);
       }
+    } else {
+      const { data, error } = await resendEmail.emails.send({
+        from: "Acme <onboarding@resend.dev>",
+        to: [emailUser],
+        subject: "¡Bienvenido a Nuestro Sitio!",
+        html: `<p>Hola ${nameUser},</p><p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p>
+        <p>Esperamos que disfrutes de tu experiencia con nosotros.</p><p><a href="http://localhost:5173/">Ingresa aquí</a></p>`,
+      });
+      if (error) {
+        console.error("Error al enviar el correo de bienvenida:", error);
+      } else {
+        console.log("Correo de bienvenida enviado con éxito:", data);
+      }
     }
 
-    const { data, error } = await resendEmail.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: [emailUser],
-      subject: "¡Bienvenido a Nuestro Sitio!",
-      html: `<p>Hola ${nameUser},</p><p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p>
-      <p>Esperamos que disfrutes de tu experiencia con nosotros.</p><p><a href="http://localhost:5173/">Ingresa aquí</a></p>`,
-    });
-    if (error) {
-      console.error("Error al enviar el correo de bienvenida:", error);
-    } else {
-      console.log("Correo de bienvenida enviado con éxito:", data);
-    }
-  } catch (error) {
-    console.error("Error inesperado al enviar el correo de bienvenida:", error);
-  }
+    
+  // } catch (error) {
+  //   console.error("Error inesperado al enviar el correo de bienvenida:", error);
+  // }
 };
 
 const sendConfirmationEmail = async (emailUser, nameUser, idSale, costSale) => {
