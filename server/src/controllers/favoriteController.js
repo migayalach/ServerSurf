@@ -147,7 +147,7 @@ const deleteFavorite = async (idUser, idProduct) => {
   }
 
   const deleted = await Favorites.destroy({ where: { idUser, idProduct } });
-  const { data } = await allFavorites()
+  const { data } = await favoriteById(idUser)
   if (deleted) {
     return {
       level: true,
