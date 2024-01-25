@@ -23,7 +23,9 @@ const postUser = async (request, response) => {
     );
     response.status(200).json(newUser);
   } catch (error) {
-    response.status(400).json({ error: "Error al crear el usuario", details: error.message });
+    response
+      .status(400)
+      .json({ error: "Error al crear el usuario", details: error.message });
   }
 };
 
@@ -63,19 +65,27 @@ const deleteUser = async (request, response) => {
 };
 
 const upDateUser = async (request, response) => {
-  const { idUser, idLevel, nameUser, emailUser, password, uniqueId } =
-    request.body;
+  const {
+    idUser,
+    idLevel,
+    nameUser,
+    emailUser,
+    password,
+    uniqueId,
+    activeUser,
+  } = request.body;
   const convierteUserName = FirstLetter(nameUser);
   try {
-    const upDate = await userUpDate(
+    const { user, message, data } = await userUpDate(
       idUser,
       idLevel,
       convierteUserName,
       emailUser,
       password,
-      uniqueId
+      uniqueId,
+      activeUser
     );
-    response.status(200).json(upDate);
+    response.status(200).json({ user, message, data});
   } catch (error) {
     response.status(400).json({ error: error.message });
   }

@@ -6,7 +6,6 @@ const _categories = require("../dataBase/dataCategory");
 const { Level, User, Favorite } = require("../dataBase/dataBase");
 const { favoriteById } = require("./favoriteController");
 
-
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
 async function countCategories() {
@@ -91,7 +90,12 @@ const createUser = async (nameUser, emailUser, password, uniqueId) => {
     return result;
     // GOOGLE
   } else if (nameUser && emailUser && uniqueId) {
-    const { user, isGoogleRegistration } = await userCreate(nameUser, emailUser, "", uniqueId);
+    const { user, isGoogleRegistration } = await userCreate(
+      nameUser,
+      emailUser,
+      "",
+      uniqueId
+    );
     if (user) {
       await resendEmail.sendWelcomeEmail(emailUser, nameUser, true);
     }
@@ -121,6 +125,7 @@ const userById = async (idUser) => {
           nameUser: idUsers.nameUser,
           emailUser: idUsers.emailUser,
           uniqueId: idUsers.uniqueId,
+          activeUser: idUsers.activeUser,
           favorites,
         },
       ],
@@ -204,16 +209,18 @@ const userUpDate = async (
   nameUser,
   emailUser,
   password,
-  uniqueId
+  uniqueId,
+  activeUser
 ) => {
   const userExisting = await User.findOne({ where: { idUser } });
   if (!userExisting) {
     return {
-      level: false,
+      user: false,
       message: `No existe el user con ID: ${idUser} para actualizar`,
       data: [],
     };
   }
+
   // EDITAR DATOS MENOS PASSWORD NI UNIQUEID YA QUE ESTE SOLO ES SHITCH
   if (uniqueId && !password) {
     const data = await User.update(
@@ -224,7 +231,7 @@ const userUpDate = async (
       { where: { idUser } }
     );
     return {
-      level: true,
+      user: true,
       message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
       data,
     };
@@ -240,12 +247,11 @@ const userUpDate = async (
       { where: { idUser } }
     );
     return {
-      level: true,
+      user: true,
       message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
       data,
     };
-  }
-  else if(uniqueId && password){
+  } else if (uniqueId && password) {
     const data = await User.update(
       {
         nameUser,
@@ -255,11 +261,54 @@ const userUpDate = async (
       { where: { idUser } }
     );
     return {
-      level: true,
+      user: true,
       message: `User ${nameUser} con ID: ${idUser} actualizado exitosamente`,
       data,
     };
+  } else {
+    await User.update(
+      {
+        idLevel,
+        activeUser,
+      },
+      { where: { idUser } }
+    );
+    const { data } = await userById(idUser);
+    return {
+      user: true,
+      message: `Cambios realizados`,
+      data,
+    };
   }
+  // //CAMBIO DE NIVEL
+  // else if (idLevel) {
+  //   await User.update(
+  //     {
+  //       idUser,
+  //     },
+  //     { where: { idUser } }
+  //   );
+  //   return {
+  //     user: true,
+  //     message: `Cambio de nivel realizado`,
+  //     data: await userById(idUser),
+  //   };
+  // }
+
+  // // EDITAR DATOS SIENDO ADMINISTRADOR, MENOS LA CONTRASEÑA
+  // else if (activeUser) {
+  //   await User.update(
+  //     {
+  //       activeUser,
+  //     },
+  //     { where: { idUser } }
+  //   );
+  //   return {
+  //     user: true,
+  //     message: `Cambio de estado realizado`,
+  //     data: await userById(idUser),
+  //   };
+  // }
 };
 
 const userByName = async (name) => {
