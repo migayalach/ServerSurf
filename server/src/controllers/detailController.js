@@ -49,6 +49,7 @@ async function productDetail(arrayProduct) {
 }
 
 const createDetail = async (idSale, idUser, listProducts) => {
+  
   //PREGUNTAR SI EXISTE EL USUARIO
   const existUser = await userExist(idUser);
   if (!existUser) {
@@ -65,36 +66,44 @@ const createDetail = async (idSale, idUser, listProducts) => {
   }
 
   // PREGUNTAMOS SI SON LOS PRODUCTOS EXISTEN
-  const productPromisse = listProducts.map(async (index) => {
-    const responseItem = await Product.findByPk(index);
+  const productPromisse = listProducts.map(async (product) => {
+    const responseItem = await Product.findByPk(product.id);
     if (!responseItem) {
+      
       return false;
     }
     return true;
   });
+  
+  
   const resuelto = await Promise.all(productPromisse);
-
+  
   let count = 0;
   for (let i = 0; i < resuelto.length; i++) {
     if (resuelto[i] === true) {
       count++;
     }
   }
-
+  console.log(listProducts);
   if (count === listProducts.length) {
     const dataCartUser = await Cart.findAll({
+      
       where: { idUser },
       attributes: ["amount", "idProduct"],
     });
+    console.log(dataCartUser);
+    
     const promisseDetail = dataCartUser.map(async ({ idProduct, amount }) => {
       const detail = await DetailSale.create({ idSale, idProduct, amount });
       return detail;
     });
     const detailResponse = await Promise.all(promisseDetail);
+    
     const mapDetailData = detailResponse.map(({ idProduct, amount }) => {
       return { idProduct, amount };
     });
-
+    
+    
     //! descontar del stock
     const stockPromisse = mapDetailData.map(async ({ idProduct, amount }) => {
       await Product.update(
@@ -102,6 +111,7 @@ const createDetail = async (idSale, idUser, listProducts) => {
         { where: { idProduct } }
       );
     });
+    
 
     await Promise.all(stockPromisse);
 

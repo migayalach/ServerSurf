@@ -1,4 +1,6 @@
 require("dotenv").config;
+const { createSale } = require("./saleController")
+const { createDetail } = require("./detailController")
 // const {TOKEN_MP} = process.env;
 const mercadopago = require("mercadopago");
 const token = "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-1650020163";
@@ -13,24 +15,24 @@ const token = "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-165
   
       const placeOrder = await mercadopago.preferences.create({
         items: items.map((item) => {
+          
           return {
             category_id: item.userId,
             description: item.description,
-            id: item.idProduct,
+            id: item.id,
             title: item.name,
             unit_price: item.price,
             picture_url: item.image,
             quantity: item.quantity,
             
-            
           };
         }),
         back_urls: {
-          failure: "https://client-server-swart.vercel.app/",
-          pending: "https://client-server-swart.vercel.app/",
-          success: "https://client-server-swart.vercel.app/",
+          failure: "https://client-server-okg3.vercel.app/",
+          pending: "https://client-server-okg3.vercel.app/",
+          success: "http://localhost:5173/my-sales",
         },
-        notification_url: "https://client-server-swart.vercel.app/",
+        notification_url: "https://3e27-2800-21a4-6200-3601-4560-3a8a-318e-6c6c.ngrok-free.app/surf/mecado/webhook",
       });
   
       const order = placeOrder.body.init_point;
@@ -41,5 +43,35 @@ const token = "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-165
       throw error;
     }
   };
+
+  const webHook = async (payment) => {
+    if (payment.type == "payment") {
+      const data = await mercadopago.payment.findById(payment["data.id"]);
   
-  module.exports = { createOrder };
+      const items = data.body.additional_info.items;
+  
+      if (data.body.status === 'approved') {
+        console.log("Items:", items);
+  
+        // Inicializar la variable para almacenar el costo total
+        let totalCost = 0;
+  
+        // Asumiendo que items es un arreglo de objetos y cada objeto tiene category_id y unit_price
+        for (const item of items) {
+          console.log("Processing item:", item);
+          // Sumar los precios de cada producto al total
+          totalCost += parseFloat(item.unit_price);
+        }
+  
+        // Crear la venta con el costo total
+        await createSale(items[0].category_id, totalCost);
+      } else {
+        console.log("Payment not approved");
+      }
+  
+      return data;
+    }
+  };
+  
+  
+  module.exports = { createOrder, webHook };

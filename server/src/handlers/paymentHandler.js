@@ -1,8 +1,8 @@
-const { createOrder } = require("../controllers/paymentController");
+const { createOrder, webHook } = require("../controllers/paymentController");
 
 const createPaymentHandler = async (request, response) => {
   const listCartItems = request.body;
-  console.log(listCartItems);
+  
   try {
     const newOrder = await createOrder(listCartItems);
     response.status(201).json(newOrder);
@@ -16,6 +16,7 @@ const webHookHandler = async (request, response) => {
   try {
     const newPayment = await webHook(payment);
     response.status(201).json(newPayment);
+    
   } catch (error) {
     response.status(500).json({ error: error.message });
   }
