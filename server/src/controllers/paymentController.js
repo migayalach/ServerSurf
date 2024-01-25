@@ -32,7 +32,7 @@ const token = "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-165
           pending: "https://client-server-okg3.vercel.app/",
           success: "https://client-server-okg3.vercel.app/my-buys",
         },
-        notification_url: "https://594b-2800-21a4-6200-3601-c43a-352-60a7-7c3e.ngrok-free.app/surf/mecado/webhook",
+        notification_url: "https://surf-4i7c.onrender.com/surf/mecado/webhook",
       });
   
       const order = placeOrder.body.init_point;
