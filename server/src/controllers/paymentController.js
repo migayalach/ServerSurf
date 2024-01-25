@@ -30,9 +30,9 @@ const token = "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-165
         back_urls: {
           failure: "https://client-server-okg3.vercel.app/",
           pending: "https://client-server-okg3.vercel.app/",
-          success: "http://localhost:5173/my-sales",
+          success: "http://localhost:5173/my-buys",
         },
-        notification_url: "https://3e27-2800-21a4-6200-3601-4560-3a8a-318e-6c6c.ngrok-free.app/surf/mecado/webhook",
+        notification_url: "https://594b-2800-21a4-6200-3601-c43a-352-60a7-7c3e.ngrok-free.app/surf/mecado/webhook",
       });
   
       const order = placeOrder.body.init_point;
@@ -53,17 +53,16 @@ const token = "TEST-8794393437302803-012315-ab82b0e8b423a272fab62356e23d359d-165
       if (data.body.status === 'approved') {
         console.log("Items:", items);
   
-        // Inicializar la variable para almacenar el costo total
         let totalCost = 0;
   
-        // Asumiendo que items es un arreglo de objetos y cada objeto tiene category_id y unit_price
+        
         for (const item of items) {
           console.log("Processing item:", item);
-          // Sumar los precios de cada producto al total
+          
           totalCost += parseFloat(item.unit_price);
         }
   
-        // Crear la venta con el costo total
+        
         await createSale(items[0].category_id, totalCost);
       } else {
         console.log("Payment not approved");
