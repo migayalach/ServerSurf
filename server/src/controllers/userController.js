@@ -164,6 +164,7 @@ const allUser = async () => {
         nameLevel: user.level.nameLevel,
         nameUser: user.nameUser,
         emailUser: user.emailUser,
+        activeUser: user.activeUser,
         favorites,
       };
     })
