@@ -197,6 +197,34 @@ const putProduct = async (
   }
 };
 
+//EDITAR STATUS
+const putStatusProduct = async (idProduct, status) => {
+  const existingProduct = await productIdExist(idProduct);
+
+  if (!existingProduct) {
+    throw Error(`Producto no encontrado`);
+  }
+
+  const result = await Product.update(
+    {
+      status,
+    },
+    { where: { idProduct } }
+  );
+
+  if (result) {
+    return {
+      message: `Producto actualizado con exito`,
+      dataUpdateProduct: await getProductId(idProduct),
+      listProducts: await getAllProducts(),
+    };
+  } else {
+    throw Error(
+      `No se pudo actualizar la información del producto ${idProduct}`
+    );
+  }
+};
+
 module.exports = {
   createProduct,
   getProductName,
@@ -204,4 +232,5 @@ module.exports = {
   getAllProducts,
   putProduct,
   deleteProduct,
+  putStatusProduct
 };
