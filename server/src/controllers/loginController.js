@@ -29,11 +29,12 @@ async function dataLevel(idLevel) {
   });
 }
 
-function responseData(idLevel, idUser, nameLevel, nameUser) {
+function responseData(idLevel, idUser, nameLevel, nameUser, emailUser) {
   return {
     access: true,
     idLevel,
     idUser,
+    emailUser,
     level: nameLevel,
     nameUser,
     message: `Datos correctos`,
@@ -54,7 +55,7 @@ async function userAccess(nameUser, emailUser, password, uniqueId) {
     if (idUser && idLevel && password) {
       const { nameLevel } = await dataLevel(idLevel);
       if (await bcrypt.compare(userPassword, password))
-        return responseData(idLevel, idUser, nameLevel, nameUser);
+        return responseData(idLevel, idUser, nameLevel, nameUser, emailUser);
     }
     errorUser();
   }
@@ -65,7 +66,7 @@ async function userAccess(nameUser, emailUser, password, uniqueId) {
       await createUser(nameUser, emailUser, userPassword, uniqueId);
       const { idUser, idLevel } = await existUserEmail(emailUser, uniqueId);
       const { nameLevel } = await dataLevel(idLevel);
-      return responseData(idLevel, idUser, nameLevel, nameUser);
+      return responseData(idLevel, idUser, nameLevel, nameUser, emailUser);
     } else {
       const dataUser = await existUserEmail(emailUser, uniqueId);
       if (!dataUser) {

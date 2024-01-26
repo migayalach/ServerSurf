@@ -8,7 +8,7 @@ const postLogin = async (request, response) => {
       await userAccess(userName, emailUser, password, uniqueId);
     response
       .status(200)
-      .json({ access, idLevel, idUser, level, nameUser, message });
+      .json({ access, idLevel, idUser, emailUser, level, nameUser, message });
   } catch (error) {
     response.status(400).json({ access: false, message: error.message });
   }
