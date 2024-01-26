@@ -6,6 +6,7 @@ const {
   putProduct,
   deleteProduct,
   filterProduct,
+  putStatusProduct
 } = require("../controllers/productController");
 
 // SE ELIMINO CODE, TYPE y CHARACTERISTICS
@@ -162,10 +163,39 @@ const productUpdated = async (request, response) => {
   }
 };
 
+const productStatusUpdated = async (request, response) => {
+  const {
+    idProduct,
+    status
+  } = request.body;
+  try {
+    const {
+      message,
+      dataUpdateProduct: { product },
+      listProducts,
+    } = await putStatusProduct(
+      idProduct,
+      status
+    );
+    return response.status(200).json({
+      updateProduct: true,
+      message,
+      dataUpdateProduct: product,
+      listProducts,
+    });
+  } catch (error) {
+    return response
+      .status(400)
+      .json({ updateProduct: false, message: error.message, listProducts: [] });
+  }
+};
+
+
 module.exports = {
   postProduct,
   getNameProduct,
   getIdProduct,
   productDeleted,
   productUpdated,
+  productStatusUpdated
 };
