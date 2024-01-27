@@ -343,6 +343,7 @@ const userByName = async (name) => {
           nameLevel: user.level.nameLevel,
           nameUser: user.nameUser,
           emailUser: user.emailUser,
+          activeUser:user.activeUser,
           favorites,
         };
       })
