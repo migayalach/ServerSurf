@@ -4,11 +4,11 @@ const postLogin = async (request, response) => {
   const { nameUser, emailUser, password, uniqueId } = request.body;
   const userName = nameUser;
   try {
-    const { access, idLevel, idUser, level, nameUser, message } =
+    const { access, idLevel, idUser, level, nameUser, message, activeUser } =
       await userAccess(userName, emailUser, password, uniqueId);
     response
       .status(200)
-      .json({ access, idLevel, idUser, emailUser, level, nameUser, message });
+      .json({ access, idLevel, idUser, emailUser, level, nameUser, activeUser, message });
   } catch (error) {
     response.status(400).json({ access: false, message: error.message });
   }
