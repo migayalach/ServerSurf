@@ -6,6 +6,8 @@ const _categories = require("../dataBase/dataCategory");
 const { Level, User, Favorite } = require("../dataBase/dataBase");
 const { favoriteById } = require("./favoriteController");
 
+const { sendWelcomeEmail } = require('../helpers/resendEmail');
+
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
 async function countCategories() {
@@ -85,7 +87,7 @@ const createUser = async (nameUser, emailUser, password, uniqueId) => {
   if (nameUser && emailUser && password) {
     const result = await userCreate(nameUser, emailUser, password, "");
     if (result && result.includes("Creado con exito")) {
-      await resendEmail.sendWelcomeEmail(emailUser, nameUser);
+      await sendWelcomeEmail(emailUser, nameUser);
     }
     return result;
     // GOOGLE
@@ -97,7 +99,7 @@ const createUser = async (nameUser, emailUser, password, uniqueId) => {
       uniqueId
     );
     if (user) {
-      await resendEmail.sendWelcomeEmail(emailUser, nameUser, true);
+      await sendWelcomeEmail(emailUser, nameUser, true);
     }
     return user;
   }
@@ -162,6 +164,7 @@ const allUser = async () => {
         nameLevel: user.level.nameLevel,
         nameUser: user.nameUser,
         emailUser: user.emailUser,
+        activeUser: user.activeUser,
         favorites,
       };
     })
@@ -340,6 +343,7 @@ const userByName = async (name) => {
           nameLevel: user.level.nameLevel,
           nameUser: user.nameUser,
           emailUser: user.emailUser,
+          activeUser:user.activeUser,
           favorites,
         };
       })

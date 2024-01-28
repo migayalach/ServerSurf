@@ -6,14 +6,21 @@ const bcrypt = require("bcrypt");
 async function existUserEmail(emailUser, uniqueId) {
   if (emailUser && !uniqueId) {
     return await User.findOne({
-      attributes: ["idUser", "idLevel", "nameUser", "password"],
+      attributes: ["idUser", "idLevel", "nameUser", "password", "activeUser"],
       where: {
         emailUser: { [Op.like]: `%${emailUser}%` },
       },
     });
   } else if (emailUser && uniqueId) {
     return await User.findOne({
-      attributes: ["idUser", "idLevel", "nameUser", "password", "uniqueId"],
+      attributes: [
+        "idUser",
+        "idLevel",
+        "nameUser",
+        "password",
+        "uniqueId",
+        "activeUser",
+      ],
       where: {
         emailUser: { [Op.like]: `%${emailUser}%` },
         uniqueId,
@@ -29,13 +36,22 @@ async function dataLevel(idLevel) {
   });
 }
 
-function responseData(idLevel, idUser, nameLevel, nameUser) {
+function responseData(
+  idLevel,
+  idUser,
+  nameLevel,
+  nameUser,
+  emailUser,
+  activeUser
+) {
   return {
     access: true,
     idLevel,
     idUser,
+    emailUser,
     level: nameLevel,
     nameUser,
+    activeUser,
     message: `Datos correctos`,
   };
 }
@@ -48,13 +64,19 @@ async function userAccess(nameUser, emailUser, password, uniqueId) {
   const userPassword = password;
   // FORMULARIO
   if (emailUser && password && !uniqueId) {
-    const { idUser, idLevel, password, nameUser } = await existUserEmail(
-      emailUser
-    );
+    const { idUser, idLevel, password, nameUser, activeUser } =
+      await existUserEmail(emailUser);
     if (idUser && idLevel && password) {
       const { nameLevel } = await dataLevel(idLevel);
       if (await bcrypt.compare(userPassword, password))
-        return responseData(idLevel, idUser, nameLevel, nameUser);
+        return responseData(
+          idLevel,
+          idUser,
+          nameLevel,
+          nameUser,
+          emailUser,
+          activeUser
+        );
     }
     errorUser();
   }
@@ -63,9 +85,19 @@ async function userAccess(nameUser, emailUser, password, uniqueId) {
     const user = await existUserEmail(emailUser, uniqueId);
     if (!user) {
       await createUser(nameUser, emailUser, userPassword, uniqueId);
-      const { idUser, idLevel } = await existUserEmail(emailUser, uniqueId);
+      const { idUser, idLevel, activeUser } = await existUserEmail(
+        emailUser,
+        uniqueId
+      );
       const { nameLevel } = await dataLevel(idLevel);
-      return responseData(idLevel, idUser, nameLevel, nameUser);
+      return responseData(
+        idLevel,
+        idUser,
+        nameLevel,
+        nameUser,
+        emailUser,
+        activeUser
+      );
     } else {
       const dataUser = await existUserEmail(emailUser, uniqueId);
       if (!dataUser) {
@@ -77,7 +109,9 @@ async function userAccess(nameUser, emailUser, password, uniqueId) {
           dataUser.idLevel,
           dataUser.idUser,
           nameLevel,
-          nameUser
+          nameUser,
+          "",
+          dataUser.activeUser
         );
       }
     }
@@ -86,23 +120,3 @@ async function userAccess(nameUser, emailUser, password, uniqueId) {
 }
 
 module.exports = userAccess;
-
-
-// CUANDO EL USUARIO SE LOGEA CON GOOGLE 
-// *SI NO EXISTE LA CUENTA SE CREA CON EMAIL Y UUID, LA CONTRASEÑA TOMA EL VALOR 
-//  DE EMAIL => LUEGO SE MANDA UN EMAIL PARA CAMBIAR LA CONTRASEÑA
-
-// SI EXISTE
-// * LOGIN NORMAL
-
-// CUANDO SE LOGUEA CON FORM
-// email y password 
-
-// !****
-// CUANDO CREA LA CUENTA CON FORM 
-// *se llena email y password en la tabla pero deja uuid en null 
-
-// si se quiere logear con form 
-// *preguntar si existe el email
-// si existe pero no hay uuid editar y poner el uuid
-// luego comprar password y uuid

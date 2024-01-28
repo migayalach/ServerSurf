@@ -41,7 +41,7 @@ const addFavorite = async (idUser, idProduct) => {
 
   const addedProduct = await Product.findOne({ where: { idProduct } });
 
-  const { data } = await allFavorites()
+  const { data } = await favoriteById(idUser)
   return {
     level: true,
     message: `Añadido el producto ${addedProduct.name} con éxito a favoritos`,
@@ -147,7 +147,7 @@ const deleteFavorite = async (idUser, idProduct) => {
   }
 
   const deleted = await Favorites.destroy({ where: { idUser, idProduct } });
-  const { data } = await allFavorites()
+  const { data } = await favoriteById(idUser)
   if (deleted) {
     return {
       level: true,
