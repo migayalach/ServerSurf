@@ -52,10 +52,10 @@ const getNameSale = async (request, response) => {
   }
 };
 
-const saleDeleted = (request, response) => {
-  const { id } = request.params;
+const saleDeleted = async (request, response) => {
+  const { idSale, idUser } = request.params;
   try {
-    const saleDelete = deleteSales(id);
+    const saleDelete = await deleteSales(idSale, idUser);
     return response.status(200).json(saleDelete);
   } catch (error) {
     return response.status(400).json({ message: error.message });
