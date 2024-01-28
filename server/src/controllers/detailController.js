@@ -84,6 +84,7 @@ const createDetail = async (idSale, idUser, listProducts) => {
       count++;
     }
   }
+  
   console.log(listProducts);
   if (count === listProducts.length) {
     const dataCartUser = await Cart.findAll({

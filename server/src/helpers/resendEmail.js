@@ -1,3 +1,5 @@
+
+
 // const { Resend } = require("resend");
 // const { EMAIL_SEND } = process.env;
 
@@ -122,3 +124,4 @@ module.exports = {
   sendWelcomeEmail,
   sendConfirmationEmail,
 };
+
