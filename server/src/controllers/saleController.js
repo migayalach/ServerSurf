@@ -78,8 +78,24 @@ const putSales = (id) => {
   return `Se actualizó el ${id}`;
 };
 
-const deleteSales = (id) => {
-  return `Se borró la venta ${id}`;
+const deleteSales = async (id) => {
+  try {
+    const sale = await Sale.findByPk(id);
+    if (!sale) {
+      throw new Error(`No se encontró la venta con el id ${id}`);
+    }
+
+    console.log(`Sale found with id ${id}`);
+    
+    await sale.destroy();
+    
+    console.log(`Sale ${id} deleted`);
+    
+    return `Se borró la venta ${id}`;
+  } catch (error) {
+    console.error('Error deleting sale:', error);
+    throw error;
+  }
 };
 
 module.exports = {
