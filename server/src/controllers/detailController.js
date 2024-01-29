@@ -67,32 +67,30 @@ const createDetail = async (idSale, idUser, listProducts) => {
 
   // PREGUNTAMOS SI SON LOS PRODUCTOS EXISTEN
   const productPromisse = listProducts.map(async (product) => {
-    const responseItem = await Product.findByPk(product.id);
+    //! ANTES DE QUE TOQUE DABA SOLO UNDEFINED
+    // const responseItem = await Product.findByPk(product.id); 
+    
+    //* ACTUALIZACION 28 - 01 - 2023 : HR: 17:57
+    const responseItem = await Product.findByPk(product); 
     if (!responseItem) {
-      
       return false;
     }
     return true;
   });
   
-  
   const resuelto = await Promise.all(productPromisse);
-  
   let count = 0;
   for (let i = 0; i < resuelto.length; i++) {
     if (resuelto[i] === true) {
       count++;
     }
   }
-  
-  console.log(listProducts);
+
   if (count === listProducts.length) {
     const dataCartUser = await Cart.findAll({
-      
       where: { idUser },
       attributes: ["amount", "idProduct"],
     });
-    console.log(dataCartUser);
     
     const promisseDetail = dataCartUser.map(async ({ idProduct, amount }) => {
       const detail = await DetailSale.create({ idSale, idProduct, amount });
