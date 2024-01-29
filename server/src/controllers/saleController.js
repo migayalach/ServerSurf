@@ -1,4 +1,11 @@
-const { User, Sale, DetailSale, Level } = require("../dataBase/dataBase");
+const { Sequelize } = require("sequelize");
+const {
+  User,
+  Sale,
+  DetailSale,
+  Level,
+  Product,
+} = require("../dataBase/dataBase");
 const { userExist } = require("../controllers/helperControllers");
 const { sendConfirmationEmail } = require("../helpers/resendEmail");
 
@@ -92,6 +99,20 @@ const deleteSales = async (idSale, idUser) => {
     if (!(await existSale(idSale))) {
       throw Error`Lo siento la venta que busca no existe`;
     }
+    const dataInfoDetail = (
+      await DetailSale.findAll({ where: { idSale } })
+    ).map(({ idProduct, amount }) => {
+      return { idProduct, amount };
+    });
+
+    //! aumentar stock
+    const stockPromisse = dataInfoDetail.map(async ({ idProduct, amount }) => {
+      await Product.update(
+        { stock: Sequelize.literal(`stock + ${amount}`) },
+        { where: { idProduct } }
+      );
+    });
+    await Promise.all(stockPromisse);
     await DetailSale.destroy({ where: { idSale } });
     await Sale.destroy({ where: { idSale } });
     return `Venta eliminada con exito`;
