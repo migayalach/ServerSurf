@@ -68,10 +68,10 @@ const createDetail = async (idSale, idUser, listProducts) => {
   // PREGUNTAMOS SI SON LOS PRODUCTOS EXISTEN
   const productPromisse = listProducts.map(async (product) => {
     //! ANTES DE QUE TOQUE DABA SOLO UNDEFINED
-    // const responseItem = await Product.findByPk(product.id); 
+    const responseItem = await Product.findByPk(product.id); 
     
     //* ACTUALIZACION 28 - 01 - 2023 : HR: 17:57
-    const responseItem = await Product.findByPk(product); 
+    //const responseItem = await Product.findByPk(product); 
     if (!responseItem) {
       return false;
     }
