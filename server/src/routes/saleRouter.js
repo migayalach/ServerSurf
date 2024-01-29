@@ -12,7 +12,7 @@ const saleRouter = Router();
 saleRouter.post("/", postSale);
 saleRouter.get("/", getNameSale);
 saleRouter.get("/:idSale", getIdSale);
-saleRouter.delete("/:id", saleDeleted);
-saleRouter.put("/", saleUpdated);
+saleRouter.delete("/:idSale/:idUser", saleDeleted);
+// saleRouter.put("/", saleUpdated);
 
 module.exports = saleRouter;

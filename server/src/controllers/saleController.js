@@ -1,15 +1,23 @@
-const { User, Sale, Cart } = require("../dataBase/dataBase");
+const { Sequelize } = require("sequelize");
+const {
+  User,
+  Sale,
+  DetailSale,
+  Level,
+  Product,
+} = require("../dataBase/dataBase");
 const { userExist } = require("../controllers/helperControllers");
-const { sendConfirmationEmail } = require('../helpers/resendEmail');
+const { sendConfirmationEmail } = require("../helpers/resendEmail");
 
 const destrucDataUser = async (idUser) =>
   ({ nameUser, lastName, emailUser } = await User.findOne({
     where: { idUser },
   }));
 
+const existSale = async (idSale) => await Sale.findOne({ where: { idSale } });
+
 const createSale = async (idUser, costSale) => {
   // EXTRA VERIFICAR SI ESTE USUARIO TIENE PRODUCTOS EN EL CARRITO
-  
   const existUser = await userExist(idUser);
   if (!existUser) {
     throw Error`Lo siento el usuario no existe`;
@@ -20,10 +28,7 @@ const createSale = async (idUser, costSale) => {
   const userData = await destrucDataUser(idUser);
   const { nameUser, emailUser } = userData;
   const r = await sendConfirmationEmail(emailUser, nameUser, costSale);
-  console.log(r)
- 
-  
-
+  console.log(r);
   return {
     idSale,
     date,
@@ -32,8 +37,7 @@ const createSale = async (idUser, costSale) => {
 };
 
 const getSaleId = async (idSale) => {
-  const existSale = await Sale.findOne({ where: { idSale } });
-  if (!existSale) {
+  if (!(await existSale(idSale))) {
     throw Error`Lo siento la venta que busca no existe`;
   }
   const { idUser, date, costSale } = await Sale.findOne({ where: { idSale } });
@@ -82,24 +86,38 @@ const putSales = (id) => {
   return `Se actualizó el ${id}`;
 };
 
-const deleteSales = async (id) => {
-  try {
-    const sale = await Sale.findByPk(id);
-    if (!sale) {
-      throw new Error(`No se encontró la venta con el id ${id}`);
-    }
-
-    console.log(`Sale found with id ${id}`);
-    
-    await sale.destroy();
-    
-    console.log(`Sale ${id} deleted`);
-    
-    return `Se borró la venta ${id}`;
-  } catch (error) {
-    console.error('Error deleting sale:', error);
-    throw error;
+const deleteSales = async (idSale, idUser) => {
+  const dataUser = await userExist(idUser);
+  if (!dataUser) {
+    throw Error`El usuario no existe`;
   }
+  const dataLevel = await Level.findOne({
+    where: { idLevel: dataUser.idLevel },
+  });
+
+  if (dataLevel.nameLevel === "ADMIN") {
+    if (!(await existSale(idSale))) {
+      throw Error`Lo siento la venta que busca no existe`;
+    }
+    const dataInfoDetail = (
+      await DetailSale.findAll({ where: { idSale } })
+    ).map(({ idProduct, amount }) => {
+      return { idProduct, amount };
+    });
+
+    //! aumentar stock
+    const stockPromisse = dataInfoDetail.map(async ({ idProduct, amount }) => {
+      await Product.update(
+        { stock: Sequelize.literal(`stock + ${amount}`) },
+        { where: { idProduct } }
+      );
+    });
+    await Promise.all(stockPromisse);
+    await DetailSale.destroy({ where: { idSale } });
+    await Sale.destroy({ where: { idSale } });
+    return `Venta eliminada con exito`;
+  }
+  throw Error`Lo siento usted no cuenta con los permisos para realizar esta operacion`;
 };
 
 module.exports = {
