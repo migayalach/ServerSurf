@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Product } = require("../dataBase/dataBase");
+const { Product, Qualification } = require("../dataBase/dataBase");
 const {
   categoryExist,
   colorExist,
@@ -88,9 +88,20 @@ const getProductId = async (idProduct) => {
     throw Error(`El producto que busca no pudo ser encontrado`);
   }
   const [product] = await listProductsPromisse([listProducts]);
+
+  // Buscar la calificacion del producto
+  const qualification = await Qualification.findOne({
+    where: {
+      idProduct: idProduct,
+    },
+  });
+  const points = qualification ? qualification.points : 0;
   return {
     message: `Producto encontrado con exito`,
-    product,
+    product: {
+      ...product, // Tomar el primer elemento del array
+      points, // Agregar los puntos de calificación al objeto del producto
+    },
   };
 };
 

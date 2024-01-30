@@ -69,16 +69,16 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'Gmail', // Puedes cambiarlo según el proveedor de correo
   auth: {
-    user: 'mariana.crt@gmail.com', // Reemplaza con tu dirección de correo
-    pass: 'tbuf qcda kcri abux', // Reemplaza con tu contraseña
+    user: 'laolaurbanaok@gmail.com', // Reemplaza con tu dirección de correo
+    pass: 'pbem cvyt jlwe mpgx', // Reemplaza con tu contraseña
   },
-});
+}); 
 
 
 const sendWelcomeEmail = async (emailUser, nameUser, isGoogleRegistration = false) => {
   try {
     const mailOptions = {
-      from: 'laolaurbana@gmail.com',
+      from: 'laolaurbanaok@gmail.com',
       to: emailUser,
       subject: '¡Bienvenido a Nuestro Sitio!',
       html: `
@@ -86,7 +86,7 @@ const sendWelcomeEmail = async (emailUser, nameUser, isGoogleRegistration = fals
         <p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p>
         <p>Esperamos que disfrutes de tu experiencia con nosotros.</p>
         <p><a href="http://localhost:5173/">Ingresa aquí</a></p>
-        ${isGoogleRegistration ? '<p><a href="URL_PARA_CAMBIAR_CONTRASEÑA">Te invitamos a que por favor cambies tu contraseña, muchas gracias.</a></p>' : ''}
+        ${isGoogleRegistration ? '<p><a href="https://client-server-okg3.vercel.app/my-account">Te invitamos a que por favor cambies tu contraseña por seguridad, muchas gracias.</a></p>' : ''}
       `,
     };
 
@@ -101,7 +101,7 @@ const sendWelcomeEmail = async (emailUser, nameUser, isGoogleRegistration = fals
 const sendConfirmationEmail = async (emailUser, nameUser, costSale) => {
   try {
     const mailOptions = {
-      from: 'mariana.crt@gmail.com',
+      from: 'laolaurbanaok@gmail.com',
       to: emailUser,
       subject: 'Confirmación de Compra',
       html: `
