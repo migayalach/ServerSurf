@@ -90,17 +90,24 @@ const getProductId = async (idProduct) => {
   const [product] = await listProductsPromisse([listProducts]);
 
   // Buscar la calificacion del producto
-  const qualification = await Qualification.findOne({
+  const qualifications = await Qualification.findAll({
     where: {
       idProduct: idProduct,
     },
   });
-  const points = qualification ? qualification.points : 0;
+
+  let totalPoints = 0;
+  if (qualifications && qualifications.length > 0) {
+    totalPoints = qualifications.reduce((total, qualification) => total + qualification.points, 0);
+  }
+  const promedioQualification = qualifications.length > 0 ? totalPoints / qualifications.length : 0;
+  // const points = qualification ? qualification.points : 0;
   return {
     message: `Producto encontrado con exito`,
     product: {
       ...product, // Tomar el primer elemento del array
-      points, // Agregar los puntos de calificación al objeto del producto
+      // points,
+      promedioQualification,
     },
   };
 };
