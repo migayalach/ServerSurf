@@ -20,20 +20,20 @@ const createQualitation = async (idUser, idProduct, comment, points) => {
     }
   }
 
-  const hasCart = await Cart.findOne({
-    where: {
-      idUser,
-      idProduct,
-    },
-  });
+  // const hasCart = await Cart.findOne({
+  //   where: {
+  //     idUser,
+  //     idProduct,
+  //   },
+  // });
 
-  if (!hasCart) {
-    return {
-      level: false,
-      message: `El usuario no ha comprado el producto. No se puede realizar un comentario.`,
-      data: []
-    };
-  }
+  // if (!hasCart) {
+  //   return {
+  //     level: false,
+  //     message: `El usuario no ha comprado el producto. No se puede realizar un comentario.`,
+  //     data: []
+  //   };
+  // }
 
   const duplicateQualification = await Qualification.findAll({
     where: { idUser },
