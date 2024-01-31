@@ -85,8 +85,7 @@ const sendWelcomeEmail = async (emailUser, nameUser, isGoogleRegistration = fals
         <p>Hola ${nameUser},</p>
         <p>¡Bienvenido a nuestro sitio! Gracias por registrarte.</p>
         <p>Esperamos que disfrutes de tu experiencia con nosotros.</p>
-        <p><a href="http://localhost:5173/">Ingresa aquí</a></p>
-        ${isGoogleRegistration ? '<p><a href="https://client-server-okg3.vercel.app/my-account">Te invitamos a que por favor cambies tu contraseña por seguridad, muchas gracias.</a></p>' : ''}
+        ${isGoogleRegistration ? '<p>Disfruta de nustros productos.</p>' : ''}
       `,
     };
 
